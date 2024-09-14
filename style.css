@@ -454,3 +454,10 @@ button{
     padding-left: 1.5em;
     box-shadow: inset 0px 0px 10px #1e4405;
 }
+
+.quoteme{
+    font-family: 'Acid TM';
+    font-size: 2em;
+    color: #1e4405;
+    box-shadow: inset 2px 2px 20px 0px #c5ecab;
+}
