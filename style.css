@@ -441,4 +441,16 @@ button{
 /* textilzip workshop */
 .vert-txt{
     writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+
+.scrolly{
+    overflow: scroll;
+}
+
+.caption{
+    position: relative;
+    bottom: 4%;
+    padding-left: 1.5em;
+    box-shadow: inset 0px 0px 10px #1e4405;
 }
