@@ -438,3 +438,7 @@ button{
   
 
 
+/* textilzip workshop */
+.vert-txt{
+    writing-mode: vertical-rl;
+}
