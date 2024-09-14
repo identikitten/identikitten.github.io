@@ -1,0 +1,440 @@
+*{
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #000;
+    font-weight: lighter;
+   
+}
+
+h1, h2{
+font-size: 1em;
+
+}
+
+h1{
+    font-size: 1em; 
+}
+
+h3{
+    font-size: 1em;
+    font-weight: 100;
+}
+
+h5{
+    margin: 0px;
+    text-transform: uppercase;
+    font-weight: 100;
+    line-height: 1.7em;
+    font-size: 0.7em;
+}
+
+.monitos{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
+    line-height: 1.4em;
+}
+
+a{
+    color: black;
+}
+
+.intro{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:hover{
+    color: #000;
+    /* background: rgba(204, 252, 11, 0.811); */
+    text-decoration: underline #f28b8b wavy;
+    box-shadow: inset 0px 0px 10px 3px #f28b8b;
+    transition: box-shadow 0.4s;
+}
+
+
+a:hover:before{
+    content: "🥀 ";
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+    background-color: #fbe4e4;
+    border-bottom: 2px solid #f28b8b;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-content {
+    flex: 3;
+    overflow: scroll;
+}
+
+.sidebar {
+    overflow: hidden;
+    flex: 1;
+    background-color: #fff;
+}
+
+.menu li:hover{
+ cursor: pointer;
+}
+
+
+.shadow{
+   box-shadow: inset 2px 1px 20px 4px rgba(242, 139, 139, 0.5);
+}
+
+.divider{
+    background: rgba(249, 54, 54, 0.22);
+    border: 0;
+    height: 1px;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    height: 1px;
+}
+
+section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.description{
+    padding: 0.5em 2em;
+}
+
+button{
+    box-shadow: 0px 0px 14px 3px #90f28ba8;
+}
+
+#startFalling{
+    position: relative;
+    top: 20%;
+    left: 15%;
+}
+
+#stopFalling{
+    position: relative;
+    top: 20%;
+    left: 20%;
+}
+
+
+/* post styling */
+
+.post {
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start; /* Aligns all columns at the top */
+    justify-content: space-between; /* Distributes space evenly between the three columns */
+}
+
+.text-content {
+    max-width: 30%; /* Limit the width of the text content */
+}
+
+.post img {
+    max-width: 20%; /* Ensure the image takes up an appropriate portion */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 20px; /* Add space between the image and the other columns */
+}
+
+.post img:hover{
+    box-shadow: 0px 0px 14px 5px rgba(242, 139, 139, 0.5);
+}
+
+.symbol-content {
+    max-width: 30%; /* Limit the width of the symbols content */
+    display: flex;
+    flex-direction: column; /* Stack the symbols vertically */
+    justify-content: flex;
+    text-align: left;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* page styling */
+
+.page-header{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+}
+
+.page-description{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+}
+
+.page-image{
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+}
+
+.page-image img{
+    max-width: 90%;
+}
+
+
+/* marquee */
+/* Ensure the aside has a defined position */
+.aside {
+    position: relative; /* Relative to contain the marquee inside */
+}
+
+
+/* Marquee wrapper to be positioned at the bottom of the aside */
+.marquee-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100px; /* Adjust based on your layout */
+    overflow: hidden;
+    /* background-color: rgb(204 252 11 / 63%); */
+    background-color: #90f28b8c;
+    z-index: 1; /* Ensures it stays on top of other content */
+}
+
+/* Gradient overlay for the top and bottom fade effect */
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30px; /* Adjust based on the fade effect */
+    z-index: 2;
+    background: linear-gradient(white, transparent);
+    /*box-shadow: inset 2px 1px 14px 4px rgba(242, 139, 139, 0.5); /* Hazy red border */
+
+}
+
+.marquee-wrapper::before {
+    top: 0;
+}
+
+.marquee-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(transparent, white);
+}
+
+.marquee-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.marquee-content {
+    font-style: italic;
+    position: absolute;
+    width: 100%;
+    animation: scroll-marquee-vertical 15s linear infinite;
+   /* box-shadow: inset 0px 0px 24px 5px rgba(204, 252, 11, 0.811);*/
+}
+
+/* Scroll animation keyframes for vertical scrolling */
+@keyframes scroll-marquee-vertical {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+/* falling chars*/
+  .falling-characters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  
+  .falling-characters span {
+    position: absolute;
+    font-family: 'Times New Roman', sans-serif;* Replace with your preferred font */
+    font-size: 24px; /* Adjust size as needed */
+    color: black; /* Adjust color as needed */
+    animation: fall linear infinite;
+  }
+  
+  @keyframes fall {
+    0% {
+      top: -10%;
+      opacity: 1;
+    }
+    100% {
+      top: 110%;
+      opacity: 0;
+    }
+  }
+  
+  /* iframe */
+
+  #content-iframe {
+    width: 100%;
+    height: calc(100% - 40px); /* Adjust based on your back button height */
+    border: none;
+}
+
+#back-button {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    padding: 5px 15px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    background: transparent;
+    border: 0px;
+    box-shadow: inset 0px 0px 8px 1px #f28b8b;
+    margin-bottom: 10px;
+    
+}
+
+#back-button:hover{
+    box-shadow: inset 0px 0px 8px 1px #90f28b;
+    transition: box-shadow 0.4s;
+}
+
+/* image gallery */
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+  }
+  
+  /* Style the images inside the grid */
+  .column img {
+    opacity: 0.8;
+    cursor: pointer;
+    aspect-ratio: 6 / 4;
+    object-fit: cover;
+    border-radius: 70%;
+    box-shadow: 0px 0px 10px 5px #f28b8b;
+  }
+
+  .column img:hover{
+    box-shadow: 0px 0px 10px 5px #90f28b;
+    transition: box-shadow 0.8s;
+  }
+  
+  .column img:hover {
+    opacity: 1;
+    transition: opacity 0.8s;
+  }
+
+  .row{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 1.4em;
+    padding-top: 1.4em;
+    overflow: scroll;
+    display: flex;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* The expanding image container (positioning is needed to position the close button and the text) */
+  .image-container {
+    position: relative;
+
+  }
+  
+
+  #expandedImg{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+    aspect-ratio: 6 / 4;
+    object-fit: scale-down;
+    transition: opacity 0.8s;
+  }
+
+
+
+
+
+
+
+
+/* bubble slider */
+
+.bubble-slider {
+    display: grid;
+    grid-template-columns: 5fr 5fr 5fr 0fr 0fr 0fr;
+    gap: 10px;
+    width: 100%;
+    cursor: e-resize;
+    /*padding: 1rem 0.5rem;*/
+    transition: grid-template-columns 0.4s;
+  }
+  
+ .bubble-slider div {
+    /*overflow: hidden;*/
+  
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+  
+  .bubble-slider div.hide {
+    opacity: 0;
+  }
+  
+  .bubble-slider img {
+    max-width: 100%;
+    aspect-ratio: 4 / 4;
+    object-fit: cover;
+  }
+  
+  figure {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+
+  .image-slider {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  
+
+
