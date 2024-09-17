@@ -4,6 +4,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+@font-face {
+    font-family: Acid;
+    src: url(Acid\ TM.otf);
+  }
+
 body {
     margin: 0;
     padding: 0;
@@ -453,6 +459,7 @@ button{
     bottom: 4%;
     padding-left: 1.5em;
     box-shadow: inset 0px 0px 10px #1e4405;
+    background: #dcffc6a1;
 }
 
 .quoteme{
@@ -462,36 +469,31 @@ button{
     box-shadow: inset 2px 2px 20px 0px #c5ecab;
 }
 
-/* vigilia inconclusa */
 
-.azul{
-    background-color:rgb(6, 3, 29);
-}
+@media only screen and (min-width: 700px) {
+    
 
-.blanco{
-    color: white;
-    font-size: 1.2em;
+.mobile-header{
+    display: none;
 }
 
 
-.cajita-1{
-    margin-left: auto;
-    margin-right: auto;
-    width: 5%;
-    position: absolute;
-   left: 0;
-   bottom: 0;
-   top: 0;
+     }
+
+
+@media only screen and (max-width: 700px) {
+    
+    .quoteme{
+        font-size: 1.3em;
+    }
+
+.page-header{
+    display: none;
 }
 
-.cajita-2{
-    margin-left: auto;
-    margin-right: auto;
-   width: 5%;
-   position: absolute;
-   right: 0;
-   bottom: 0;
-   top: 0;
-
+.vert-txt{
+    display: none;
 }
+
+     }
 
