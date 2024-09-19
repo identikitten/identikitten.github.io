@@ -441,10 +441,35 @@ button{
     overflow: hidden;
   }
 
+
+  .bolitas{
+    width: 15%;
+    aspect-ratio: 2/2;
+    font-size: 13px;
+    border: #1e44057d 1px solid;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 20px 5px #1e4405;
+  }
+
+  .bolitas-azul{
+    box-shadow: inset 0px 0px 20px 5px #0a0c4f;
+  }
   
+  .bolitas p{
+    margin: 1.5em;
+    text-align: center;
+    padding-top: 15px;
+  }
 
 
 /* textilzip workshop */
+
+.textil img{
+    width: 100%;
+    aspect-ratio: 5 / 3;
+    object-fit: cover;
+}
+
 .vert-txt{
     writing-mode: vertical-rl;
     -webkit-writing-mode: vertical-rl;
@@ -463,10 +488,30 @@ button{
 }
 
 .quoteme{
-    font-family: 'Acid TM';
+    font-family: 'Acid';
     font-size: 2em;
     color: #1e4405;
     box-shadow: inset 2px 2px 20px 0px #c5ecab;
+}
+
+.intro {
+    display: flex;
+}
+
+.intro img{
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+   border-radius: 30%;
+    width: 220px;
+    aspect-ratio: 2 / 2;
+    object-fit: cover;
+    margin-right: 1.5em;
+    box-shadow: 0px 0px 20px 2px #90f28b;
+   
+}
+
+iframe{
+    border: none;
 }
 
 
@@ -492,6 +537,10 @@ button{
 }
 
 .vert-txt{
+    display: none;
+}
+
+iframe, .organismo, .intro{
     display: none;
 }
 
