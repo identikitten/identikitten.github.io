@@ -156,10 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
         </section>
   
         <div class="page-description w-90 flex mb4">
-        <div class="w-30">
+        <div class="w-30 project-sidebar">
         ${item.decoration}
         </div>
-        <div class="w-70">
+        <div class="w-70-ns">
           ${item.description}
           </div>
         </div>

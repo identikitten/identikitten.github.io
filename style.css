@@ -495,7 +495,7 @@ button{
 }
 
 .intro {
-    display: flex;
+    /*display: flex;*/
 }
 
 .intro img{
@@ -512,6 +512,23 @@ button{
 
 iframe{
     border: none;
+}
+
+.mobile-header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: white;
+}
+
+.mobile-header li{
+    display: inline;
+    box-shadow: inset #1e4405 0px 0px 6px 0px;
+    padding: 3px;
+}
+
+.mobile-header p{
+    padding-left: 2.2em;
 }
 
 
@@ -541,6 +558,32 @@ iframe{
 }
 
 iframe, .organismo, .intro{
+    display: none;
+}
+
+.sidebar{
+    display: none;
+}
+
+.main-content{
+    padding-top: 80px;
+}
+
+#back-button{
+    margin-bottom: 0px;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    background: white;
+}
+
+.page-description{
+    width: 100%!important;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.project-sidebar{
     display: none;
 }
 

@@ -43,7 +43,7 @@ const galleryData = [
       </pre>
       `,
         thumbnail: 'images/fantasmado-1.jpg',
-        images: ['images/fantasmado-1.png','images/fantasmado-2.png', 'images/fantasmado-3.jpg', 'images/fantasmado-4.jpg', 'images/fantasmado-5.jpg', 'images/fantasmado-6.jpg', 'images/fantasmado-7.png', 'images/fantasmado-8.png'],
+        images: ['images/fantasmado-1.jpg','images/fantasmado-2.png', 'images/fantasmado-3.jpg', 'images/fantasmado-4.jpg', 'images/fantasmado-5.jpg', 'images/fantasmado-6.jpg', 'images/fantasmado-7.png', 'images/fantasmado-8.png'],
         decoration: `
         <pre>
 ◌⋰◦⋱● 𓂉
@@ -87,7 +87,7 @@ const galleryData = [
         `
       },
 
-      // falta llenar ectoplasm
+     
       {
         id: 'ectoplasm',
         title: 'ECTOPLASM',
@@ -121,7 +121,7 @@ const galleryData = [
           `
       },
 
-      // falta llenar este tambien
+  
 
       {
         id: 'cured-with-words',
@@ -156,6 +156,9 @@ const galleryData = [
          <p>This was part of "Floresta Efímera," a cycle of digital literature focused on performative reading with new media curated by Canek Zapata.</p>
         `
       },
+
+
+      
 
 
     ];
