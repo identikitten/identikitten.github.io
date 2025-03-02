@@ -6,6 +6,8 @@
     <title>⋰⋱⋰⋱ organismo digital ⋰⋱⋰⋱ </title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 
 <body class="">
@@ -15,17 +17,15 @@
                 <div class="">
                     <p class="intro tc">
                     𓆱    𓆱 𓍢
-                  𓆱 𓇼glitch literature 𓆙 𓍢 <br> 𓆱 cryptopoetry 𓆱 𓆙 
-                  devotion poetics
-                  𓆑 𓆙 𓍢𓇼<br>
-                   𓆸 𓆱 𓍢 poetic terrorism 𓆙 
-                  𓍢 𓇼𓆑 𓇼 𓆑<br>
-                  𓇼𓆱 𓍢 𓆱 𓍢 aura of machines 𓍢 𓆑 𓇼 avatars 𓆙
-                  𓆸 𓇼<br>
-                   𓆸 𓆱  also design 𓇼 𓆸 𓇼
-                  𓆱 𓇼 𓆑 𓆱 𓍢 𓆑
-                     𓆙 𓇼
-                        𓆱 
+                  𓆱 𓇼 i am 𓆙 𓍢 <br> 𓆱 awake 𓆱 𓆙 
+                  𓆑 𓆙 in 𓍢𓇼<br>
+                   𓆸 𓆱 everything  𓍢 𓆙 
+                  𓍢 𓇼𓆑 𓇼  i love 𓆑<br>
+                  𓇼𓆱 𓍢 𓆱 𓍢 and desire 𓍢 𓆑 𓇼 𓆙
+                  𓆸 to the  𓇼<br>
+                    𓆱  𓇼 point 𓆸 𓇼
+                  𓆱 𓇼 of 𓆑 
+                  terror 𓆱 𓍢 𓆑
                    </p>
                 </div>
                 <div class="divider"></div>
@@ -40,30 +40,65 @@
         </div> 
 
         <section class="mobile-header shadow">
+            <div class="another-menu">
             <p>𓈑𓇢𓂃𓏬𓂋</p>
             <p>digital organism</p>
+            <ul class="intro-menu-cel">
+                <li> <a href="about.html">about</a></li>
+                <li><a href="blog.html">blog</a></li>
+                <li><a href="mailto:saramartinezor@gmail.com">contact</a></li>
+                <li class="lang"><a href="">ver en español</a></li>
+            </ul>
+            </div>
                 <ul class="menu" id="menuContainer">
                     <li><a class="filter active" data-filter="all">all</a></li>
                     <li><a class="filter" data-filter="art">art</a></li>
                     <li><a class="filter" data-filter="design">design</a></li>
                     <li><a class="filter" data-filter="workshops">workshops</a></li>
-                   
-                  
-                </ul>
+                    <li><a class="filter" data-filter="texts">texts</a></li>
+                    <li><a class="filter" data-filter="experiments">experiments</a></li>
+                   </ul>
         </section>
 
         <div class="sidebar shadow aside">
             <div class="description">
-                <p>organismo digital</p>
+                <p><a href="index.html">organismo digital</a></p>
+
+                <div class="divider"></div>
+
+                <p class="lang"><a href="">ver en español</a></p>
+
+                <div class="divider"></div>
+
+                <ul class="intro-links">
+                    
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="blog.html">blog</a></li>
+                    <li><a href="mailto:saramartinezor@gmail.com">contact</a></li>
+                    </ul>
+
+                    <div class="divider"></div>
                 <ul class="menu" id="menuContainer">
+                <p>categories:</p>
                     <li><a class="filter active" data-filter="all">all</a></li>
                     <li><a class="filter" data-filter="art">art</a></li>
                     <li><a class="filter" data-filter="design">design</a></li>
                     <li><a class="filter" data-filter="workshops">workshops</a></li>
+                    <li><a class="filter" data-filter="texts">texts</a></li>
+                    <li><a class="filter" data-filter="experiments">experiments</a></li>
                     
                      
                 </ul>
+                <div class="divider"></div>
+               
+                <ul>
+                    <p>Plans for the future:</p>
+                    <li>Adding a shadow library (self-hosted on a raspberry pi)</li>
+                    <li>Adding downloadables</li>
+                </ul>
             </div>
+
+          
 
             <div class="falling-characters"></div>
             <button id="startFalling">make them fall</button>
@@ -83,5 +118,18 @@
 
     <script src="data.js"></script>
     <script src="script.js" defer></script>
+
+
+    <script>
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", user => {
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        }
+      </script>
 </body>
 </html>

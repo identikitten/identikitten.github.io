@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (defaults to master)
+
+# When using the git gateway backend, you can publish to your GitHub repo
+# If you want to use GitHub directly, change git-gateway to github and add 
+# your repo and auth settings
+
+# Enable local development
+local_backend: true
+
+# These lines should match the media folder structure of your site
+media_folder: "images" # Your existing images folder
+public_folder: "/images" # The public path to your images
+
+collections:
+  - name: "gallery" # Used in routes, e.g., /admin/collections/gallery
+    label: "Gallery Item" # Used in the UI
+    folder: "_gallery" # Where files will be stored (we'll use JS to process these)
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template (simplified)
+    fields: # The fields for each document
+      - {label: "ID", name: "id", widget: "string", hint: "Unique identifier for URL (no spaces)"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Year", name: "year", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["art", "design", "workshops", "texts", "collaborations"]}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", hint: "Main preview image"}
+      - {label: "Gallery Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image}, hint: "All images to display in the gallery"}
+      - {label: "Symbols HTML", name: "symbols", widget: "text", required: false, hint: "Decorative symbols that appear in bubble"}
+      - {label: "Decoration HTML", name: "decoration", widget: "text", required: false, hint: "Additional decorative elements"}
+      - {label: "Description", name: "description", widget: "markdown", hint: "Full description with formatting"}
+  
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog Post" # Used in the UI
+    folder: "_blog" # Where files will be stored (we'll use JS to process these)
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template (simplified)
+    fields: # The fields for each document
+      - {label: "ID", name: "id", widget: "string", hint: "Unique identifier for URL (no spaces)"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false, hint: "Main image for the post"}
+      - {label: "Body", name: "content", widget: "markdown", hint: "Main content of the blog post"}

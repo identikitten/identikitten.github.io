@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>⋰⋱⋰⋱ organismo digital - Content Manager ⋰⋱⋰⋱</title>
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Include Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Decap CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
+    <script>
+      // Add your custom CSS to the CMS
+      CMS.registerPreviewStyle("../style.css");
+      
+      // Customize the preview component for gallery items
+      const GalleryItemPreview = createClass({
+        render: function() {
+          const entry = this.props.entry;
+          
+          return h('div', {className: 'preview-container'},
+            h('h2', {}, entry.getIn(['data', 'title'])),
+            h('p', {}, entry.getIn(['data', 'year'])),
+            h('img', {src: entry.getIn(['data', 'thumbnail'])}),
+            h('div', {
+              className: 'description',
+              dangerouslySetInnerHTML: {
+                __html: this.props.widgetFor('description')
+              }
+            })
+          );
+        }
+      });
+      
+      CMS.registerPreviewTemplate('gallery', GalleryItemPreview);
+    </script>
+  </body>
+</html>
