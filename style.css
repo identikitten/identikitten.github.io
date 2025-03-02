@@ -628,6 +628,7 @@ iframe{
     display: inline;
     box-shadow: inset #1e4405 0px 0px 6px 0px;
     padding: 0.6em;
+    background: #ffffff8a;
 }
 
 .mobile-header p{
@@ -688,6 +689,7 @@ iframe{
         position: unset!important;
         border-radius: 0;
         width: 100vw;
+        margin-left: 0;
     }
 
     .more-links{
