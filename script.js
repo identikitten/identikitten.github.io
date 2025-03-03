@@ -128,57 +128,71 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // content of each post is loaded
-  function loadContent(id) {
-    const item = galleryData.find(item => item.id === id);
-    if (!item) return;
 
-    const contentHTML = `
-      <div class="page-header w-90">
-        <h3 class="fl">${item.title}</h3>
-        <h3 class="fr">${item.year}</h3>
+function loadContent(id) {
+  const item = galleryData.find(item => item.id === id);
+  if (!item) return;
+
+  const contentHTML = `
+    <div class="page-header w-90">
+      <h3 class="fl">${item.title}</h3>
+      <h3 class="fr">${item.year}</h3>
+    </div>
+
+    <section class="image-slider">
+      <div class="image-container">
+        <img id="expandedImg" style="width:100%">
       </div>
 
-      <section class="image-slider">
-        <div class="image-container">
-          <img id="expandedImg" style="width:100%">
-        </div>
-
-        <div class="row">
-          ${item.images.map((img, index) => `
-            <div class="column">
-              <img src="${img}" alt="Image ${index + 1}" onclick="changeImage(this);">
-            </div>
-          `).join('')}
-        </div>
-      </section>
-
-      <div class="page-description w-90 flex mb4">
-      <div class="w-30 project-sidebar">
-      ${item.decoration}
+      <div class="row">
+        ${item.images.map((img, index) => `
+          <div class="column">
+            <img src="${img}" alt="Image ${index + 1}" onclick="changeImage(this);">
+          </div>
+        `).join('')}
       </div>
-      <div class="w-70-ns">
-        ${item.description}
-        </div>
+    </section>
+
+    <div class="page-description w-90 flex mb4">
+    <div class="w-30 project-sidebar">
+    ${item.decoration}
+    </div>
+    <div class="w-70-ns">
+      ${item.description}
       </div>
-    `;
-    document.getElementById('intro-container').style.display = 'none';
-    contentContainer.style.display = 'none';
-    projectContainer.innerHTML = contentHTML;
-    projectContainer.style.display = 'block';
-    backButton.style.display = 'block';
+    </div>
+  `;
+  document.getElementById('intro-container').style.display = 'none';
+  contentContainer.style.display = 'none';
+  projectContainer.innerHTML = contentHTML;
+  projectContainer.style.display = 'block';
+  backButton.style.display = 'block';
+  
+  // Hide category menus when viewing a project
+  const sidebarMenu = document.querySelector('.hideandseek');
+  const mobileMenu = document.querySelector('.mobile-header .menu');
+  
+  if (sidebarMenu) sidebarMenu.style.opacity = '0';
+  if (mobileMenu) mobileMenu.style.opacity = '0';
 
-    // Reinitialize the image slider
-    initializeImageSlider();
-  }
+  // Reinitialize the image slider
+  initializeImageSlider();
+}
 
-  function showMainContent() {
-      document.getElementById('intro-container').style.display = 'block';
-      contentContainer.style.display = 'block';
-      projectContainer.style.display = 'none';
-      projectContainer.innerHTML = '';
-      backButton.style.display = 'none';
-  }
+function showMainContent() {
+  document.getElementById('intro-container').style.display = 'block';
+  contentContainer.style.display = 'block';
+  projectContainer.style.display = 'none';
+  projectContainer.innerHTML = '';
+  backButton.style.display = 'none';
+  
+  // Show category menus when back on main content
+  const sidebarMenu = document.querySelector('.hideandseek');
+  const mobileMenu = document.querySelector('.mobile-header .menu');
+  
+  if (sidebarMenu) sidebarMenu.style.opacity = '1';
+  if (mobileMenu) mobileMenu.style.opacity = '1';
+}
   
   function initializeImageSlider() {
     let currentImageIndex = 0;
@@ -191,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         expandImg.src = imgs.src;
         expandImg.style.opacity = "1";
-      }, 500);
+      }, 800);
     }
 
     function cycleImages() {
@@ -202,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
       currentImageIndex++;
     }
 
-    const intervalId = setInterval(cycleImages, 3500);
+    const intervalId = setInterval(cycleImages, 4500);
 
     images.forEach(img => {
       img.addEventListener('click', () => {

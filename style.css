@@ -75,6 +75,18 @@ a:hover{
     transition: box-shadow 0.4s;
 }
 
+a:visited{
+    color: #000
+}
+
+.hideandseek {
+    transition: all 0.5s ease-out;
+}
+
+.mobile-header .menu{
+    transition: all 0.5s ease-out;
+}
+
 .indigo{
     color: #192586;
 }
@@ -84,11 +96,16 @@ a:hover{
 }
 
 .hw:before{
-    content: "🪨⍣⍣";
+    content: "⍣";
+}
+
+.hw{
+
+    background-image: linear-gradient(rgb(118, 44, 245), rgb(232, 247, 129), rgb(99, 170, 220));
 }
 
 .hw:after{
-    content: "⍣⍣🪨";
+    content: "⍣";
 }
 
 .lang {
@@ -677,7 +694,8 @@ iframe{
         flex-wrap: wrap;
         position: fixed;
         bottom: 0px;
-    }
+        left:0;
+        right:0;
     
 
     /*page structure*/
