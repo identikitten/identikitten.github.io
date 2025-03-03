@@ -1,5 +1,4 @@
-const blogData = [];
-
+window.blogData = window.blogData || [];
 // Language handling
 let currentLanguage = 'en'; // Default language - this will be synced with translations.js
 

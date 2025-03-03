@@ -435,7 +435,7 @@ button{
     cursor: pointer;
     text-align: left;
     width: 100%;
-    background: transparent;
+    background: #ffffffc9;
     border: 0px;
     box-shadow: inset 0px 0px 8px 1px #f28b8b;
     margin-bottom: 10px;
@@ -643,7 +643,7 @@ iframe{
 .mobile-header li{
     flex-grow: 100;
     display: inline;
-    box-shadow: inset #1e4405 0px 0px 6px 0px;
+    box-shadow: inset #378007 0px 0px 6px 0px;
     padding: 0.6em;
     background: #ffffff8a;
 }
@@ -744,7 +744,7 @@ iframe, .organismo, .intro{
 
 #back-button{
     margin-bottom: 0px;
-    background: white;
+    background: #ffffffc9;
     padding: 10px 15px;
 }
 

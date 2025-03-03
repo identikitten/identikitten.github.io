@@ -1,32 +1,5 @@
 // translations.js - Complete translation file
 
-// Initialize project translations
-if (!translations.en.projects) translations.en.projects = {};
-if (!translations.es.projects) translations.es.projects = {};
-
-// Load project translations from JSON
-fetch('project-translations.json')
-  .then(response => response.json())
-  .then(data => {
-    // Merge project translations with UI translations
-    if (data.en && data.en.projects) {
-      Object.assign(translations.en.projects, data.en.projects);
-    }
-    if (data.es && data.es.projects) {
-      Object.assign(translations.es.projects, data.es.projects);
-    }
-    
-    // Update page content with translations if page already loaded
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      updatePageContent();
-    }
-  })
-  .catch(error => {
-    console.warn('Error loading project translations:', error);
-    // Continue without project translations
-  });
-
-
 // Translations dictionary
 const translations = {
     en: {
@@ -51,7 +24,6 @@ const translations = {
       "workshopsCategory": "workshops",
       "textsCategory": "texts",
       "experimentsCategory": "experiments",
-      "collaborationsCategory": "collaborations",
       
       // Footer
       "futurePlans": "Plans for the future:",
@@ -93,7 +65,6 @@ const translations = {
       "workshopsCategory": "talleres",
       "textsCategory": "textos",
       "experimentsCategory": "experimentos",
-      "collaborationsCategory": "colaboraciones",
       
       // Footer
       "futurePlans": "Planes para el futuro:",
@@ -114,6 +85,35 @@ const translations = {
       "readMore": "Leer más →"
     }
   };
+
+// Initialize project translations
+if (!translations.en.projects) translations.en.projects = {};
+if (!translations.es.projects) translations.es.projects = {};
+
+// Load project translations from JSON
+fetch('project-translations.json')
+  .then(response => response.json())
+  .then(data => {
+    // Merge project translations with UI translations
+    if (data.en && data.en.projects) {
+      Object.assign(translations.en.projects, data.en.projects);
+    }
+    if (data.es && data.es.projects) {
+      Object.assign(translations.es.projects, data.es.projects);
+    }
+    
+    // Update page content with translations if page already loaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      updatePageContent();
+    }
+  })
+  .catch(error => {
+    console.warn('Error loading project translations:', error);
+    // Continue without project translations
+  });
+
+
+
   
   // Global variable to track current language
   let currentLanguage = 'en'; // Default language
@@ -142,20 +142,38 @@ function switchLanguage(lang) {
   // Make currentLanguage available globally
   window.currentLanguage = currentLanguage;
   
-  // Update all language toggle links
-  function updateLanguageLinks() {
-    const langLinks = document.querySelectorAll('.lang a');
-    langLinks.forEach(link => {
+ 
+   function updateLanguageLinks() {
+    initializeAllLanguageToggles();
+  }
+  
+
+
+  // Add this function to your translations.js file
+function initializeAllLanguageToggles() {
+    // Desktop sidebar toggle
+    const sidebarLangLinks = document.querySelectorAll('.sidebar .lang a');
+    
+    // Mobile menu toggle
+    const mobileLangLinks = document.querySelectorAll('.mobile-header .lang a');
+    
+    // Update all toggles
+    const allLangLinks = [...sidebarLangLinks, ...mobileLangLinks];
+    
+    allLangLinks.forEach(link => {
       if (currentLanguage === 'en') {
         link.textContent = translations.en.seeInSpanish;
         link.setAttribute('onclick', 'switchLanguage("es"); return false;');
+        link.href = '#';
       } else {
         link.textContent = translations.es.seeInEnglish;
         link.setAttribute('onclick', 'switchLanguage("en"); return false;');
+        link.href = '#';
       }
     });
   }
   
+ 
   // Helper function to update element text
   function updateElementText(selector, translationKey) {
     const elements = document.querySelectorAll(selector);
@@ -178,13 +196,17 @@ function switchLanguage(lang) {
     updateElementText('#stopFalling', 'stopFall');
     
     // Categories - IMPORTANT: Fix for sidebar categories
-    updateElementText('.hideandseek ul:first-of-type p', 'categoriesTitle');
-    updateElementText('.menu li:nth-child(1) a', 'allCategory');
-    updateElementText('.menu li:nth-child(2) a', 'artCategory');
-    updateElementText('.menu li:nth-child(3) a', 'designCategory');
-    updateElementText('.menu li:nth-child(4) a', 'workshopsCategory');
-    updateElementText('.menu li:nth-child(5) a', 'textsCategory');
-    updateElementText('.menu li:nth-child(6) a', 'experimentsCategory');
+ 
+
+
+    updateElementText('.menu a[data-filter="all"]', 'allCategory');
+
+// And for the other categories:
+updateElementText('.menu a[data-filter="art"]', 'artCategory');
+updateElementText('.menu a[data-filter="design"]', 'designCategory');
+updateElementText('.menu a[data-filter="workshops"]', 'workshopsCategory');
+updateElementText('.menu a[data-filter="texts"]', 'textsCategory');
+updateElementText('.menu a[data-filter="experiments"]', 'experimentsCategory');
     
     // Footer plans section
     const plansTitle = document.querySelector('.hideandseek ul:last-of-type p');
@@ -272,4 +294,5 @@ function switchLanguage(lang) {
     // Initialize the page with the correct language
     updatePageContent();
     updateLanguageLinks();
+    
   });

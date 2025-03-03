@@ -1,4 +1,4 @@
-const galleryData = [
+window.galleryData = [
   {
     id: 'prayer',
     title: 'PRAYER FOR THOSE ABOUT TO BE DEVOURED',

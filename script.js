@@ -1,3 +1,6 @@
+// At the beginning of your script.js
+const galleryData = window.galleryData || [];
+
 document.addEventListener('DOMContentLoaded', function() {
   const contentContainer = document.getElementById('content-container');
   const projectContainer = document.getElementById('project-container');
@@ -256,11 +259,11 @@ function positionPostsWithoutOverlap() {
   
   // Category-specific colors
   const categoryColors = {
-    'texts': '#FC39D8',
+    'texts': '#dcf952',
     'workshops': '#71FFEC',
     'design': '#717BFF',
     'art': '#F28B8B',
-    'experiments': '#1E4405'
+    'experiments': '#FC39D8'
   };
   
   // Reset all posts to initial state
@@ -369,4 +372,83 @@ function positionPostsWithoutOverlap() {
   // Initial render
   renderGallery();
   showMainContent(); // Ensure we start on the main content view
+});
+
+
+// Add this to your existing script.js file
+
+// Function to handle scrolling to top on mobile
+function setupMobileScrollTop() {
+  // Check if we're on a mobile device
+  const isMobile = window.innerWidth <= 700; // Matches your media query breakpoint
+  
+  if (isMobile) {
+    // For project loading
+    const originalLoadContent = window.loadContent;
+    if (typeof originalLoadContent === 'function') {
+      window.loadContent = function(id) {
+        // Call the original function
+        originalLoadContent(id);
+        // Then scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      };
+    }
+
+    // Add event listeners to any project links
+    document.querySelectorAll('.post a').forEach(link => {
+      link.addEventListener('click', function() {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }, 100); // Small delay to ensure content is loaded
+      });
+    });
+
+    // For blog posts
+    if (window.location.href.includes('blog.html')) {
+      document.querySelectorAll('.blog-item a').forEach(link => {
+        link.addEventListener('click', function() {
+          setTimeout(() => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }, 100);
+        });
+      });
+    }
+
+    // For back button click
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+      const originalClickHandler = backButton.onclick;
+      backButton.onclick = function(e) {
+        if (originalClickHandler) {
+          originalClickHandler.call(this, e);
+        }
+        
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }, 100);
+      };
+    }
+  }
+}
+
+// Initialize when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setupMobileScrollTop();
+  
+  // Also set up for window resize events
+  window.addEventListener('resize', function() {
+    setupMobileScrollTop();
+  });
 });

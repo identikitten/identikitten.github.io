@@ -68,15 +68,15 @@ function buildBlogData() {
   }
 // Generate data.js file
 function generateDataJs(galleryData) {
-  const dataJsContent = `const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
-  fs.writeFileSync(path.join(__dirname, 'data.js'), dataJsContent);
+    const dataJsContent = `window.galleryData = ${JSON.stringify(galleryData, null, 2)};`;
+fs.writeFileSync(path.join(__dirname, 'data.js'), dataJsContent);
   console.log('Generated data.js with gallery items');
 }
 
 // Generate blog.js file
 function generateBlogJs(blogData) {
-  const blogJsContent = `const blogData = ${JSON.stringify(blogData, null, 2)};`;
-  fs.writeFileSync(path.join(__dirname, 'blog.js'), blogJsContent);
+    const blogJsContent = `window.blogData = ${JSON.stringify(blogData, null, 2)};`;
+    fs.writeFileSync(path.join(__dirname, 'blog.js'), blogJsContent);
   console.log('Generated blog.js with blog posts');
 }
 
