@@ -119,7 +119,9 @@ const translations = {
   let currentLanguage = 'en'; // Default language
   
   // Main language switching function
-  function switchLanguage(lang) {
+  // Add to translations.js, in the switchLanguage function
+
+function switchLanguage(lang) {
     currentLanguage = lang;
     
     // Update UI with new language
@@ -130,7 +132,15 @@ const translations = {
     
     // Update language toggle links
     updateLanguageLinks();
+    
+    // Dispatch event to notify other scripts
+    document.dispatchEvent(new CustomEvent('languageChanged', {
+      detail: { language: lang }
+    }));
   }
+  
+  // Make currentLanguage available globally
+  window.currentLanguage = currentLanguage;
   
   // Update all language toggle links
   function updateLanguageLinks() {

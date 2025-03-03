@@ -14,30 +14,33 @@ media_folder: "images" # Your existing images folder
 public_folder: "/images" # The public path to your images
 
 collections:
-  - name: "gallery" # Used in routes, e.g., /admin/collections/gallery
-    label: "Gallery Item" # Used in the UI
-    folder: "_gallery" # Where files will be stored (we'll use JS to process these)
-    create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template (simplified)
-    fields: # The fields for each document
-      - {label: "ID", name: "id", widget: "string", hint: "Unique identifier for URL (no spaces)"}
-      - {label: "Title", name: "title", widget: "string"}
+  - name: "gallery"
+    label: "Gallery Items"
+    folder: "_gallery"
+    create: true
+    slug: "{{id}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string"}
+      - {label: "Title (EN)", name: "title", widget: "string"}
+      - {label: "Title (ES)", name: "title_es", widget: "string", required: false}
       - {label: "Year", name: "year", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["art", "design", "workshops", "texts", "collaborations"]}
-      - {label: "Thumbnail", name: "thumbnail", widget: "image", hint: "Main preview image"}
-      - {label: "Gallery Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image}, hint: "All images to display in the gallery"}
-      - {label: "Symbols HTML", name: "symbols", widget: "text", required: false, hint: "Decorative symbols that appear in bubble"}
-      - {label: "Decoration HTML", name: "decoration", widget: "text", required: false, hint: "Additional decorative elements"}
-      - {label: "Description", name: "description", widget: "markdown", hint: "Full description with formatting"}
+      - {label: "Category", name: "category", widget: "select", options: ["art", "design", "workshops", "texts", "experiments", "collaborations"]}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image"}
+      - {label: "Images", name: "images", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+      - {label: "Symbols", name: "symbols", widget: "text", required: false}
+      - {label: "Decoration", name: "decoration", widget: "text", required: false}
+      - {label: "Description (EN)", name: "description", widget: "markdown"}
+      - {label: "Description (ES)", name: "description_es", widget: "markdown", required: false}
   
-  - name: "blog" # Used in routes, e.g., /admin/collections/blog
-    label: "Blog Post" # Used in the UI
-    folder: "_blog" # Where files will be stored (we'll use JS to process these)
-    create: true # Allow users to create new documents in this collection
-    slug: "{{slug}}" # Filename template (simplified)
-    fields: # The fields for each document
-      - {label: "ID", name: "id", widget: "string", hint: "Unique identifier for URL (no spaces)"}
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "_blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "ID", name: "id", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false, hint: "Main image for the post"}
-      - {label: "Body", name: "content", widget: "markdown", hint: "Main content of the blog post"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Language", name: "language", widget: "select", options: ["en", "es", "both"], default: "en", hint: "Select the language(s) this post should appear in"}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Content", name: "content", widget: "markdown"}
