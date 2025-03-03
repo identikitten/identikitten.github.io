@@ -1,15 +1,22 @@
+console.log('Starting build process...');
+console.log('Current directory:', __dirname);
+console.log('Directory contents:', fs.readdirSync(__dirname));
+
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
+
+
 
 // Build gallery data
 function buildGalleryData() {
     const galleryDir = path.join(__dirname, '_gallery');
     
-    if (!fs.existsSync(galleryDir)) {
-      console.log('Gallery directory not found. Creating one...');
-      fs.mkdirSync(galleryDir, { recursive: true });
-      return [];
+    console.log('Gallery directory path:', galleryDir);
+    console.log('Gallery directory exists:', fs.existsSync(galleryDir));
+    
+    if (fs.existsSync(galleryDir)) {
+      console.log('Gallery directory contents:', fs.readdirSync(galleryDir));
     }
     
     const galleryFiles = fs.readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
