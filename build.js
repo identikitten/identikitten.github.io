@@ -116,11 +116,12 @@ function generateTranslationDictionary(galleryData) {
   }
   
   // Add this to your existing build process
-  const galleryData = buildGalleryData();
+
+
+// Generate project translations - use the galleryData from the main build process
+const projectTranslations = generateTranslationDictionary(galleryData);
   
-  // Generate project translations
-  const projectTranslations = generateTranslationDictionary(galleryData);
-  
+
   // Write to a translations.json file (can be loaded by translations.js)
   fs.writeFileSync(
     path.join(__dirname, 'project-translations.json'), 
