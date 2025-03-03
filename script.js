@@ -177,6 +177,8 @@ function loadContent(id) {
 
   // Reinitialize the image slider
   initializeImageSlider();
+  // Add this near the end of your loadContent function
+  projectContainer.dataset.projectId = id;
 }
 
 function showMainContent() {

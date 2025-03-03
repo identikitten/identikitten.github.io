@@ -696,7 +696,7 @@ iframe{
         bottom: 0px;
         left:0;
         right:0;
-    
+    }
 
     /*page structure*/
     .container{
@@ -739,7 +739,7 @@ iframe, .organismo, .intro{
 }
 
 .main-content{
-    margin-top: 32%;
+    margin-top: 28%;
 }
 
 #back-button{
