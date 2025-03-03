@@ -1,29 +1,29 @@
+
+import { readdirSync, existsSync, readFileSync, mkdirSync, writeFileSync } from 'fs';
+import { join } from 'path';
+import matter from 'gray-matter';
+
 console.log('Starting build process...');
 console.log('Current directory:', __dirname);
-console.log('Directory contents:', fs.readdirSync(__dirname));
-
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-
+console.log('Directory contents:', readdirSync(__dirname));
 
 
 // Build gallery data
 function buildGalleryData() {
-    const galleryDir = path.join(__dirname, '_gallery');
+    const galleryDir = join(__dirname, '_gallery');
     
     console.log('Gallery directory path:', galleryDir);
-    console.log('Gallery directory exists:', fs.existsSync(galleryDir));
+    console.log('Gallery directory exists:', existsSync(galleryDir));
     
-    if (fs.existsSync(galleryDir)) {
-      console.log('Gallery directory contents:', fs.readdirSync(galleryDir));
+    if (existsSync(galleryDir)) {
+      console.log('Gallery directory contents:', readdirSync(galleryDir));
     }
     
-    const galleryFiles = fs.readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
+    const galleryFiles = readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
     
     const galleryData = galleryFiles.map(filename => {
-      const filePath = path.join(galleryDir, filename);
-      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const filePath = join(galleryDir, filename);
+      const fileContent = readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContent);
       
       return {
@@ -46,19 +46,19 @@ function buildGalleryData() {
 
 // Build blog data
 function buildBlogData() {
-    const blogDir = path.join(__dirname, '_blog');
+    const blogDir = join(__dirname, '_blog');
     
-    if (!fs.existsSync(blogDir)) {
+    if (!existsSync(blogDir)) {
       console.log('Blog directory not found. Creating one...');
-      fs.mkdirSync(blogDir, { recursive: true });
+      mkdirSync(blogDir, { recursive: true });
       return [];
     }
     
-    const blogFiles = fs.readdirSync(blogDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
+    const blogFiles = readdirSync(blogDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
     
     const blogData = blogFiles.map(filename => {
-      const filePath = path.join(blogDir, filename);
-      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const filePath = join(blogDir, filename);
+      const fileContent = readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContent);
       
       return {
@@ -76,14 +76,14 @@ function buildBlogData() {
 // Generate data.js file
 function generateDataJs(galleryData) {
     const dataJsContent = `window.galleryData = ${JSON.stringify(galleryData, null, 2)};`;
-fs.writeFileSync(path.join(__dirname, 'data.js'), dataJsContent);
+    writeFileSync(join(__dirname, 'data.js'), dataJsContent);
   console.log('Generated data.js with gallery items');
 }
 
 // Generate blog.js file
 function generateBlogJs(blogData) {
     const blogJsContent = `window.blogData = ${JSON.stringify(blogData, null, 2)};`;
-    fs.writeFileSync(path.join(__dirname, 'blog.js'), blogJsContent);
+    writeFileSync(join(__dirname, 'blog.js'), blogJsContent);
   console.log('Generated blog.js with blog posts');
 }
 
@@ -123,8 +123,8 @@ const projectTranslations = generateTranslationDictionary(galleryData);
   
 
   // Write to a translations.json file (can be loaded by translations.js)
-  fs.writeFileSync(
-    path.join(__dirname, 'project-translations.json'), 
+  writeFileSync(
+    join(__dirname, 'project-translations.json'), 
     JSON.stringify(projectTranslations, null, 2)
   );
   console.log('Generated project-translations.json');
