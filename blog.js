@@ -78,6 +78,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Generate HTML for filtered posts
+    const readMoreText = currentLanguage === 'es' ? 'Leer más →' : 'Read more →';
+    
+    const blogHTML = filteredPosts.map(post => `
+      <div class="blog-item">
+        <h2 class="blog-title"><a href="#${post.id}" class="blog-link">${post.title}</a></h2>
+        <div class="blog-date">${formatDate(post.date)}</div>
+        ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" class="blog-thumbnail">` : ''}
+        <div class="blog-preview">${getPreview(post.content)}</div>
+        <p><a href="#${post.id}" class="blog-link">${readMoreText}</a></p>
+      </div>
+    `).join('');
+    
+    blogList.innerHTML = blogHTML;
+    
+    // Add event listeners to the blog links - with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      document.querySelectorAll('.blog-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const id = this.getAttribute('href').substring(1);
+          loadBlogPost(id);
+        });
+      });
+    }, 50);
+  }
+  
+    // Sort blog posts by date (newest first)
+    const sortedBlogData = [...blogData].sort((a, b) => 
+      new Date(b.date) - new Date(a.date)
+    );
+    
+    // Filter posts by current language
+    const filteredPosts = filterBlogPostsByLanguage(sortedBlogData, currentLanguage);
+    
+    if (filteredPosts.length === 0) {
+      // No posts for this language
+      const noPostsMessage = currentLanguage === 'es' ? 
+        'No hay entradas de blog en español todavía.' : 
+        'No blog posts in English yet.';
+      
+      blogList.innerHTML = `<p class="tc">${noPostsMessage}</p>`;
+      return;
+
+    }
+    
+    // Generate HTML for filtered posts
     const blogHTML = filteredPosts.map(post => `
       <div class="blog-item">
         <h2 class="blog-title"><a href="#${post.id}">${post.title}</a></h2>
@@ -124,6 +170,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update URL
     window.history.pushState({blogId: id}, post.title, `blog.html#${id}`);
+
+
+    setTimeout(() => {
+        document.querySelectorAll('.blog-item a').forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('href').substring(1);
+            loadBlogPost(id);
+          });
+        });
+      }, 100); // Small delay to ensure DOM is fully rendered
+    
   }
   
   // Function to go back to blog list

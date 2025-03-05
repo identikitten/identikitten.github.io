@@ -49,7 +49,7 @@ const translations = {
       "blog": "blog",
       "contact": "contacto",
       "seeInSpanish": "ver en español",
-      "seeInEnglish": "ver en inglés",
+      "seeInEnglish": "see in english",
       
       // Buttons & UI elements
       "backToMain": "⋆ ˚｡ Volver al Contenido Principal",
@@ -183,30 +183,31 @@ function initializeAllLanguageToggles() {
       }
     });
   }
+
+
+  
   
   // Update all page content based on current language
   function updatePageContent() {
     // Navigation and common elements
-    updateElementText('.intro-links li:nth-child(1) a', 'about');
-    updateElementText('.intro-links li:nth-child(2) a', 'blog');
-    updateElementText('.intro-links li:nth-child(3) a', 'contact');
-    
+
+    updateElementText('.intro-links li:nth-child(1) a, .intro-menu-cel li:nth-child(1) a', 'about');
+    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', 'blog');
+    updateElementText('.intro-links li:nth-child(3) a, .intro-menu-cel li:nth-child(3) a', 'contact');
+
     // Buttons
     updateElementText('#startFalling', 'makeFall');
     updateElementText('#stopFalling', 'stopFall');
     
-    // Categories - IMPORTANT: Fix for sidebar categories
- 
-
-
+    
+    // Categories - Fix for sidebar and mobile categories
     updateElementText('.menu a[data-filter="all"]', 'allCategory');
-
-// And for the other categories:
-updateElementText('.menu a[data-filter="art"]', 'artCategory');
-updateElementText('.menu a[data-filter="design"]', 'designCategory');
-updateElementText('.menu a[data-filter="workshops"]', 'workshopsCategory');
-updateElementText('.menu a[data-filter="texts"]', 'textsCategory');
-updateElementText('.menu a[data-filter="experiments"]', 'experimentsCategory');
+    updateElementText('.menu a[data-filter="art"]', 'artCategory');
+    updateElementText('.menu a[data-filter="design"]', 'designCategory');
+    updateElementText('.menu a[data-filter="workshops"]', 'workshopsCategory');
+    updateElementText('.menu a[data-filter="texts"]', 'textsCategory');
+    updateElementText('.menu a[data-filter="experiments"]', 'experimentsCategory');
+    
     
     // Footer plans section
     const plansTitle = document.querySelector('.hideandseek ul:last-of-type p');
@@ -266,9 +267,34 @@ updateElementText('.menu a[data-filter="experiments"]', 'experimentsCategory');
   }
   
   // Function to translate project content
-  function updateProjectContent() {
-    // This will be implemented for translating gallery items
-    // We'll add this functionality later 
+ // Update translate.js - implement updateProjectContent function properly
+
+function updateProjectContent() {
+    // Check if we're on a project page
+    const projectContainer = document.getElementById('project-container');
+    if (!projectContainer || projectContainer.style.display === 'none') return;
+    
+    const projectId = projectContainer.dataset.projectId;
+    if (!projectId) return;
+    
+    // Check if we have translations for this project
+    if (translations[currentLanguage].projects && 
+        translations[currentLanguage].projects[projectId]) {
+      
+      const projectTranslations = translations[currentLanguage].projects[projectId];
+      
+      // Update title
+      const titleElement = projectContainer.querySelector('.page-header h3.fl');
+      if (titleElement && projectTranslations.title) {
+        titleElement.textContent = projectTranslations.title;
+      }
+      
+      // Update description
+      const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
+      if (descriptionElement && projectTranslations.description) {
+        descriptionElement.innerHTML = projectTranslations.description;
+      }
+    }
   }
   
   // Function to translate category names

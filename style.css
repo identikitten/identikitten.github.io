@@ -187,13 +187,13 @@ button{
 
 #startFalling{
     position: relative;
-    top: 20%;
+    top: 5%;
     left: 15%;
 }
 
 #stopFalling{
     position: relative;
-    top: 20%;
+    top: 5%;
     left: 20%;
 }
 
