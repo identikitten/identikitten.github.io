@@ -12,7 +12,8 @@ description_es: "
 <h5>DESARROLLADO DURANTE LA <a href="https://www.welcometomyhomepage.net/" target="_blank"> RESIDENCIA ARTÍSTICA DIGITAL WELCOME TO MY HOMEPAGE! EN MOHA</a> ENSAYO DE CONSOLADORA DE DESARROLLADOR</h5>
 <p>Un ensayo interactivo que se puede leer en la consoladora de desarrollador de tu navegador. El ensayo trata sobre el amor a las computadoras, combatir al escapismo y desactivar fantasías de sanación (que tienden hacia el aislamiento) para enfrentar el mundo. Solo es accesible a través de una computadora de escritorio.</p>
 <p>Puedes leer el ensayo <a href="https://all-about-computer-love.glitch.me/" target="_blank">en este link</a>. Para leerlo, abre las herramientas de desarrollador en tu navegador y navega hasta el console log. Tanto el console log como esta ventana deben estar visibles para poder leer completamente el ensayo.</p>
-<p>Este proyecto fue realizado durante mi estancia en <a href="https://www.welcometomyhomepage.net/" target="_blank">Welcome to my Homepage! Residencia Digital en MOHA</a> ♡︎♡︎</p>"
+<p>Este proyecto fue realizado durante mi estancia en <a href="https://www.welcometomyhomepage.net/" target="_blank">Welcome to my Homepage! Residencia Digital en MOHA</a> ♡︎♡︎</p>
+"
 ---
 
        <h5>DEVELOPED DURING THE <a href="https://www.welcometomyhomepage.net/" target="_blank">WELCOME TO MY HOMEPAGE! MOHA DIGITAL ARTIST RESIDENCY</a> CONSOLE LOG ESSAY</h5>

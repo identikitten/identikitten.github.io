@@ -13,7 +13,8 @@ description-es: "
 <p>Esta performance fue un experimento de expansión de una novela que no quería ser novela, explorando la relación entre las voces de las mujeres en mi familia, incluyéndome a mí. Profundiza en el acto de escribir y la resistencia a terminar o soltar este texto, que se transformó en una performance, una novela-partitura-ritual para entablar un diálogo con una oscuridad que se manifiesta y desea expandirse, hablar y ser nombrada.</p>
 <p>La performance implicaba dar instrucciones para que los asistentes leyeran un texto para cada personaje y luego destruyeran el texto de diversas maneras. Mientras leían, sus palabras se proyectaban en la pantalla, desencadenando diferentes reacciones del texto simultáneamente, acompañado por música en vivo de <a href="https://soundcloud.com/granitomusic" target="_blank">Granito</a></p>
 <p>Después de la lectura, los asistentes debían interactuar con las páginas que habían utilizado (por ejemplo, coser uno de los guiones para que no pudiera ser leído otra vez, marcar las páginas con una X o quemar el texto).</p>
-<p>Esto formó parte de "Floresta Efímera", un ciclo de literatura digital centrado en la lectura performativa con nuevos medios, curado por Canek Zapata.</p>"
+<p>Esto formó parte de "Floresta Efímera", un ciclo de literatura digital centrado en la lectura performativa con nuevos medios, curado por Canek Zapata.</p>
+"
 ---
 
        <h5>PERFORMANCE WITH LIVE INTERACTION (SOCKET.JS, HTML & CSS) & LIVE MUSIC</h5>
