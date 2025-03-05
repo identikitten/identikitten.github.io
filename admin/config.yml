@@ -13,24 +13,24 @@ local_backend: true
 media_folder: "images" # Your existing images folder
 public_folder: "/images" # The public path to your images
 
+# Example Netlify CMS config for gallery collection
 collections:
   - name: "gallery"
     label: "Gallery Items"
     folder: "_gallery"
     create: true
-    slug: "{{id}}"
     fields:
       - {label: "ID", name: "id", widget: "string"}
-      - {label: "Title (EN)", name: "title", widget: "string"}
-      - {label: "Title (ES)", name: "title_es", widget: "string", required: false}
+      - {label: "Title (English)", name: "title", widget: "string"}
+      - {label: "Title (Spanish)", name: "title_es", widget: "string", required: false}
       - {label: "Year", name: "year", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["art", "design", "workshops", "texts", "experiments", "collaborations"]}
+      - {label: "Category", name: "category", widget: "select", options: ["art", "design", "workshops", "texts", "experiments"]}
       - {label: "Thumbnail", name: "thumbnail", widget: "image"}
-      - {label: "Images", name: "images", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+      - {label: "Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image}}
       - {label: "Symbols", name: "symbols", widget: "text", required: false}
       - {label: "Decoration", name: "decoration", widget: "text", required: false}
-      - {label: "Description (EN)", name: "description", widget: "markdown"}
-      - {label: "Description (ES)", name: "description_es", widget: "markdown", required: false}
+      - {label: "Description (English)", name: "body", widget: "markdown"}
+      - {label: "Description (Spanish)", name: "description_es", widget: "markdown", required: false}
   
   - name: "blog"
     label: "Blog Posts"

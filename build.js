@@ -25,25 +25,26 @@ function buildGalleryData() {
     
     const galleryFiles = fs.readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
     
-    const galleryData = galleryFiles.map(filename => {
-      const filePath = path.join(galleryDir, filename);
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      const { data, content } = matter(fileContent);
-      
-      return {
-        id: data.id,
-        title: data.title,
-        title_es: data.title_es || '',
-        year: data.year,
-        category: data.category,
-        symbols: data.symbols || '',
-        thumbnail: data.thumbnail,
-        images: data.images || [data.thumbnail],
-        decoration: data.decoration || '',
-        description: data.description || content,
-        description_es: data.description_es || ''
-      };
-    });
+    // Inside the buildGalleryData function
+const galleryData = galleryFiles.map(filename => {
+    const filePath = path.join(galleryDir, filename);
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContent);
+    
+    return {
+      id: data.id,
+      title: data.title,
+      title_es: data.title_es || data.title, 
+      year: data.year,
+      category: data.category,
+      symbols: data.symbols || '',
+      thumbnail: data.thumbnail,
+      images: data.images || [data.thumbnail],
+      decoration: data.decoration || '',
+      description: data.description || content,
+      description_es: data.description_es || content 
+    };
+  });
     
     return galleryData;
 }

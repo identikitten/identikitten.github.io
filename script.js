@@ -75,20 +75,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Gallery and filtering functionality
   function renderGallery() {
-      // Generate HTML for gallery items
-      const galleryHTML = galleryData.map((item, index) => `  
+    const galleryHTML = galleryData.map((item, index) => {
+      
+      const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
+          item.title_es : item.title;
+        
+      return `  
           <div class="post" data-category="${item.category}">
           <a href="#" data-id="${item.id}"> 
               <div class="text-content">
-                  <h2>${item.title}</h2>
+                  <h2>${displayTitle}</h2>
               </div>
-              <img src="${item.thumbnail}" alt="${item.title}" style="display:none;">
+              <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
               </a>
           </div>
-      `).join('');
+      `;
+  }).join('');
 
-      contentContainer.innerHTML = galleryHTML;
-
+  contentContainer.innerHTML = galleryHTML;
       // Add event listeners to the newly created elements
       document.querySelectorAll('.post a').forEach(link => {
           link.addEventListener('click', function(e) {
@@ -132,44 +136,51 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
-function loadContent(id) {
-  const item = galleryData.find(item => item.id === id);
-  if (!item) return;
+  function loadContent(id) {
+    const item = galleryData.find(item => item.id === id);
+    if (!item) return;
 
-  const contentHTML = `
-    <div class="page-header w-90">
-      <h3 class="fl">${item.title}</h3>
-      <h3 class="fr">${item.year}</h3>
-    </div>
+    // Use Spanish fields if in Spanish mode
+    const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
+        item.title_es : item.title;
+    const displayDescription = window.currentLanguage === 'es' && item.description_es ? 
+        item.description_es : item.description;
 
-    <section class="image-slider">
-      <div class="image-container">
-        <img id="expandedImg" style="width:100%">
-      </div>
+    const contentHTML = `
+        <div class="page-header w-90">
+          <h3 class="fl">${displayTitle}</h3>
+          <h3 class="fr">${item.year}</h3>
+        </div>
 
-      <div class="row">
-        ${item.images.map((img, index) => `
-          <div class="column">
-            <img src="${img}" alt="Image ${index + 1}" onclick="changeImage(this);">
+        <section class="image-slider">
+          <div class="image-container">
+            <img id="expandedImg" style="width:100%">
           </div>
-        `).join('')}
-      </div>
-    </section>
 
-    <div class="page-description w-90 flex mb4">
-    <div class="w-30 project-sidebar">
-    ${item.decoration}
-    </div>
-    <div class="w-70-ns">
-      ${item.description}
-      </div>
-    </div>
-  `;
-  document.getElementById('intro-container').style.display = 'none';
-  contentContainer.style.display = 'none';
-  projectContainer.innerHTML = contentHTML;
-  projectContainer.style.display = 'block';
-  backButton.style.display = 'block';
+          <div class="row">
+            ${item.images.map((img, index) => `
+              <div class="column">
+                <img src="${img}" alt="${displayTitle} - Image ${index + 1}" onclick="changeImage(this);">
+              </div>
+            `).join('')}
+          </div>
+        </section>
+
+        <div class="page-description w-90 flex mb4">
+        <div class="w-30 project-sidebar">
+        ${item.decoration}
+        </div>
+        <div class="w-70-ns">
+          ${displayDescription}
+          </div>
+        </div>
+    `;
+    document.getElementById('intro-container').style.display = 'none';
+    contentContainer.style.display = 'none';
+    projectContainer.innerHTML = contentHTML;
+    projectContainer.style.display = 'block';
+    projectContainer.dataset.projectId = id;
+    backButton.style.display = 'block';
   
   // Hide category menus when viewing a project
   const sidebarMenu = document.querySelector('.hideandseek');
@@ -442,6 +453,23 @@ function setupMobileScrollTop() {
     }
   }
 }
+
+// Add this near the end of your script.js file
+document.addEventListener('languageChanged', function(e) {
+  // Re-render gallery if we're on the main page
+  if (document.getElementById('content-container') && 
+      document.getElementById('content-container').style.display !== 'none') {
+    renderGallery();
+  } 
+  // Re-load current project if we're on a project page
+  else if (document.getElementById('project-container') && 
+           document.getElementById('project-container').style.display !== 'none') {
+    const projectId = document.getElementById('project-container').dataset.projectId;
+    if (projectId) {
+      loadContent(projectId);
+    }
+  }
+});
 
 // Initialize when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
