@@ -25,7 +25,30 @@ function buildGalleryData() {
     
     const galleryFiles = fs.readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
     
-    // Inside the buildGalleryData function
+    const galleryData = galleryFiles.map(filename => {
+        const filePath = path.join(galleryDir, filename);
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const { data, content } = matter(fileContent);
+        
+        return {
+          id: data.id,
+          title: data.title,
+          title_es: data.title_es || data.title, // Include title_es
+          year: data.year,
+          category: data.category,
+          symbols: data.symbols || '',
+          thumbnail: data.thumbnail,
+          images: data.images || [data.thumbnail],
+          decoration: data.decoration || '',
+          description: data.description || content,
+          description_es: data.description_es || '' // Include description_es
+        };
+    });
+    
+    return galleryData; // Add this closing bracket and return statement
+}
+
+// Inside the buildGalleryData function where you process each file
 const galleryData = galleryFiles.map(filename => {
     const filePath = path.join(galleryDir, filename);
     const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -34,7 +57,7 @@ const galleryData = galleryFiles.map(filename => {
     return {
       id: data.id,
       title: data.title,
-      title_es: data.title_es || data.title, 
+      title_es: data.title_es || data.title, // Include title_es
       year: data.year,
       category: data.category,
       symbols: data.symbols || '',
@@ -42,12 +65,9 @@ const galleryData = galleryFiles.map(filename => {
       images: data.images || [data.thumbnail],
       decoration: data.decoration || '',
       description: data.description || content,
-      description_es: data.description_es || content 
+      description_es: data.description_es || '' // Include description_es
     };
   });
-    
-    return galleryData;
-}
 
 // Build blog data
 function buildBlogData() {

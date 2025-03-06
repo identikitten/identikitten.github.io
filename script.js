@@ -1,6 +1,20 @@
 // At the beginning of your script.js
 const galleryData = window.galleryData || [];
 
+// Debugging galleryData at the start
+console.log("Initial galleryData check:");
+if (galleryData && galleryData.length > 0) {
+  console.log("First project ID:", galleryData[0].id);
+  console.log("First project has title_es:", !!galleryData[0].title_es);
+  console.log("First project has description_es:", !!galleryData[0].description_es);
+  
+  // Check all items with translations
+  const withTitleEs = galleryData.filter(item => item.title_es).map(item => item.id);
+  const withDescEs = galleryData.filter(item => item.description_es).map(item => item.id);
+  console.log("Projects with title_es:", withTitleEs);
+  console.log("Projects with description_es:", withDescEs);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const contentContainer = document.getElementById('content-container');
   const projectContainer = document.getElementById('project-container');
@@ -135,16 +149,26 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-
-  function loadContent(id) {
-    const item = galleryData.find(item => item.id === id);
-    if (!item) return;
-
-    // Use Spanish fields if in Spanish mode
-    const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
-        item.title_es : item.title;
-    const displayDescription = window.currentLanguage === 'es' && item.description_es ? 
-        item.description_es : item.description;
+        function loadContent(id) {
+          const item = galleryData.find(item => item.id === id);
+          if (!item) {
+            console.error("No item found with ID:", id);
+            return;
+          }
+        
+          // Debug the item and translations
+          console.log("Loading project:", id);
+          console.log("Current language:", window.currentLanguage);
+          console.log("Has title_es:", !!item.title_es);
+          console.log("Has description_es:", !!item.description_es);
+          
+          // Use Spanish fields if in Spanish mode
+          const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
+              item.title_es : item.title;
+          const displayDescription = window.currentLanguage === 'es' && item.description_es ? 
+              item.description_es : item.description;
+          
+          console.log("Using title:", displayTitle);
 
     const contentHTML = `
         <div class="page-header w-90">
@@ -454,7 +478,7 @@ function setupMobileScrollTop() {
   }
 }
 
-// Add this near the end of your script.js file
+// Add this near the end of script.js
 document.addEventListener('languageChanged', function(e) {
   // Re-render gallery if we're on the main page
   if (document.getElementById('content-container') && 

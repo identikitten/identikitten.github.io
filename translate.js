@@ -121,8 +121,10 @@ fetch('project-translations.json')
   // Main language switching function
   // Add to translations.js, in the switchLanguage function
 
-function switchLanguage(lang) {
+  function switchLanguage(lang) {
+    // Set the current language
     currentLanguage = lang;
+    window.currentLanguage = lang; // Make sure it's available globally
     
     // Update UI with new language
     updatePageContent();
@@ -322,3 +324,13 @@ function updateProjectContent() {
     updateLanguageLinks();
     
   });
+
+  // Add this to your translate.js at the end of the document.addEventListener('DOMContentLoaded', ...) function
+console.log("Current language:", currentLanguage);
+if (window.galleryData) {
+  const itemsWithTranslations = window.galleryData.filter(item => item.title_es);
+  console.log("Items with Spanish titles:", itemsWithTranslations.length);
+  if (itemsWithTranslations.length > 0) {
+    console.log("Sample translation:", itemsWithTranslations[0].title, "→", itemsWithTranslations[0].title_es);
+  }
+}
