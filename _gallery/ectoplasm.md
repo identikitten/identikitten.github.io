@@ -9,12 +9,12 @@ images: ["images/ectoplasma-1.jpg","images/ectoplasma-2.jpeg","images/ectoplasma
 symbols: "\n    <pre>\n    𓇼\n       \n\n        𓏲\n    </pre>\n    "
 decoration: "\n      <pre>\n   𓂍\n     𓆇\n      𓆇\n       𓆇\n        𓈀\n      </pre>\n      "
 description-es: |
-<h5>PROYECCIÓN SOBRE TEXTIL, SENSOR DE MOVIMIENTO, RASPBERRY PI, OBJETOS DE COBRE Y MDF</h5>
-<p>Ectoplasma es parte de mis exploraciones en torno a corromper la legibilidad de los textos para encontrar una verdad oculta detrás de las palabras.</p>
-<p>Es una colaboración y diálogo con mi madre y mi abuela. Lo que se proyecta en el centro del lienzo es un poema escrito por mi abuela. Es un poema que mi madre no ha querido escuchar. La frase que enmarca el poema es lo que mi madre respondió cuando le pregunté - Si pudieras decirle algo a tu madre ahora mismo, ¿qué le dirías?</p>
-<p>La pieza consiste en una proyección del poema sobre dos capas de tela frente a un candelabro con una vela encendida. Cuando intentas acercarte y leer el poema, el círculo creado por las palabras de mi madre se va llenando gradualmente de color verde, cubriendo las palabras de mi abuela.</p>
-<p>Tomo el concepto de ectoplasma, un recurso utilizado por médiums a principios del siglo XX durante noches espiritistas para simular la materialización del espíritu que querían contactar para sus clientes. Imprimían rostros en telas y los sacaban por la boca, como si estos restos biológicos de una persona fallecida se materializaran primero dentro del cuerpo de la médium antes de ser expulsados al mundo.</p>
-<p>Fotos por Mónica Garrido</p>
+  <h5>PROYECCIÓN SOBRE TEXTIL, SENSOR DE MOVIMIENTO, RASPBERRY PI, OBJETOS DE COBRE Y MDF</h5>
+  <p>Ectoplasma es parte de mis exploraciones en torno a corromper la legibilidad de los textos para encontrar una verdad oculta detrás de las palabras.</p>
+  <p>Es una colaboración y diálogo con mi madre y mi abuela. Lo que se proyecta en el centro del lienzo es un poema escrito por mi abuela. Es un poema que mi madre no ha querido escuchar. La frase que enmarca el poema es lo que mi madre respondió cuando le pregunté - Si pudieras decirle algo a tu madre ahora mismo, ¿qué le dirías?</p>
+  <p>La pieza consiste en una proyección del poema sobre dos capas de tela frente a un candelabro con una vela encendida. Cuando intentas acercarte y leer el poema, el círculo creado por las palabras de mi madre se va llenando gradualmente de color verde, cubriendo las palabras de mi abuela.</p>
+  <p>Tomo el concepto de ectoplasma, un recurso utilizado por médiums a principios del siglo XX durante noches espiritistas para simular la materialización del espíritu que querían contactar para sus clientes. Imprimían rostros en telas y los sacaban por la boca, como si estos restos biológicos de una persona fallecida se materializaran primero dentro del cuerpo de la médium antes de ser expulsados al mundo.</p>
+  <p>Fotos por Mónica Garrido</p>
 
 ---
 
