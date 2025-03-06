@@ -25,6 +25,7 @@ function buildGalleryData() {
     
     const galleryFiles = fs.readdirSync(galleryDir).filter(file => file.endsWith('.md') || file.endsWith('.markdown'));
     
+    // Process each gallery file and create data objects
     const galleryData = galleryFiles.map(filename => {
         const filePath = path.join(galleryDir, filename);
         const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -45,31 +46,10 @@ function buildGalleryData() {
         };
     });
     
-    return galleryData; // Add this closing bracket and return statement
+    return galleryData;
 }
 
-// Inside the buildGalleryData function where you process each file
-const galleryData = galleryFiles.map(filename => {
-    const filePath = path.join(galleryDir, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContent);
-    
-    return {
-      id: data.id,
-      title: data.title,
-      title_es: data.title_es || data.title, // Include title_es
-      year: data.year,
-      category: data.category,
-      symbols: data.symbols || '',
-      thumbnail: data.thumbnail,
-      images: data.images || [data.thumbnail],
-      decoration: data.decoration || '',
-      description: data.description || content,
-      description_es: data.description_es || '' // Include description_es
-    };
-  });
-
-// Build blog data
+// Build blog data function
 function buildBlogData() {
     const blogDir = path.join(__dirname, '_blog');
     
@@ -104,6 +84,17 @@ function generateDataJs(galleryData) {
     const dataJsContent = `window.galleryData = ${JSON.stringify(galleryData, null, 2)};`;
     fs.writeFileSync(path.join(__dirname, 'data.js'), dataJsContent);
     console.log('Generated data.js with gallery items');
+    
+    // Log details about translations for debugging
+    const itemsWithTitleEs = galleryData.filter(item => item.title_es).length;
+    const itemsWithDescEs = galleryData.filter(item => item.description_es).length;
+    console.log(`Found ${itemsWithTitleEs} items with Spanish titles`);
+    console.log(`Found ${itemsWithDescEs} items with Spanish descriptions`);
+    
+    if (itemsWithTitleEs > 0) {
+        const sample = galleryData.find(item => item.title_es);
+        console.log(`Sample translation: "${sample.title}" → "${sample.title_es}"`);
+    }
 }
 
 // Generate blog.js file
