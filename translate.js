@@ -271,33 +271,54 @@ function initializeAllLanguageToggles() {
   // Function to translate project content
  // Update translate.js - implement updateProjectContent function properly
 
+// In updateProjectContent in translate.js
 function updateProjectContent() {
-    // Check if we're on a project page
-    const projectContainer = document.getElementById('project-container');
-    if (!projectContainer || projectContainer.style.display === 'none') return;
+  // Check if we're on a project page
+  const projectContainer = document.getElementById('project-container');
+  if (!projectContainer || projectContainer.style.display === 'none') return;
+  
+  const projectId = projectContainer.dataset.projectId;
+  if (!projectId) return;
+  
+  // Check if we have translations for this project
+  if (translations[currentLanguage].projects && 
+      translations[currentLanguage].projects[projectId]) {
     
-    const projectId = projectContainer.dataset.projectId;
-    if (!projectId) return;
+    const projectTranslations = translations[currentLanguage].projects[projectId];
     
-    // Check if we have translations for this project
-    if (translations[currentLanguage].projects && 
-        translations[currentLanguage].projects[projectId]) {
-      
-      const projectTranslations = translations[currentLanguage].projects[projectId];
-      
-      // Update title
-      const titleElement = projectContainer.querySelector('.page-header h3.fl');
-      if (titleElement && projectTranslations.title) {
-        titleElement.textContent = projectTranslations.title;
+    // Update title
+    const titleElement = projectContainer.querySelector('.page-header h3.fl');
+    if (titleElement && projectTranslations.title) {
+      titleElement.textContent = projectTranslations.title;
+    }
+    
+    // Update description - ensure HTML is preserved
+    const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
+    if (descriptionElement && projectTranslations.description) {
+      descriptionElement.innerHTML = projectTranslations.description;
+    }
+  } else {
+    // If there are no translations in projects object, check direct fields
+    const item = galleryData.find(item => item.id === projectId);
+    if (item) {
+      // Update title if title_es exists
+      if (currentLanguage === 'es' && item.title_es) {
+        const titleElement = projectContainer.querySelector('.page-header h3.fl');
+        if (titleElement) {
+          titleElement.textContent = item.title_es;
+        }
       }
       
-      // Update description
-      const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
-      if (descriptionElement && projectTranslations.description) {
-        descriptionElement.innerHTML = projectTranslations.description;
+      // Update description if description_es exists
+      if (currentLanguage === 'es' && item.description_es) {
+        const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
+        if (descriptionElement) {
+          descriptionElement.innerHTML = item.description_es;
+        }
       }
     }
   }
+}
   
   // Function to translate category names
   function translateCategory(category) {

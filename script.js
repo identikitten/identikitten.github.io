@@ -15,10 +15,47 @@ if (galleryData && galleryData.length > 0) {
   console.log("Projects with description_es:", withDescEs);
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
   const contentContainer = document.getElementById('content-container');
   const projectContainer = document.getElementById('project-container');
   const backButton = document.getElementById('back-button');
+
+
+  // Add at the beginning of your script.js DOMContentLoaded function
+function handleURL() {
+  const url = window.location.href;
+  const hash = window.location.hash;
+  
+  // Check if URL contains a project ID
+  if (hash.startsWith('#project/')) {
+    const projectId = hash.replace('#project/', '');
+    loadContent(projectId);
+  }
+}
+
+// Call this at page load
+handleURL();
+
+// Update your click handlers to use proper URLs
+document.querySelectorAll('.post a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const id = this.getAttribute('data-id');
+    window.location.hash = `project/${id}`;
+    loadContent(id);
+    e.preventDefault();
+  });
+});
+
+// Update back button to clear the hash
+backButton.addEventListener('click', function() {
+  window.location.hash = '';
+  showMainContent();
+});
+
+// Listen for URL changes
+window.addEventListener('hashchange', handleURL);
 
   // Falling characters functionality
   const container = document.querySelector(".falling-characters");
@@ -94,9 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
           item.title_es : item.title;
         
-      return `  
+          return `  
           <div class="post" data-category="${item.category}">
-          <a href="#" data-id="${item.id}"> 
+          <a href="#project/${item.id}" data-id="${item.id}"> 
               <div class="text-content">
                   <h2>${displayTitle}</h2>
               </div>
@@ -104,8 +141,9 @@ document.addEventListener('DOMContentLoaded', function() {
               </a>
           </div>
       `;
-  }).join('');
+    }).join('');
 
+  
   contentContainer.innerHTML = galleryHTML;
       // Add event listeners to the newly created elements
       document.querySelectorAll('.post a').forEach(link => {
@@ -150,25 +188,25 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
         function loadContent(id) {
-          const item = galleryData.find(item => item.id === id);
-          if (!item) {
-            console.error("No item found with ID:", id);
-            return;
+          function loadContent(id) {
+            const item = galleryData.find(item => item.id === id);
+            if (!item) {
+              console.error("No item found with ID:", id);
+              return;
+            }
+            
+            // Use Spanish fields if in Spanish mode and they exist
+            const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
+                item.title_es : item.title;
+                
+            // For description, we need to handle the markdown content
+            let displayDescription;
+            if (window.currentLanguage === 'es' && item.description_es) {
+              displayDescription = item.description_es;
+            } else {
+              displayDescription = item.description;
+            }
           }
-        
-          // Debug the item and translations
-          console.log("Loading project:", id);
-          console.log("Current language:", window.currentLanguage);
-          console.log("Has title_es:", !!item.title_es);
-          console.log("Has description_es:", !!item.description_es);
-          
-          // Use Spanish fields if in Spanish mode
-          const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
-              item.title_es : item.title;
-          const displayDescription = window.currentLanguage === 'es' && item.description_es ? 
-              item.description_es : item.description;
-          
-          console.log("Using title:", displayTitle);
 
     const contentHTML = `
         <div class="page-header w-90">
@@ -445,7 +483,7 @@ function setupMobileScrollTop() {
     });
 
     // For blog posts
-    if (window.location.href.includes('blog.html')) {
+    if (window.location.href.includes('notes.html')) {
       document.querySelectorAll('.blog-item a').forEach(link => {
         link.addEventListener('click', function() {
           setTimeout(() => {
