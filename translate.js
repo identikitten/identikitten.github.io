@@ -5,7 +5,7 @@ const translations = {
     en: {
       // Navigation
       "about": "about",
-      "blog": "blog",
+      "notes": "notes",
       "contact": "contact",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
@@ -46,7 +46,7 @@ const translations = {
     es: {
       // Navigation
       "about": "acerca",
-      "blog": "blog",
+      "notes": "notas",
       "contact": "contacto",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
@@ -173,6 +173,7 @@ function initializeAllLanguageToggles() {
         link.href = '#';
       }
     });
+
   }
   
  
@@ -194,7 +195,7 @@ function initializeAllLanguageToggles() {
     // Navigation and common elements
 
     updateElementText('.intro-links li:nth-child(1) a, .intro-menu-cel li:nth-child(1) a', 'about');
-    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', 'blog');
+    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', 'notes');
     updateElementText('.intro-links li:nth-child(3) a, .intro-menu-cel li:nth-child(3) a', 'contact');
 
     // Buttons
@@ -211,22 +212,12 @@ function initializeAllLanguageToggles() {
     updateElementText('.menu a[data-filter="experiments"]', 'experimentsCategory');
     
     
-    // Footer plans section
-    const plansTitle = document.querySelector('.hideandseek ul:last-of-type p');
-    if (plansTitle) {
-      plansTitle.textContent = translations[currentLanguage].futurePlans;
-    }
     
-    const plans = document.querySelectorAll('.hideandseek ul:last-of-type li');
-    if (plans.length >= 2) {
-      plans[0].textContent = translations[currentLanguage].plan1;
-      plans[1].textContent = translations[currentLanguage].plan2;
-    }
     
     // Update back button if it exists
     const backButton = document.getElementById('back-button');
     if (backButton) {
-      if (window.location.pathname.includes('blog.html') && 
+      if (window.location.pathname.includes('notes.html') && 
           !backButton.getAttribute('href')?.includes('index.html')) {
         updateElementText('#back-button', 'backToBlog');
       } else {
@@ -271,51 +262,35 @@ function initializeAllLanguageToggles() {
   // Function to translate project content
  // Update translate.js - implement updateProjectContent function properly
 
-// In updateProjectContent in translate.js
-function updateProjectContent() {
+ function updateProjectContent() {
   // Check if we're on a project page
   const projectContainer = document.getElementById('project-container');
   if (!projectContainer || projectContainer.style.display === 'none') return;
   
   const projectId = projectContainer.dataset.projectId;
   if (!projectId) return;
-  
-  // Check if we have translations for this project
-  if (translations[currentLanguage].projects && 
-      translations[currentLanguage].projects[projectId]) {
-    
-    const projectTranslations = translations[currentLanguage].projects[projectId];
-    
-    // Update title
-    const titleElement = projectContainer.querySelector('.page-header h3.fl');
-    if (titleElement && projectTranslations.title) {
-      titleElement.textContent = projectTranslations.title;
+
+  // Find the project in galleryData
+  const project = window.galleryData?.find(item => item.id === projectId);
+  if (!project) return;
+
+  // Update title
+  const titleElement = projectContainer.querySelector('.page-header h3.fl');
+  if (titleElement) {
+    if (currentLanguage === 'es' && project.title_es) {
+      titleElement.textContent = project.title_es;
+    } else {
+      titleElement.textContent = project.title;
     }
-    
-    // Update description - ensure HTML is preserved
-    const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
-    if (descriptionElement && projectTranslations.description) {
-      descriptionElement.innerHTML = projectTranslations.description;
-    }
-  } else {
-    // If there are no translations in projects object, check direct fields
-    const item = galleryData.find(item => item.id === projectId);
-    if (item) {
-      // Update title if title_es exists
-      if (currentLanguage === 'es' && item.title_es) {
-        const titleElement = projectContainer.querySelector('.page-header h3.fl');
-        if (titleElement) {
-          titleElement.textContent = item.title_es;
-        }
-      }
-      
-      // Update description if description_es exists
-      if (currentLanguage === 'es' && item.description_es) {
-        const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
-        if (descriptionElement) {
-          descriptionElement.innerHTML = item.description_es;
-        }
-      }
+  }
+
+  // Update description
+  const descriptionElement = projectContainer.querySelector('.page-description .w-70-ns');
+  if (descriptionElement) {
+    if (currentLanguage === 'es' && project.description_es) {
+      descriptionElement.innerHTML = project.description_es;
+    } else {
+      descriptionElement.innerHTML = project.description;
     }
   }
 }

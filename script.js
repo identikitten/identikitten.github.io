@@ -15,47 +15,10 @@ if (galleryData && galleryData.length > 0) {
   console.log("Projects with description_es:", withDescEs);
 }
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
   const contentContainer = document.getElementById('content-container');
   const projectContainer = document.getElementById('project-container');
   const backButton = document.getElementById('back-button');
-
-
-  // Add at the beginning of your script.js DOMContentLoaded function
-function handleURL() {
-  const url = window.location.href;
-  const hash = window.location.hash;
-  
-  // Check if URL contains a project ID
-  if (hash.startsWith('#project/')) {
-    const projectId = hash.replace('#project/', '');
-    loadContent(projectId);
-  }
-}
-
-// Call this at page load
-handleURL();
-
-// Update your click handlers to use proper URLs
-document.querySelectorAll('.post a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    const id = this.getAttribute('data-id');
-    window.location.hash = `project/${id}`;
-    loadContent(id);
-    e.preventDefault();
-  });
-});
-
-// Update back button to clear the hash
-backButton.addEventListener('click', function() {
-  window.location.hash = '';
-  showMainContent();
-});
-
-// Listen for URL changes
-window.addEventListener('hashchange', handleURL);
 
   // Falling characters functionality
   const container = document.querySelector(".falling-characters");
@@ -126,25 +89,29 @@ window.addEventListener('hashchange', handleURL);
 
   // Gallery and filtering functionality
   function renderGallery() {
-    const galleryHTML = galleryData.map((item, index) => {
+    if (!window.galleryData) {
+      console.error('galleryData not loaded yet');
+      return;
+    }
+  
+    const galleryHTML = window.galleryData.map((item) => {
+      const displayTitle = currentLanguage === 'es' && item.title_es 
+        ? item.title_es 
+        : item.title;
       
-      const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
-          item.title_es : item.title;
-        
-          return `  
-          <div class="post" data-category="${item.category}">
-          <a href="#project/${item.id}" data-id="${item.id}"> 
-              <div class="text-content">
-                  <h2>${displayTitle}</h2>
-              </div>
-              <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
-              </a>
-          </div>
+      return `  
+        <div class="post" data-category="${item.category}">
+          <a href="#" data-id="${item.id}"> 
+            <div class="text-content">
+              <h2>${displayTitle}</h2>
+            </div>
+            <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
+          </a>
+        </div>
       `;
     }).join('');
-
   
-  contentContainer.innerHTML = galleryHTML;
+    contentContainer.innerHTML = galleryHTML;
       // Add event listeners to the newly created elements
       document.querySelectorAll('.post a').forEach(link => {
           link.addEventListener('click', function(e) {
@@ -160,6 +127,12 @@ window.addEventListener('hashchange', handleURL);
       // Initialize filter functionality
       initializeFilter();
   }
+
+
+  // In script.js, after loading galleryData
+console.log('Gallery data loaded:', window.galleryData);
+console.log('Projects with Spanish titles:', 
+  window.galleryData.filter(item => item.title_es).map(item => item.id));
 
   function initializeFilter() {
       const filterLinks = document.querySelectorAll(".filter");
@@ -188,25 +161,25 @@ window.addEventListener('hashchange', handleURL);
   }
 
         function loadContent(id) {
-          function loadContent(id) {
-            const item = galleryData.find(item => item.id === id);
-            if (!item) {
-              console.error("No item found with ID:", id);
-              return;
-            }
-            
-            // Use Spanish fields if in Spanish mode and they exist
-            const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
-                item.title_es : item.title;
-                
-            // For description, we need to handle the markdown content
-            let displayDescription;
-            if (window.currentLanguage === 'es' && item.description_es) {
-              displayDescription = item.description_es;
-            } else {
-              displayDescription = item.description;
-            }
+          const item = galleryData.find(item => item.id === id);
+          if (!item) {
+            console.error("No item found with ID:", id);
+            return;
           }
+        
+          // Debug the item and translations
+          console.log("Loading project:", id);
+          console.log("Current language:", window.currentLanguage);
+          console.log("Has title_es:", !!item.title_es);
+          console.log("Has description_es:", !!item.description_es);
+          
+          // Use Spanish fields if in Spanish mode
+          const displayTitle = window.currentLanguage === 'es' && item.title_es ? 
+              item.title_es : item.title;
+          const displayDescription = window.currentLanguage === 'es' && item.description_es ? 
+              item.description_es : item.description;
+          
+          console.log("Using title:", displayTitle);
 
     const contentHTML = `
         <div class="page-header w-90">
@@ -518,18 +491,16 @@ function setupMobileScrollTop() {
 
 // Add this near the end of script.js
 document.addEventListener('languageChanged', function(e) {
-  // Re-render gallery if we're on the main page
-  if (document.getElementById('content-container') && 
-      document.getElementById('content-container').style.display !== 'none') {
+  console.log('Language changed to:', e.detail.language);
+  
+  // Update gallery if on main page
+  if (document.getElementById('content-container')?.style.display !== 'none') {
     renderGallery();
-  } 
-  // Re-load current project if we're on a project page
-  else if (document.getElementById('project-container') && 
-           document.getElementById('project-container').style.display !== 'none') {
-    const projectId = document.getElementById('project-container').dataset.projectId;
-    if (projectId) {
-      loadContent(projectId);
-    }
+  }
+  
+  // Update project if on project page
+  if (document.getElementById('project-container')?.style.display !== 'none') {
+    updateProjectContent();
   }
 });
 
