@@ -47,23 +47,27 @@ function setupGalleryInteractions() {
 }
 
 
-// Add this near the end of script.js
 document.addEventListener('languageChanged', function(e) {
-  // Re-render gallery if we're on the main page
-  if (document.getElementById('content-container') && 
-      document.getElementById('content-container').style.display !== 'none') {
-    renderGallery();
-  } 
-  // Re-load current project if we're on a project page
-  else if (document.getElementById('project-container') && 
-           document.getElementById('project-container').style.display !== 'none') {
+  // On main gallery page
+  if (document.getElementById('content-container')?.style.display !== 'none') {
+    // Update existing posts' text only
+    document.querySelectorAll('.post').forEach(post => {
+      const id = post.querySelector('a').getAttribute('data-id');
+      const item = galleryData.find(item => item.id === id);
+      if (item) {
+        const titleElement = post.querySelector('h2');
+        titleElement.textContent = window.currentLanguage === 'es' && item.title_es 
+          ? item.title_es 
+          : item.title;
+      }
+    });
+  }
+  // On project page
+  else if (document.getElementById('project-container')?.style.display !== 'none') {
     const projectId = document.getElementById('project-container').dataset.projectId;
-    if (projectId) {
-      loadContent(projectId);
-    }
+    if (projectId) loadContent(projectId);
   }
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
   contentContainer = document.getElementById('content-container');

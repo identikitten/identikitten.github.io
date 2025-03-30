@@ -206,9 +206,8 @@ button{
   }
   
   .post {
-    /*transition: top 1s ease-out;*/
-    will-change: transform;
-  transition: none !important;
+    transition: top 1s ease-out;
+    
   }
 
 
