@@ -15,6 +15,58 @@ if (galleryData && galleryData.length > 0) {
   console.log("Projects with description_es:", withDescEs);
 }
 
+
+
+// Gallery and filtering functionality
+function renderGallery() {
+  if (!window.galleryData) {
+    console.error('galleryData not loaded yet');
+    return;
+  }
+
+  // Make sure contentContainer exists
+  if (!contentContainer) {
+    contentContainer = document.getElementById('content-container');
+    if (!contentContainer) return;
+  }
+
+  const galleryHTML = window.galleryData.map((item) => {
+    const displayTitle = window.currentLanguage === 'es' && item.title_es 
+      ? item.title_es 
+      : item.title;
+    
+    return `  
+      <div class="post" data-category="${item.category}">
+        <a href="#" data-id="${item.id}"> 
+          <div class="text-content">
+            <h2>${displayTitle}</h2>
+          </div>
+          <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
+        </a>
+      </div>
+    `;
+  }).join('');
+
+  contentContainer.innerHTML = galleryHTML;
+    // Add event listeners to the newly created elements
+    document.querySelectorAll('.post a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('data-id');
+            loadContent(id);
+        });
+    });
+
+    // Position posts without overlap
+    positionPostsWithoutOverlap();
+
+    // Initialize filter functionality
+    initializeFilter();
+}
+
+window.renderGallery = renderGallery;
+
+
 document.addEventListener('DOMContentLoaded', function() {
   contentContainer = document.getElementById('content-container');
   projectContainer = document.getElementById('project-container');
@@ -87,54 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error("Stop button not found");
   }
 
-  // Gallery and filtering functionality
-  function renderGallery() {
-    if (!window.galleryData) {
-      console.error('galleryData not loaded yet');
-      return;
-    }
   
-    // Make sure contentContainer exists
-    if (!contentContainer) {
-      contentContainer = document.getElementById('content-container');
-      if (!contentContainer) return;
-    }
-  
-    const galleryHTML = window.galleryData.map((item) => {
-      const displayTitle = window.currentLanguage === 'es' && item.title_es 
-        ? item.title_es 
-        : item.title;
-      
-      return `  
-        <div class="post" data-category="${item.category}">
-          <a href="#" data-id="${item.id}"> 
-            <div class="text-content">
-              <h2>${displayTitle}</h2>
-            </div>
-            <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
-          </a>
-        </div>
-      `;
-    }).join('');
-  
-    contentContainer.innerHTML = galleryHTML;
-      // Add event listeners to the newly created elements
-      document.querySelectorAll('.post a').forEach(link => {
-          link.addEventListener('click', function(e) {
-              e.preventDefault();
-              const id = this.getAttribute('data-id');
-              loadContent(id);
-          });
-      });
-
-      // Position posts without overlap
-      positionPostsWithoutOverlap();
-
-      // Initialize filter functionality
-      initializeFilter();
-  }
-
-  window.renderGallery = renderGallery;
 
   // In script.js, after loading galleryData
 console.log('Gallery data loaded:', window.galleryData);
