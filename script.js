@@ -1,20 +1,16 @@
 // At the beginning of your script.js
 const galleryData = window.galleryData || [];
-// At the top of script.js, after galleryData declaration
 
 
-
+// Gallery and filtering functionality
 function renderGallery() {
   if (!window.galleryData) {
     console.error('galleryData not loaded yet');
     return;
   }
 
-  const contentContainer = document.getElementById('content-container');
-  if (!contentContainer) return;
-
   const galleryHTML = window.galleryData.map((item) => {
-    const displayTitle = window.currentLanguage === 'es' && item.title_es 
+    const displayTitle = currentLanguage === 'es' && item.title_es 
       ? item.title_es 
       : item.title;
     
@@ -31,25 +27,38 @@ function renderGallery() {
   }).join('');
 
   contentContainer.innerHTML = galleryHTML;
-  
-  // Add event listeners to the newly created elements
-  document.querySelectorAll('.post a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const id = this.getAttribute('data-id');
-      loadContent(id);
+    // Add event listeners to the newly created elements
+    document.querySelectorAll('.post a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('data-id');
+            loadContent(id);
+        });
     });
-  });
 
-  // Position posts without overlap
-  positionPostsWithoutOverlap();
+    // Position posts without overlap
+    positionPostsWithoutOverlap();
 
-  // Initialize filter functionality
-  initializeFilter();
+    // Initialize filter functionality
+    initializeFilter();
 }
 
+// At the top of script.js, after galleryData declaration
 window.renderGallery = renderGallery;
 
+// Debugging galleryData at the start
+console.log("Initial galleryData check:");
+if (galleryData && galleryData.length > 0) {
+  console.log("First project ID:", galleryData[0].id);
+  console.log("First project has title_es:", !!galleryData[0].title_es);
+  console.log("First project has description_es:", !!galleryData[0].description_es);
+  
+  // Check all items with translations
+  const withTitleEs = galleryData.filter(item => item.title_es).map(item => item.id);
+  const withDescEs = galleryData.filter(item => item.description_es).map(item => item.id);
+  console.log("Projects with title_es:", withTitleEs);
+  console.log("Projects with description_es:", withDescEs);
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   const contentContainer = document.getElementById('content-container');
@@ -123,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error("Stop button not found");
   }
 
+  
 
 
   // In script.js, after loading galleryData
@@ -417,6 +427,7 @@ function positionPostsWithoutOverlap() {
 });
 
 
+
 // Function to handle scrolling to top on mobile
 function setupMobileScrollTop() {
   // Check if we're on a mobile device
@@ -483,7 +494,7 @@ function setupMobileScrollTop() {
   }
 }
 
-
+// Add this near the end of script.js
 document.addEventListener('languageChanged', function(e) {
   console.log('Language changed to:', e.detail.language);
   
