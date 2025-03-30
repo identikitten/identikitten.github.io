@@ -2,75 +2,77 @@ const galleryData = window.galleryData || [];
 let contentContainer, projectContainer, backButton; // Declare these globally
 
 
-console.log("Initial galleryData check:");
-if (galleryData && galleryData.length > 0) {
-  console.log("First project ID:", galleryData[0].id);
-  console.log("First project has title_es:", !!galleryData[0].title_es);
-  console.log("First project has description_es:", !!galleryData[0].description_es);
-  
-  // Check all items with translations
-  const withTitleEs = galleryData.filter(item => item.title_es).map(item => item.id);
-  const withDescEs = galleryData.filter(item => item.description_es).map(item => item.id);
-  console.log("Projects with title_es:", withTitleEs);
-  console.log("Projects with description_es:", withDescEs);
+function updateGalleryText() {
+  document.querySelectorAll('.post').forEach(post => {
+    const id = post.querySelector('a').getAttribute('data-id');
+    const item = galleryData.find(item => item.id === id);
+    if (item) {
+      const displayTitle = window.currentLanguage === 'es' && item.title_es 
+        ? item.title_es 
+        : item.title;
+      post.querySelector('h2').textContent = displayTitle;
+    }
+  });
 }
 
 
 
-// Gallery and filtering functionality
 function renderGallery() {
-  if (!window.galleryData) {
-    console.error('galleryData not loaded yet');
-    return;
-  }
-
-  // Make sure contentContainer exists
-  if (!contentContainer) {
-    contentContainer = document.getElementById('content-container');
-    if (!contentContainer) return;
-  }
-
-  const galleryHTML = window.galleryData.map((item) => {
-    const displayTitle = window.currentLanguage === 'es' && item.title_es 
-      ? item.title_es 
-      : item.title;
-    
-    return `  
-      <div class="post" data-category="${item.category}">
-        <a href="#" data-id="${item.id}"> 
-          <div class="text-content">
-            <h2>${displayTitle}</h2>
-          </div>
-          <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
-        </a>
-      </div>
-    `;
-  }).join('');
+  if (!contentContainer) return;
+  
+  const galleryHTML = galleryData.map(item => `
+    <div class="post" data-category="${item.category}">
+      <a href="#" data-id="${item.id}"> 
+        <div class="text-content">
+          <h2>${window.currentLanguage === 'es' && item.title_es ? item.title_es : item.title}</h2>
+        </div>
+        <img src="${item.thumbnail}" alt="" style="display:none;">
+      </a>
+    </div>
+  `).join('');
 
   contentContainer.innerHTML = galleryHTML;
-    // Add event listeners to the newly created elements
-    document.querySelectorAll('.post a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = this.getAttribute('data-id');
-            loadContent(id);
-        });
-    });
-
-    // Position posts without overlap
-    positionPostsWithoutOverlap();
-
-    // Initialize filter functionality
-    initializeFilter();
+  setupGalleryInteractions();
+  positionPostsWithoutOverlap(); // Only called on initial load
 }
 
-window.renderGallery = renderGallery;
+function setupGalleryInteractions() {
+  document.querySelectorAll('.post a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      loadContent(this.getAttribute('data-id'));
+    });
+  });
+  initializeFilter();
+}
+
+
+// Add this near the end of script.js
+document.addEventListener('languageChanged', function(e) {
+  // Re-render gallery if we're on the main page
+  if (document.getElementById('content-container') && 
+      document.getElementById('content-container').style.display !== 'none') {
+    renderGallery();
+  } 
+  // Re-load current project if we're on a project page
+  else if (document.getElementById('project-container') && 
+           document.getElementById('project-container').style.display !== 'none') {
+    const projectId = document.getElementById('project-container').dataset.projectId;
+    if (projectId) {
+      loadContent(projectId);
+    }
+  }
+});
 
 
 document.addEventListener('DOMContentLoaded', function() {
   contentContainer = document.getElementById('content-container');
   projectContainer = document.getElementById('project-container');
   backButton = document.getElementById('back-button');
+
+    // Initial render
+    renderGallery();
+    showMainContent(); // Ensure we start on the main content view
 
   // Falling characters functionality
   const container = document.querySelector(".falling-characters");
@@ -139,7 +141,54 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error("Stop button not found");
   }
 
+  // Gallery and filtering functionality
+  function renderGallery() {
+    if (!window.galleryData) {
+      console.error('galleryData not loaded yet');
+      return;
+    }
   
+    // Make sure contentContainer exists
+    if (!contentContainer) {
+      contentContainer = document.getElementById('content-container');
+      if (!contentContainer) return;
+    }
+  
+    const galleryHTML = window.galleryData.map((item) => {
+      const displayTitle = window.currentLanguage === 'es' && item.title_es 
+        ? item.title_es 
+        : item.title;
+      
+      return `  
+        <div class="post" data-category="${item.category}">
+          <a href="#" data-id="${item.id}"> 
+            <div class="text-content">
+              <h2>${displayTitle}</h2>
+            </div>
+            <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
+          </a>
+        </div>
+      `;
+    }).join('');
+  
+    contentContainer.innerHTML = galleryHTML;
+      // Add event listeners to the newly created elements
+      document.querySelectorAll('.post a').forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const id = this.getAttribute('data-id');
+              loadContent(id);
+          });
+      });
+
+      // Position posts without overlap
+      positionPostsWithoutOverlap();
+
+      // Initialize filter functionality
+      initializeFilter();
+  }
+
+  window.renderGallery = renderGallery;
 
   // In script.js, after loading galleryData
 console.log('Gallery data loaded:', window.galleryData);
@@ -427,9 +476,7 @@ function positionPostsWithoutOverlap() {
   console.log('Positioned ' + posts.length + ' posts randomly (no grid)');
 }
 
-  // Initial render
-  renderGallery();
-  showMainContent(); // Ensure we start on the main content view
+
 });
 
 
@@ -500,22 +547,7 @@ function setupMobileScrollTop() {
   }
 }
 
-// Add this near the end of script.js
-document.addEventListener('languageChanged', function(e) {
-  // Re-render gallery if we're on the main page
-  if (document.getElementById('content-container') && 
-      document.getElementById('content-container').style.display !== 'none') {
-    renderGallery();
-  } 
-  // Re-load current project if we're on a project page
-  else if (document.getElementById('project-container') && 
-           document.getElementById('project-container').style.display !== 'none') {
-    const projectId = document.getElementById('project-container').dataset.projectId;
-    if (projectId) {
-      loadContent(projectId);
-    }
-  }
-});
+
 
 // Initialize when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
