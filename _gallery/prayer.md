@@ -7,6 +7,17 @@ thumbnail: images/prayer-1.png
 images: ["images/prayer-1.png","images/prayer-2.png","images/prayer-3.png","images/prayer-4.png"]
 symbols: "\n    <pre>\n  𓆱\n    𓍢\n     𓇼\n    </pre>\n    "
 decoration: "\n      <pre>\n⋆ ˚｡🪨 ⋆｡°       \n   ⋆ ˚｡ 🪨 ⋆｡°                  \n        ⋆｡° 🪨 ⋆｡°\n      </pre>\n      "
+description_es: |
+
+  <h5>Pieza para Cartografías de la Resistencia, curaduría de Alina Sánchez para Lxs Invitadxs, Pabellón de Máxico en Venecia<br>
+Roca pulverizada, pantalla E-Ink de 2.3", Arduino UNO R3</h5>
+  <p>Si el cuerpo es territorio, ¿cuánto es mío y cuánto de mis padres y de mis ancestros? Si parte de éste ha sido determinado por mi genética y por mi crianza, ¿cuánto de ello está ocupado, cedido, entregado, o en disputa?</p>
+
+<p>Esta pieza es un intento de conectar con una parte de este territorio que está en disputa, en donde la lógica impuesta es la de devorar o permitir ser devorada, tal como la relación entre Cronos y sus hijos, un vínculo formado a través del miedo del padre a perder el poder.</p>
+
+<p>Cronos devora a sus hijos porque teme ser desplazado por ellos. En las pinturas de Rubens y Goya, observamos el contraste entre los dos cuerpos, y la aparente imposibilidad de los hijos de no tomar, eventualmente, la posición del devorado.</p>
+<p>Sin embargo, existe la posibilidad de engañar al padre para salvarse a uno mismo. Rea, la madre de Zeus, encuentra una manera de engañar a Cronos: envuelve con un pañal una piedra para que el padre la confunda con el cuerpo de su hijo. Zeus después obliga a Cronos a regurgitar a los hijos a los que se había tragado, empezando con la piedra.</p>
+<p>En la pantalla que uso para la pieza, escribo mi propia plegaria que elijo también tomar como promesa: que nunca más sea tu hambre la que me quite el aliento.</p>
 ---
 
       <h5>Piece for Cartographies of Resistance, curated by Alina Sánchez for Lxs Invitadxs, Máxico Pavillion in Venice<br>

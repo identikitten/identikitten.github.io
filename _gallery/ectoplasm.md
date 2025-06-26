@@ -8,7 +8,7 @@ thumbnail: images/ectoplasma-1.jpg
 images: ["images/ectoplasma-1.jpg","images/ectoplasma-2.jpeg","images/ectoplasma-3.jpeg","images/ectoplasma-4.jpg"]
 symbols: "\n    <pre>\n    𓇼\n       \n\n        𓏲\n    </pre>\n    "
 decoration: "\n      <pre>\n   𓂍\n     𓆇\n      𓆇\n       𓆇\n        𓈀\n      </pre>\n      "
-description-es: |
+description_es: |
   <h5>PROYECCIÓN SOBRE TEXTIL, SENSOR DE MOVIMIENTO, RASPBERRY PI, OBJETOS DE COBRE Y MDF</h5>
   <p>Ectoplasma es parte de mis exploraciones en torno a corromper la legibilidad de los textos para encontrar una verdad oculta detrás de las palabras.</p>
   <p>Es una colaboración y diálogo con mi madre y mi abuela. Lo que se proyecta en el centro del lienzo es un poema escrito por mi abuela. Es un poema que mi madre no ha querido escuchar. La frase que enmarca el poema es lo que mi madre respondió cuando le pregunté - Si pudieras decirle algo a tu madre ahora mismo, ¿qué le dirías?</p>

@@ -8,7 +8,7 @@ thumbnail: images/iconos-caidos-1.png
 images: ["images/iconos-caidos-1.png","images/iconos-caidos-2.gif","images/iconos-caidos-3.png"]
 symbols: "\n      <pre>\n𓂂 \n\n\n    𓂻\n      </pre>\n      "
 decoration: "\n        <pre>\n♱\n˟\n ♱   \n   ˟\n     ♱\n        </pre>\n        "
-description: |
+description_es: |
   <h5>TELA SUBLIMADA, LLAVE DE CRUZ, PANTALLA TFT LCD, PLACA MEGA 2560, TWEETS EXTRAÍDOS</h5>
   <p>Esta fue una pieza comisionada por Ury Enríquez para el Museo de los Conspiradores, donde cinco artistas trabajaron en una obra en un solo día alrededor del tema de los mapas de Querétaro, la ciudad donde vivía en ese momento.</p>
   <p>En el medio de la cuadrícula-cielo delimitada, y atada a la palanca de neumáticos, hay una pequeña pantalla TFT que muestra tweets que extraje, con la limitación de que debían mencionar 'Querétaro' y 'mujer' o 'mujeres'. En la cuadrícula-cielo que cubre la pared, hay pequeñas vírgenes sin rostro cayendo, como si fueran partículas de materia pixelada procedentes del cielo.</p>
