@@ -9,7 +9,7 @@ images: ["images/lit-machines-1.gif","images/lit-machines-2.png","images/lit-mac
 symbols: "\n      <pre>\n𓃉\n 𓃊\n  𓃋\n   𓃌\n   𓃍\n      </pre>\n      "
 decoration: "\n      <pre>\n𓃉\n 𓃊\n  𓃋\n   𓃌\n   𓃍\n      </pre>\n      "
 description_es: |
-      <p>Un taller literario experimental que explora las posibilidades teóricas y creativas del ciberespacio.</p>
+       <p>Un taller literario experimental que explora las posibilidades teóricas y creativas del ciberespacio.</p>
        <p>Exploramos conceptos como la cripto-poesía, el terrorismo poético, el hacking de sueños (a través de sueños lúcidos) y nos sumergimos en software abandonado y comunidades virtuales tempranas para encontrar posibilidades de recreación y reinterpretación.</p>
        <p>Facilitado en colaboración con <a href=\"https://www.instagram.com/mvseo_privado/\" target=\"_blank\">Mvseo Privado</a>.</p>
        <p>Explora el sitio web <a href=\"https://web.archive.org/web/20210710050733/http://www.maquinasliterarias.xyz/\" target=\"_blank\">antes</a> de que una máquina literaria lo infectara y <a href=\"http://www.maquinasliterarias.xyz/\" target=\"_blank\">después</a>.</p>
