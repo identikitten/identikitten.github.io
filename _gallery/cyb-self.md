@@ -1,7 +1,7 @@
 ---
 id: cyb-self
 title: "CYBERSELFIE"
-title-es: "CIBERSELFIE"
+title_es: "CIBERSELFIE"
 year: 2022
 category: art
 thumbnail: images/ciberselfie.gif

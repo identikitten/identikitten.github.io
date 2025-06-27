@@ -1,7 +1,7 @@
 ---
 id: cured-with-words
 title: "THIS CANT BE CURED WITH WORDS"
-title-es: "ESTO NO SE CURA CON PALABRAS"
+title_es: "ESTO NO SE CURA CON PALABRAS"
 year: 2024
 category: art
 thumbnail: images/palabras-1.png

@@ -1,7 +1,7 @@
 ---
 id: fallen-icons
 title: "FALLEN ICONS"
-title-es: "ICONOS CAÍDOS"
+title_es: "ICONOS CAÍDOS"
 year: 2024
 category: art
 thumbnail: images/iconos-caidos-1.png

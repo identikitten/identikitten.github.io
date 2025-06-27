@@ -1,6 +1,7 @@
 ---
 id: sfpc-summer
 title: "SCHOOL FOR POETIC COMPUTATION SUMMER 2024 SESSION DESIGN"
+title_es: "DISEÑO DE SESIÓN DE VERANO 2024 (SCHOOL FOR POETIC COMPUTATION)"
 year: 2024
 category: design
 thumbnail: images/photo1.png

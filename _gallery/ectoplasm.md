@@ -1,7 +1,7 @@
 ---
 id: ectoplasm
 title: "ECTOPLASM"
-title-es: "ECTOPLASMA"
+title_es: "ECTOPLASMA"
 year: 2024
 category: art
 thumbnail: images/ectoplasma-1.jpg

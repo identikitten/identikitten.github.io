@@ -1,6 +1,7 @@
 ---
 id: txt-corrupt
 title: "CORRUPTING TEXT TO FIND YOUR VOICE"
+title_es: "CORROMPER EL TEXTO PARA ENCONTRAR TU VOZ"
 year: 2022
 category: art
 thumbnail: images/corromper-1.png

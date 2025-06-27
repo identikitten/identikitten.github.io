@@ -1,6 +1,7 @@
 ---
 id: ghosted-body
 title: "ESSAY ON A GHOSTED BODY"
+title_es: "ENSAYO SOBRE UN CUERPO FANTASMADO"
 year: 2024
 category: art
 thumbnail: images/fantasmado-1.jpg

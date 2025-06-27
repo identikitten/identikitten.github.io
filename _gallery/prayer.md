@@ -1,6 +1,7 @@
 ---
 id: prayer
 title: "PRAYER FOR THOSE ABOUT TO BE DEVOURED"
+title_es: "PLEGARIA PARA AQUELLOS QUE ESTÁN A PUNTO DE SER DEVORADOS"
 year: 2024
 category: art
 thumbnail: images/prayer-1.png

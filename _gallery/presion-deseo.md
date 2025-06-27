@@ -1,6 +1,7 @@
 ---
 id: presion-deseo
 title: "🔮•・∙✫HAVE YOU EVER SUFFERED THE PRESSURE OF DESIRE? ✫・•∙🔮"
+title_es: "¿ALGUNA VEZ HA SUFRIDO USTED LA PRESIÓN DEL DESEO?"
 year: 2024
 category: art
 thumbnail: images/des-5.jpg
