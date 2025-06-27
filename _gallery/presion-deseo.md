@@ -9,11 +9,11 @@ symbols: "\n      <pre>\n•\n⋆\n✫ •\n⋆\n∙ ✫\n      </pre>\n      "
 decoration: "\n        <pre>\n•\n  ⋆\n   ✫ •\n  ⋆\n    ∙ \n      ✫\n        </pre>\n        "
 description_es: |
   <h5>En memoria de <span class="hw">Horacio Warpola</span>, querido amigo y colaborador, co-creador de <a href="https://www.instagram.com/sqnx.mx/" target="_blank">SQNX</a>, colectivo transmedia</h5>
-<h5>PERFORMANCE CON INTERACCIÓN EN VIVO (SOCKET.JS, HTML & CSS) Y MÚSICA EN VIVO</h5>
-<p>Una performance sobre el desencanto creativo en la que <span class="hw">Horacio Warpola</span> y yo escribimos sobre algunas ✨💰soluciones mágicas💰✨ que ni siquiera nosotrxs podemos seguir al pie de la letra, pero el sueño siempre está ahí. Fue una farsa, un juego y una forma de confrontar los sueños interiorizados, deshacernos de las expectativas que se colocan sobre lxs artistas, y reconocer que el desencanto artístico responde a lógicas de productividad y discurso que a veces seguimos y que nos entristecen.</p>
-<p>Fue una colaboración con el colectivo transmedia SQNX, con diseño sonoro de Rojotodoeltiempo y Jorge Pitol, e interacción visual y con el público a través de un controlador telefónico hecho a medida por Isra Viadest.</p>
-<div class="divider"></div>
-<p>Fotos por Teresa Rodríguez</p>
+  <h5>PERFORMANCE CON INTERACCIÓN EN VIVO (SOCKET.JS, HTML & CSS) Y MÚSICA EN VIVO</h5>
+  <p>Una performance sobre el desencanto creativo en la que <span class="hw">Horacio Warpola</span> y yo escribimos sobre algunas ✨💰soluciones mágicas💰✨ que ni siquiera nosotrxs podemos seguir al pie de la letra, pero el sueño siempre está ahí. Fue una farsa, un juego y una forma de confrontar los sueños interiorizados, deshacernos de las expectativas que se colocan sobre lxs artistas, y reconocer que el desencanto artístico responde a lógicas de productividad y discurso que a veces seguimos y que nos entristecen.</p>
+  <p>Fue una colaboración con el colectivo transmedia SQNX, con diseño sonoro de Rojotodoeltiempo y Jorge Pitol, e interacción visual y con el público a través de un controlador telefónico hecho a medida por Isra Viadest.</p>
+  <div class="divider"></div>
+  <p>Fotos por Teresa Rodríguez</p>
 
 ---
 

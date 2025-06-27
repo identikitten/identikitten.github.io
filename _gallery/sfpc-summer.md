@@ -9,7 +9,7 @@ symbols: "\n      <pre>\n𓆙\n\n\n    𓆺\n      </pre>\n      "
 decoration: "\n        <pre>\n𓇼 ⋆.˚                  \n   𓆉.                          \n      𓆝                                 \n        𓆡⋆.˚\n        </pre>\n        "
 description_es: |
   <p>Sueños de veranos paradisíacos, tardes jugando con globos de agua y teñidos psicodélicos. Folletos llenos de destinos vacacionales, la imagen de un verano idílico ha quedado atrás en medio de una crisis climática y política. Aun así, queda una huella de esa felicidad despreocupada en nuestros mundos oníricos, una que puede extenderse hacia el deseo concreto de construir algo que pueda sostener ese mundo otra vez.</p>
-<p>Diseño de la sesión de verano 2024 para <a href="https://sfpc.study/sessions/summer-24" target="_blank">SFPC.</a></p>
+  <p>Diseño de la sesión de verano 2024 para <a href="https://sfpc.study/sessions/summer-24" target="_blank">SFPC.</a></p>
 
 
 ---
