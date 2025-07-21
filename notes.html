@@ -3,53 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⋰⋱⋰⋱ organismo digital - blog ⋰⋱⋰⋱ </title>
+    <title>⋰⋱⋰⋱ organismo digital ⋰⋱⋰⋱ </title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-    <style>
-        .blog-list {
-            padding: 2rem;
-        }
-        
-        .blog-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(242, 139, 139, 0.5);
-        }
-        
-        .blog-item:last-child {
-            border-bottom: none;
-        }
-        
-        .blog-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .blog-date {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            color: #666;
-        }
-        
-        .blog-thumbnail {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
-            border-radius: 15px;
-            box-shadow: 0px 0px 10px 3px rgba(242, 139, 139, 0.5);
-        }
-        
-        .blog-content {
-            line-height: 1.6;
-        }
-        
-        .blog-post {
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-    </style>
+   
 </head>
 
 <body class="">
@@ -57,16 +14,11 @@
         <div class="main-content shadow">
             <div id="blog-container">
                 <div class="page-header w-90">
-                    <h3 class="m0 ph2">blog</h3>
+                    <h3 class="m0 ph2">⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</h3>
                 </div>
                 
-                <div class="blog-list" id="blog-list">
-                    <!-- Blog posts will be dynamically inserted here -->
-                </div>
                 
-                <div class="blog-post" id="blog-post" style="display: none;">
-                    <!-- Individual blog post content will be loaded here -->
-                </div>
+            
             </div>
         </div>
 
@@ -75,9 +27,9 @@
                 <p>𓈑𓇢𓂃𓏬𓂋</p>
                 <a href="/index.html"><p>digital organism</p></a>
                 <ul class="intro-menu-cel">
-                    <li><a href="blog.html">blog</a></li>
+                    <li><a href="notes.html">⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</a></li>
                     <li><a href="about.html">about</a></li>
-                    <li><a href="mailto:saramartinezor@gmail.com">contact</a></li>
+                   
                 </ul>
             </div>
         </section>
@@ -88,9 +40,9 @@
                 <p class="lang"><a href="">ver en español</a></p>
 
                 <ul class="intro-links">
-                    <li><a href="blog.html">blog</a></li>
+                    <li><a href="notes.html">⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</a></li>
                     <li><a href="about.html">about</a></li>
-                    <li><a href="mailto:saramartinezor@gmail.com">contact</a></li>
+                   
                 </ul>
             </div>
 
@@ -106,130 +58,5 @@
     <script src="data.js"></script>
     <script src="blog.js"></script>
     <script src="script.js" defer></script>
-   
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const blogList = document.getElementById('blog-list');
-            const blogPost = document.getElementById('blog-post');
-            const backButton = document.getElementById('back-button');
-            
-            // Function to render blog list
-            function renderBlogList() {
-                if (!blogData || !blogData.length) {
-                    blogList.innerHTML = '<p class="tc">No blog posts yet.</p>';
-                    return;
-                }
-                
-                // Sort blog posts by date (newest first)
-                const sortedBlogData = [...blogData].sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                const blogHTML = sortedBlogData.map(post => `
-                    <div class="blog-item">
-                        <h2 class="blog-title"><a href="#${post.id}">${post.title}</a></h2>
-                        <div class="blog-date">${formatDate(post.date)}</div>
-                        ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" class="blog-thumbnail">` : ''}
-                        <div class="blog-preview">${getPreview(post.content)}</div>
-                        <p><a href="#${post.id}">Read more →</a></p>
-                    </div>
-                `).join('');
-                
-                blogList.innerHTML = blogHTML;
-                
-                // Add event listeners to the blog links
-                document.querySelectorAll('.blog-item a').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        const id = this.getAttribute('href').substring(1);
-                        loadBlogPost(id);
-                    });
-                });
-            }
-            
-            // Function to load a specific blog post
-            function loadBlogPost(id) {
-                const post = blogData.find(post => post.id === id);
-                if (!post) return;
-                
-                const postHTML = `
-                    <h1 class="blog-title">${post.title}</h1>
-                    <div class="blog-date">${formatDate(post.date)}</div>
-                    ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" class="blog-thumbnail">` : ''}
-                    <div class="blog-content">${post.content}</div>
-                `;
-                
-                blogList.style.display = 'none';
-                blogPost.innerHTML = postHTML;
-                blogPost.style.display = 'block';
-                
-                // Update back button behavior
-                backButton.removeEventListener('click', goToMainSite);
-                backButton.addEventListener('click', goToBlogList);
-                backButton.textContent = '⋆ ˚｡ Back to Blog List';
-                
-                // Update URL
-                window.history.pushState({blogId: id}, post.title, `blog.html#${id}`);
-            }
-            
-            // Function to go back to blog list
-            function goToBlogList(e) {
-                if (e) e.preventDefault();
-                
-                blogPost.style.display = 'none';
-                blogList.style.display = 'block';
-                
-                // Update back button behavior
-                backButton.removeEventListener('click', goToBlogList);
-                backButton.addEventListener('click', goToMainSite);
-                backButton.textContent = '⋆ ˚｡ Back to Main Content';
-                
-                // Update URL
-                window.history.pushState({}, 'Blog', 'blog.html');
-            }
-            
-            // Function to go to main site
-            function goToMainSite(e) {
-                // Default behavior - link to index.html
-            }
-            
-            // Helper function to format date
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                return date.toLocaleDateString('en-US', options);
-            }
-            
-            // Helper function to get a preview of the content
-            function getPreview(content) {
-                // Create a temporary div to parse HTML content
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = content;
-                
-                // Get text content and limit to 150 characters
-                let text = tempDiv.textContent || tempDiv.innerText;
-                if (text.length > 150) {
-                    text = text.substring(0, 150) + '...';
-                }
-                
-                return text;
-            }
-            
-            // Handle browser back button
-            window.addEventListener('popstate', function(event) {
-                if (event.state && event.state.blogId) {
-                    loadBlogPost(event.state.blogId);
-                } else {
-                    goToBlogList();
-                }
-            });
-            
-            // Check if URL has a hash to load a specific post
-            if (window.location.hash) {
-                const blogId = window.location.hash.substring(1);
-                loadBlogPost(blogId);
-            } else {
-                // Initial render of blog list
-                renderBlogList();
-                backButton.addEventListener('click', goToMainSite);
-            }
-        });
-    </script>
+</body>
+</html>

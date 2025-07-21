@@ -17,4 +17,5 @@ description_es: |
 
         <p>Dreams of paradisiac summers, afternoons spent playing with water balloons and tie-dyes. Pamphlets filled with vacation spots, the image of an idyllic summer is long gone in the midst of a climate and political crisis. Still, there's a footprint of that carefree happiness in our oneiric worlds, one that can extend into the concrete desire to build something that can hold that world again.</p>
         <p>Summer 2024 session design for the <a href="https://sfpc.study/sessions/summer-24" target="_blank">School for Poetic Computation.</a></p>
+        
       

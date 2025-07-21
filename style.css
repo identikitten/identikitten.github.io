@@ -686,6 +686,19 @@ iframe{
 
 @media only screen and (max-width: 700px) {
 
+     #expandedImg{
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 6 / 4;
+    object-fit: scale-down;
+    transition: opacity 0.8s;
+
+  }
+
+  h2{
+    font-size: 1.8em;}
+
     #menuContainer{
         text-align: center;
         padding-left: 0px;
@@ -752,8 +765,8 @@ iframe, .organismo, .intro{
 
 .page-description{
     width: 100%!important;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 
 .project-sidebar{

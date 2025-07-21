@@ -5,7 +5,7 @@ const translations = {
     en: {
       // Navigation
       "about": "about",
-      "notes": "notes",
+      "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆": "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆",
       "contact": "contact",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
@@ -46,7 +46,7 @@ const translations = {
     es: {
       // Navigation
       "about": "acerca",
-      "notes": "notas",
+      "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆": "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆",
       "contact": "contacto",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
@@ -72,10 +72,9 @@ const translations = {
       "plan2": "Agregar descargables",
       
       // About page
-      "bioTitle": "Soy una artista mexicana radicada en Viena.",
-      "bioP1": "Mi práctica explora la liminalidad de la presencia a través de la pregunta de cómo los cuerpos, rostros e identidades son codificados, abstraídos y reinterpretados a través de estructuras tecnológicas y estéticas.",
-      "bioP2": "Me interesan los límites entre la corporalidad y la mediación, la familiaridad y la extrañeza, la intimidad y la alienación, la libertad y el control. Todos los medios me resultan interesantes y trabajo con el concepto primero, y el medio después. En el pasado, he trabajado con texto, electrónica, textiles y herramientas digitales como la codificación y el hackeo de protocolos de texto.",
-      "bioP3": "Puedes encontrarme en",
+      "bioTitle": "Soy una artista mexicana viviendo en Viena.",
+      "bioP1": "Me interesan los límites entre la corporalidad y la mediación, la familiaridad y la extrañeza, la intimidad y la alienación, la libertad y el control. Todos los medios me resultan interesantes y trabajo con el concepto primero, y el medio después. En el pasado, he trabajado con texto, electrónica, textiles y herramientas digitales como la codificación y el hackeo de protocolos de texto.",
+      "bioP2": "Puedes encontrarme en",
       
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 estoy 𓆙 𓍢 <br> 𓆱 despierta 𓆱 𓆙 \n𓆑 𓆙 en 𓍢𓇼<br>\n 𓆸 𓆱 todo  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  lo que amo 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 y deseo 𓍢 𓆑 𓇼 𓆙\n𓆸 hasta el  𓇼<br>\n  𓆱  𓇼 punto 𓆸 𓇼\n𓆱 𓇼 del 𓆑 \nterror 𓆱 𓍢 𓆑",
