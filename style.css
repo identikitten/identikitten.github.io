@@ -161,6 +161,19 @@ header {
    box-shadow: inset 2px 1px 20px 4px rgba(242, 139, 139, 0.5);
 }
 
+.shadow-blue{
+    box-shadow: inset #b3b2af 0px 0px 5px 4px;
+}
+
+.tiny{
+    font-size: 5px;
+    text-transform: uppercase;
+}
+
+.bigger{
+    font-size: 20px;
+}
+
 .divider{
     background: rgba(249, 54, 54, 0.22);
     border: 0;
@@ -645,9 +658,10 @@ iframe{
 .mobile-header li{
     flex-grow: 100;
     display: inline;
-    box-shadow: inset #378007 0px 0px 6px 0px;
+    box-shadow: inset #b3b2af 0px 0px 11px 4px;
     padding: 0.6em;
     background: #ffffff8a;
+    backdrop-filter: blur(4px);
 }
 
 .mobile-header p{
@@ -687,13 +701,12 @@ iframe{
 @media only screen and (max-width: 700px) {
 
      #expandedImg{
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    aspect-ratio: 6 / 4;
-    object-fit: scale-down;
-    transition: opacity 0.8s;
-
+    width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        aspect-ratio: 4 / 4;
+        object-fit: cover;
+        transition: opacity 0.8s;
   }
 
   h2{

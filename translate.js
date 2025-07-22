@@ -11,7 +11,7 @@ const translations = {
       "seeInEnglish": "see in english",
       
       // Buttons & UI elements
-      "backToMain": "⋆ ˚｡ Back to Main Content",
+      "backToMain": "🥀 Back",
       "backToBlog": "⋆ ˚｡ Back to Blog List",
       "makeFall": "make them fall",
       "stopFall": "stop them",
@@ -32,9 +32,8 @@ const translations = {
       
       // About page
       "bioTitle": "I'm a mexican artist based in Vienna.",
-      "bioP1": "My practice explores the liminality of presence through the question of how bodies, faces, and identities are encoded, abstracted, and reinterpreted through technological and aesthetic structures.",
-      "bioP2": "I am interested in the boundaries between embodiment and mediation, familiarity and strangeness, intimacy and alienation, freedom and control. All mediums are interesting to me, and I work on a concept-first, medium-second basis. In the past, I've worked with text, electronics, textiles, and digital tools such as coding and text protocol hacking.",
-      "bioP3": "You can find me on",
+      "bioP1": "I am interested in the boundaries between embodiment and mediation, familiarity and strangeness, intimacy and alienation, freedom and control. All mediums are interesting to me, and I work on a concept-first, medium-second basis. In the past, I've worked with text, electronics, textiles, and digital tools such as coding and text protocol hacking.",
+      "bioP2": "You can find me on",
       
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 i am 𓆙 𓍢 <br> 𓆱 awake 𓆱 𓆙 \n𓆑 𓆙 in 𓍢𓇼<br>\n 𓆸 𓆱 everything  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  i love 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 and desire 𓍢 𓆑 𓇼 𓆙\n𓆸 to the  𓇼<br>\n  𓆱  𓇼 point 𓆸 𓇼\n𓆱 𓇼 of 𓆑 \nterror 𓆱 𓍢 𓆑",
@@ -52,7 +51,7 @@ const translations = {
       "seeInEnglish": "see in english",
       
       // Buttons & UI elements
-      "backToMain": "⋆ ˚｡ Volver al Contenido Principal",
+      "backToMain": "🥀 Volver",
       "backToBlog": "⋆ ˚｡ Volver a la Lista del Blog",
       "makeFall": "hazlos caer",
       "stopFall": "detenlos",

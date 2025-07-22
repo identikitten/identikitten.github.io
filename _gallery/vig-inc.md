@@ -1,6 +1,6 @@
 ---
 id: vig-inc
-title: "VIGILIA_INCONCLUSA (W6NUK).SQNX.PART1"
+title: "VIGILIA_INCONCLUSA"
 year: 2024
 category: art
 thumbnail: images/vigilia-1.jpg
