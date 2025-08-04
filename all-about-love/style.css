@@ -1,0 +1,158 @@
+
+@font-face {
+    font-family: FT88;
+    src: url("https://cdn.glitch.global/a8fed1cb-f4fc-4d98-91be-313365a91171/FT88-Regular.otf?v=1708718998654");
+  }
+
+  @font-face {
+    font-family: basiic;
+    src: url("https://cdn.glitch.global/a8fed1cb-f4fc-4d98-91be-313365a91171/basiic.ttf?v=1708718994883");
+  }
+
+
+.FT88{
+    font-family: FT88;
+
+}
+
+.basiic{
+ font-family: basiic;
+}
+
+
+
+.ascii-txt{
+    white-space: pre;
+    font-family: monospace;
+}
+
+
+
+marquee{
+    width: 800px;
+    white-space: pre;
+}
+
+body{
+    background: #ffcfdc;
+    color: #f7022a;
+}
+
+a{
+    color: #D6120F;
+    text-decoration: none;
+}
+
+a:hover{
+    background-color: #CFF3FF;
+}
+
+
+h2{
+    font-family: FT88;
+    font-size: 16px;
+    position: fixed;
+    bottom: 10px;
+    color: #433334;
+    margin-left: 20px;
+}
+
+h4{
+    font-family: FT88;
+    font-size: 16px;
+    position: fixed;
+    bottom: 10px;
+    color: #ffcfdc;
+    margin-left: 20px;
+}
+
+#asciiCloudLeft{
+    font-size: 9px;
+}
+
+#asciiCloudRight{
+    font-size: 8px;
+    transform: translateX(351px);
+}
+
+#moonContainer{
+    position: absolute;
+    top: 5%;
+    white-space: pre;
+    font-family: monospace;
+    text-align: left;
+    font-size: 7px;
+    padding-left: 20px;
+}
+
+.random-string{
+        color: #D6C17E;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+}
+
+
+h3{
+    font-family: FT88;
+    font-size: 13px;
+}
+
+
+p{
+    font-family: basiic;
+    font-size: 14px;
+}
+
+
+#textPathContent{
+    font-family: basiic;
+    font-size: 12px;
+    color: #f7022a;
+    text-align: justify;
+}
+
+svg{
+    font-family: basiic;
+    font-size: 12px;
+}
+
+
+li::before {
+    content: "⁕";
+    font-size: 14px;
+  }
+
+li, ul{
+    font-family: basiic;
+    font-size: 14px;
+}
+
+
+
+  #welcome{
+    font-size: 1.5em;
+  }
+
+  .popup-content {
+    display: none;
+    position: absolute;
+    background-color: #ffcfdc;
+    color: #f7022a;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1; /* Ensure the popup is above other content */
+}
+
+
+
+  
