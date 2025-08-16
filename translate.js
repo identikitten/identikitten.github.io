@@ -31,9 +31,11 @@ const translations = {
       "plan2": "Adding downloadables",
       
       // About page
-      "bioTitle": "I'm a mexican artist based in Vienna.",
-      "bioP1": "I am interested in the boundaries between embodiment and mediation, familiarity and strangeness, intimacy and alienation, freedom and control. All mediums are interesting to me, and I work on a concept-first, medium-second basis. In the past, I've worked with text, electronics, textiles, and digital tools such as coding and text protocol hacking.",
-      "bioP2": "You can find me on",
+     "bioP1": 'Mexican artist working with experimental design, poetry, and material explorations of the digital. I’m currently based in Vienna and I do communications and design work for the <a href="https://sfpc.study" target="_blank">School for Poetic Computation</a>.',
+     "bioP2": 'I’m also ½ of the collective NotToday, where we use experimental media tactics that blend fiction, sabotage, and symbolic distortion to experiment with disrupting ideological authority online.',
+     "bioP3": '𓂅 You can find me on <a href="https://www.instagram.com/identikitten" target="_blank">Instagram</a>.',
+
+
       
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 i am 𓆙 𓍢 <br> 𓆱 awake 𓆱 𓆙 \n𓆑 𓆙 in 𓍢𓇼<br>\n 𓆸 𓆱 everything  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  i love 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 and desire 𓍢 𓆑 𓇼 𓆙\n𓆸 to the  𓇼<br>\n  𓆱  𓇼 point 𓆸 𓇼\n𓆱 𓇼 of 𓆑 \nterror 𓆱 𓍢 𓆑",
@@ -71,10 +73,11 @@ const translations = {
       "plan2": "Agregar descargables",
       
       // About page
-      "bioTitle": "Soy una artista mexicana viviendo en Viena.",
-      "bioP1": "Me interesan los límites entre la corporalidad y la mediación, la familiaridad y la extrañeza, la intimidad y la alienación, la libertad y el control. Todos los medios me resultan interesantes y trabajo con el concepto primero, y el medio después. En el pasado, he trabajado con texto, electrónica, textiles y herramientas digitales como la codificación y el hackeo de protocolos de texto.",
-      "bioP2": "Puedes encontrarme en",
-      
+     "bioP1": 'Artista mexicana que trabaja con diseño experimental, poesía y exploraciones materiales de lo digital. Vivo en Viena y hago trabajo de comunicación y diseño para la <a href="https://sfpc.study" target="_blank">School for Poetic Computation</a>.',
+     "bioP2": 'También soy ½ del colectivo NotToday, en donde usamos tácticas experimentales mediáticas mezclando ficción, sabotaje y distorsión simbólica para cuestionar la autoridad.',
+     "bioP3": '𓂅 Puedes encontrarme en <a href="https://www.instagram.com/identikitten" target="_blank">Instagram</a>.',
+
+
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 estoy 𓆙 𓍢 <br> 𓆱 despierta 𓆱 𓆙 \n𓆑 𓆙 en 𓍢𓇼<br>\n 𓆸 𓆱 todo  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  lo que amo 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 y deseo 𓍢 𓆑 𓇼 𓆙\n𓆸 hasta el  𓇼<br>\n  𓆱  𓇼 punto 𓆸 𓇼\n𓆱 𓇼 del 𓆑 \nterror 𓆱 𓍢 𓆑",
       
@@ -193,7 +196,7 @@ function initializeAllLanguageToggles() {
     // Navigation and common elements
 
     updateElementText('.intro-links li:nth-child(1) a, .intro-menu-cel li:nth-child(1) a', 'about');
-    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', 'notes');
+    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', '⋆｡ﾟ☁︎E｡⋆D｡ ﾟE｡ ﾟN｡ﾟ☾⋆');
     updateElementText('.intro-links li:nth-child(3) a, .intro-menu-cel li:nth-child(3) a', 'contact');
 
     // Buttons
@@ -215,7 +218,7 @@ function initializeAllLanguageToggles() {
     // Update back button if it exists
     const backButton = document.getElementById('back-button');
     if (backButton) {
-      if (window.location.pathname.includes('notes.html') && 
+      if (window.location.pathname.includes('EDEN.html') && 
           !backButton.getAttribute('href')?.includes('index.html')) {
         updateElementText('#back-button', 'backToBlog');
       } else {
@@ -238,24 +241,17 @@ function initializeAllLanguageToggles() {
   
   // Update about page content
   function updateAboutPageContent() {
-    const bioSection = document.querySelector('.bio');
-    if (bioSection) {
-      const paragraphs = bioSection.querySelectorAll('p');
-      if (paragraphs.length >= 4) {
-        paragraphs[0].textContent = translations[currentLanguage].bioTitle;
-        paragraphs[1].textContent = translations[currentLanguage].bioP1;
-        paragraphs[2].textContent = translations[currentLanguage].bioP2;
-        
-        // Handle the last paragraph with Instagram link
-        const lastP = paragraphs[3];
-        const instagramLink = lastP.querySelector('a');
-        if (instagramLink) {
-          lastP.innerHTML = translations[currentLanguage].bioP3 + ' <a href="' + 
-                           instagramLink.getAttribute('href') + '" target="_blank">Instagram</a>.';
-        }
-      }
-    }
+  const bioSection = document.querySelector('.bio');
+  if (!bioSection) return;
+
+  const paragraphs = bioSection.querySelectorAll('p');
+  if (paragraphs.length >= 3) {
+    paragraphs[0].innerHTML = translations[currentLanguage].bioP1;
+    paragraphs[1].innerHTML = translations[currentLanguage].bioP2;
+    paragraphs[2].innerHTML = translations[currentLanguage].bioP3;
   }
+}
+
   
   // Function to translate project content
  // Update translate.js - implement updateProjectContent function properly

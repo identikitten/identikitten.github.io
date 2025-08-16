@@ -518,7 +518,7 @@ function setupMobileScrollTop() {
     });
 
     // For blog posts
-    if (window.location.href.includes('notes.html')) {
+    if (window.location.href.includes('EDEN.html')) {
       document.querySelectorAll('.blog-item a').forEach(link => {
         link.addEventListener('click', function() {
           setTimeout(() => {
