@@ -124,7 +124,7 @@ a:visited{
 }
 
 
-a:hover:before{
+p a:hover:before{
     content: "🥀 ";
 }
 
@@ -154,6 +154,10 @@ header {
 
 .menu li:hover{
  cursor: pointer;
+}
+
+p a{
+    filter: drop-shadow(0px 0px 4px #f28b8b);
 }
 
 
