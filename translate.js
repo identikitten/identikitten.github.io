@@ -5,8 +5,7 @@ const translations = {
     en: {
       // Navigation
       "about": "about",
-      "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆": "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆",
-      "contact": "contact",
+      "EDEN 𓃚 ": "EDEN 𓅯",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
       
@@ -47,8 +46,7 @@ const translations = {
     es: {
       // Navigation
       "about": "acerca",
-      "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆": "⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆",
-      "contact": "contacto",
+      "EDEN 𓃚": "EDEN 𓅯",
       "seeInSpanish": "ver en español",
       "seeInEnglish": "see in english",
       
@@ -196,8 +194,7 @@ function initializeAllLanguageToggles() {
     // Navigation and common elements
 
     updateElementText('.intro-links li:nth-child(1) a, .intro-menu-cel li:nth-child(1) a', 'about');
-    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', '⋆｡ﾟ☁︎E｡⋆D｡ ﾟE｡ ﾟN｡ﾟ☾⋆');
-    updateElementText('.intro-links li:nth-child(3) a, .intro-menu-cel li:nth-child(3) a', 'contact');
+    updateElementText('.intro-links li:nth-child(2) a, .intro-menu-cel li:nth-child(2) a', 'EDEN 𓃚');
 
     // Buttons
     updateElementText('#startFalling', 'makeFall');
