@@ -141,6 +141,11 @@ header {
     justify-content: space-between;
 }
 
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .main-content {
     flex: 3;
     overflow: scroll;
