@@ -29,9 +29,10 @@
             border: 0px;
         }
         .random-button:hover {
-            background-color: rgba(0, 0, 0, 0.9);
+          background-color: rgba(255, 255, 255, 0.688);
             transform: translate(-50%, -50%) scale(1.05);
-            color: white;
+            box-shadow: inset 0px 0px 10px 3px red;
+            color: black;
         }
         .card-left img,
         .card-right img {
@@ -53,15 +54,30 @@
         /* Hide polylines (connecting lines) */
         .card-left svg polyline,
         .card-right svg polyline {
-            display: none;
+            display: none !important;
+        }
+        
+        /* Hide bounding boxes and structural elements */
+        .card-left svg rect,
+        .card-left svg circle,
+        .card-left svg ellipse,
+        .card-left svg polygon,
+        .card-left svg line,
+        .card-right svg rect,
+        .card-right svg circle,
+        .card-right svg ellipse,
+        .card-right svg polygon,
+        .card-right svg line {
+            display: none !important;
+            visibility: hidden !important;
         }
         
         /* Style only paths (the actual text/characters) */
         .card-left svg path,
         .card-right svg path {
-            stroke: red;
+            stroke: red !important;
             stroke-width: 2;
-            fill: none;
+            fill: none !important;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -77,13 +93,13 @@
 <body>
 
 <div class="list-element flex flex-wrap tc card-box">
-    <div class="w-100 shadow">
-        <div class="card-left pa4">
+    <div class="w-100 h-50 shadow">
+        <div class="card-left ph4 pt5">
             <!-- SVG will be loaded here dynamically -->
         </div>
     </div>
-    <div class="w-100 shadow">
-        <div class="card-right pa4">
+    <div class="w-100 h-50 shadow">
+        <div class="card-right pa4 pt5">
             <!-- SVG will be loaded here dynamically -->
         </div>
     </div>
@@ -99,21 +115,28 @@
     // - VS Code: Use the "Live Server" extension
     
     // Image arrays for each card - images from the cf folder
-    // Add more images to the cf folder and update these arrays
     const cardLeftImages = [
-        'images/cf/cf-1.svg',
-        // Add more images here as you add them to the cf folder
-        // 'images/cf/cf-2.jpg',
-        // 'images/cf/cf-3.png',
-        // etc.
+        'images/cf/Asset 1.svg',
+        'images/cf/Asset 2.svg',
+        'images/cf/Asset 22.svg',
+        'images/cf/Asset 3.svg',
+        'images/cf/Asset 4.svg',
+        'images/cf/Asset 5.svg',
+        'images/cf/Asset 52.svg',
+        'images/cf/Asset 6.svg',
+        'images/cf/Asset 62.svg'
     ];
 
     const cardRightImages = [
-        'images/cf/cf-1.svg',
-        // Add more images here as you add them to the cf folder
-        // 'images/cf/cf-2.jpg',
-        // 'images/cf/cf-3.png',
-        // etc.
+        'images/cf/Asset 1.svg',
+        'images/cf/Asset 2.svg',
+        'images/cf/Asset 22.svg',
+        'images/cf/Asset 3.svg',
+        'images/cf/Asset 4.svg',
+        'images/cf/Asset 5.svg',
+        'images/cf/Asset 52.svg',
+        'images/cf/Asset 6.svg',
+        'images/cf/Asset 62.svg'
     ];
 
     // Get references to DOM elements
@@ -142,21 +165,61 @@
         // Handle both SVG element and document - both support querySelectorAll
         const container = svgElementOrDoc;
         
+        // Remove stroke colors from groups and other containers that might affect child elements
+        const groups = container.querySelectorAll('g');
+        groups.forEach(group => {
+            group.removeAttribute('stroke');
+            group.style.stroke = 'none';
+        });
+        
         // Hide all polylines (connecting lines)
         const polylines = container.querySelectorAll('polyline');
         polylines.forEach(polyline => {
             polyline.style.display = 'none';
         });
         
-        // Style and animate only paths (the actual text/characters)
+        // Hide bounding boxes and structural elements (rect, circle, ellipse, polygon)
+        const rects = container.querySelectorAll('rect');
+        rects.forEach(rect => {
+            rect.style.display = 'none';
+        });
+        
+        const circles = container.querySelectorAll('circle');
+        circles.forEach(circle => {
+            circle.style.display = 'none';
+        });
+        
+        const ellipses = container.querySelectorAll('ellipse');
+        ellipses.forEach(ellipse => {
+            ellipse.style.display = 'none';
+        });
+        
+        const polygons = container.querySelectorAll('polygon');
+        polygons.forEach(polygon => {
+            polygon.style.display = 'none';
+        });
+        
+        // Hide lines that aren't part of the actual text paths
+        const lines = container.querySelectorAll('line');
+        lines.forEach(line => {
+            line.style.display = 'none';
+        });
+        
+        // Style and animate only paths (the actual text/characters including strikethroughs)
         const paths = container.querySelectorAll('path');
         paths.forEach((path, index) => {
-            // Set stroke properties - make it thicker
+            // Aggressively force red - override any CSS, classes, or inline styles
+            path.removeAttribute('stroke');
+            path.removeAttribute('class');
             path.setAttribute('stroke', 'red');
-            path.setAttribute('stroke-width', '2');
+            path.style.stroke = 'red';
+            path.style.strokeColor = 'red';
+            path.style.color = 'red';
+            path.style.setProperty('stroke', 'red', 'important');
+            
+            // Ensure fill is none
             path.setAttribute('fill', 'none');
-            path.setAttribute('stroke-linecap', 'round');
-            path.setAttribute('stroke-linejoin', 'round');
+            path.style.fill = 'none';
             
             // Calculate path length for animation
             const length = getPathLength(path);
@@ -278,11 +341,16 @@
         }
     }
 
-    // Function to shuffle both images
+    // Function to shuffle both images - ensures they're never the same
     function shuffleBothImages() {
-        // Get random images for both cards
-        const randomLeftImage = getRandomImage(cardLeftImages);
-        const randomRightImage = getRandomImage(cardRightImages);
+        // Get random images for both cards, ensuring they're different
+        let randomLeftImage = getRandomImage(cardLeftImages);
+        let randomRightImage = getRandomImage(cardRightImages);
+        
+        // Keep picking until they're different
+        while (randomLeftImage === randomRightImage && cardLeftImages.length > 1) {
+            randomRightImage = getRandomImage(cardRightImages);
+        }
         
         // Update both images with fade transition
         leftCardContainer.style.opacity = '0';
@@ -303,11 +371,13 @@
         }, 10);
     }
 
-    // Initialize with first images
+    // Initialize with first images - ensure they're different
     window.addEventListener('DOMContentLoaded', () => {
+        const leftImage = cardLeftImages[0];
+        const rightImage = cardRightImages.length > 1 ? cardRightImages[1] : cardRightImages[0];
         Promise.all([
-            displaySVG(leftCardContainer, cardLeftImages[0]),
-            displaySVG(rightCardContainer, cardRightImages[0])
+            displaySVG(leftCardContainer, leftImage),
+            displaySVG(rightCardContainer, rightImage)
         ]);
     });
 
