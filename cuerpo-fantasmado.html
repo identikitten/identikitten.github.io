@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuerpo Fantasmado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+    <style>
+        .card-box {
+            height: 100vh;
+            position: relative;
+        }
+        .random-button {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            padding: 20px 40px;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.688);
+            color: black;
+            box-shadow: inset 0px 0px 10px 3px #f28b8b;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 0px;
+        }
+        .random-button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translate(-50%, -50%) scale(1.05);
+            color: white;
+        }
+        .card-left img,
+        .card-right img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* SVG styling - make strokes red and thicker */
+        .card-left svg,
+        .card-right svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Hide polylines (connecting lines) */
+        .card-left svg polyline,
+        .card-right svg polyline {
+            display: none;
+        }
+        
+        /* Style only paths (the actual text/characters) */
+        .card-left svg path,
+        .card-right svg path {
+            stroke: red;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Animation for path drawing effect */
+        @keyframes drawPath {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="list-element flex flex-wrap tc card-box">
+    <div class="w-100 shadow">
+        <div class="card-left pa4">
+            <!-- SVG will be loaded here dynamically -->
+        </div>
+    </div>
+    <div class="w-100 shadow">
+        <div class="card-right pa4">
+            <!-- SVG will be loaded here dynamically -->
+        </div>
+    </div>
+</div>
+
+<button class="random-button" id="randomImageButton">Barajar</button>
+
+<script>
+    // NOTE: If you get CORS errors when opening this file directly (file:// protocol),
+    // run a local server instead. Options:
+    // - Python: python -m http.server 8000 (then visit http://localhost:8000/cuerpo-fantasmado.html)
+    // - Node: npx http-server (then visit http://localhost:8080/cuerpo-fantasmado.html)
+    // - VS Code: Use the "Live Server" extension
+    
+    // Image arrays for each card - images from the cf folder
+    // Add more images to the cf folder and update these arrays
+    const cardLeftImages = [
+        'images/cf/cf-1.svg',
+        // Add more images here as you add them to the cf folder
+        // 'images/cf/cf-2.jpg',
+        // 'images/cf/cf-3.png',
+        // etc.
+    ];
+
+    const cardRightImages = [
+        'images/cf/cf-1.svg',
+        // Add more images here as you add them to the cf folder
+        // 'images/cf/cf-2.jpg',
+        // 'images/cf/cf-3.png',
+        // etc.
+    ];
+
+    // Get references to DOM elements
+    const leftCardContainer = document.querySelector('.card-left');
+    const rightCardContainer = document.querySelector('.card-right');
+    const randomButton = document.getElementById('randomImageButton');
+
+    // Function to get a random image from an array
+    function getRandomImage(imageArray) {
+        const randomIndex = Math.floor(Math.random() * imageArray.length);
+        return imageArray[randomIndex];
+    }
+
+    // Function to get path length for proper animation
+    function getPathLength(path) {
+        if (path.getTotalLength) {
+            return path.getTotalLength();
+        }
+        return 1000; // fallback value
+    }
+
+    // Function to style and animate SVG paths
+    function styleSVGPaths(svgElementOrDoc, delay = 0) {
+        if (!svgElementOrDoc) return;
+        
+        // Handle both SVG element and document - both support querySelectorAll
+        const container = svgElementOrDoc;
+        
+        // Hide all polylines (connecting lines)
+        const polylines = container.querySelectorAll('polyline');
+        polylines.forEach(polyline => {
+            polyline.style.display = 'none';
+        });
+        
+        // Style and animate only paths (the actual text/characters)
+        const paths = container.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            // Set stroke properties - make it thicker
+            path.setAttribute('stroke', 'red');
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            
+            // Calculate path length for animation
+            const length = getPathLength(path);
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            
+            // Animate with stagger delay
+            const animationDelay = delay + (index * 0.15);
+            path.style.animation = `drawPath ${2 + Math.random()}s ease-in-out ${animationDelay}s forwards`;
+        });
+    }
+
+    // SVG content cache - will be populated as SVGs are loaded
+    const svgCache = {};
+
+    // Function to load SVG content - works with both file:// and http://
+    function loadSVGContent(url) {
+        return new Promise((resolve) => {
+            // Check cache first
+            if (svgCache[url]) {
+                resolve(svgCache[url]);
+                return;
+            }
+
+            // Try XMLHttpRequest first (works in some cases with file://)
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 || xhr.status === 0) {
+                        // Status 0 can occur with file:// protocol
+                        svgCache[url] = xhr.responseText;
+                        resolve(xhr.responseText);
+                    } else {
+                        // If XMLHttpRequest fails, try object tag method
+                        loadSVGViaObject(url).then(resolve);
+                    }
+                }
+            };
+            
+            try {
+                xhr.send();
+            } catch (e) {
+                // If XMLHttpRequest fails, try object tag method
+                loadSVGViaObject(url).then(resolve);
+            }
+        });
+    }
+
+    // Alternative: Load SVG via object tag and extract content
+    function loadSVGViaObject(url) {
+        return new Promise((resolve) => {
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.visibility = 'hidden';
+            document.body.appendChild(tempContainer);
+
+            const object = document.createElement('object');
+            object.type = 'image/svg+xml';
+            object.data = url;
+            object.style.width = '1px';
+            object.style.height = '1px';
+
+            object.onload = function() {
+                try {
+                    const svgDoc = object.contentDocument;
+                    if (svgDoc) {
+                        const svgElement = svgDoc.documentElement;
+                        const svgContent = new XMLSerializer().serializeToString(svgElement);
+                        svgCache[url] = svgContent;
+                        document.body.removeChild(tempContainer);
+                        resolve(svgContent);
+                    } else {
+                        document.body.removeChild(tempContainer);
+                        resolve(null);
+                    }
+                } catch (e) {
+                    document.body.removeChild(tempContainer);
+                    resolve(null);
+                }
+            };
+
+            object.onerror = function() {
+                document.body.removeChild(tempContainer);
+                resolve(null);
+            };
+
+            tempContainer.appendChild(object);
+            
+            // Timeout fallback
+            setTimeout(() => {
+                if (tempContainer.parentNode) {
+                    document.body.removeChild(tempContainer);
+                    resolve(null);
+                }
+            }, 2000);
+        });
+    }
+
+    // Function to display SVG with animation
+    async function displaySVG(container, svgUrl) {
+        container.innerHTML = '';
+        
+        const svgContent = await loadSVGContent(svgUrl);
+        if (svgContent) {
+            container.innerHTML = svgContent;
+            const svg = container.querySelector('svg');
+            if (svg) {
+                styleSVGPaths(svg);
+            }
+        } else {
+            // Fallback: use img tag if we can't load inline
+            const img = document.createElement('img');
+            img.src = svgUrl;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            container.appendChild(img);
+        }
+    }
+
+    // Function to shuffle both images
+    function shuffleBothImages() {
+        // Get random images for both cards
+        const randomLeftImage = getRandomImage(cardLeftImages);
+        const randomRightImage = getRandomImage(cardRightImages);
+        
+        // Update both images with fade transition
+        leftCardContainer.style.opacity = '0';
+        rightCardContainer.style.opacity = '0';
+        
+        setTimeout(() => {
+            Promise.all([
+                displaySVG(leftCardContainer, randomLeftImage),
+                displaySVG(rightCardContainer, randomRightImage)
+            ]).then(() => {
+                setTimeout(() => {
+                    leftCardContainer.style.transition = 'opacity 0.5s ease';
+                    rightCardContainer.style.transition = 'opacity 0.5s ease';
+                    leftCardContainer.style.opacity = '1';
+                    rightCardContainer.style.opacity = '1';
+                }, 10);
+            });
+        }, 10);
+    }
+
+    // Initialize with first images
+    window.addEventListener('DOMContentLoaded', () => {
+        Promise.all([
+            displaySVG(leftCardContainer, cardLeftImages[0]),
+            displaySVG(rightCardContainer, cardRightImages[0])
+        ]);
+    });
+
+    // Add event listener to the button
+    randomButton.addEventListener('click', shuffleBothImages);
+
+    // Optional: Allow keyboard spacebar to trigger shuffle
+    document.addEventListener('keydown', function(event) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            shuffleBothImages();
+        }
+    });
+</script>
+
+</body>
+</html>
