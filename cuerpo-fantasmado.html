@@ -30,9 +30,18 @@
         }
         .random-button:hover {
           background-color: rgba(255, 255, 255, 0.688);
-            transform: translate(-50%, -50%) scale(1.05);
             box-shadow: inset 0px 0px 10px 3px red;
             color: black;
+        }
+        
+        /* Mobile positioning - center button in viewport */
+        @media (max-width: 768px) {
+            .random-button {
+                position: fixed;
+                top: 50vh;
+                left: 50vw;
+                transform: translate(-50%, -50%);
+            }
         }
         .card-left img,
         .card-right img {
@@ -49,6 +58,8 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            transform: scale(1.1); /* Make text 1.5x bigger - adjust this value as needed */
+            transform-origin: center center;
         }
         
         /* Hide polylines (connecting lines) */
@@ -72,9 +83,12 @@
             visibility: hidden !important;
         }
         
-        /* Style only paths (the actual text/characters) */
+        /* Style only paths (the actual text/characters including strikethroughs) */
         .card-left svg path,
         .card-right svg path {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
             stroke: red !important;
             stroke-width: 2;
             fill: none !important;
@@ -105,7 +119,7 @@
     </div>
 </div>
 
-<button class="random-button" id="randomImageButton">Barajar</button>
+<button class="random-button" id="randomImageButton">Barajar 𓂉</button>
 
 <script>
     // NOTE: If you get CORS errors when opening this file directly (file:// protocol),
@@ -117,26 +131,50 @@
     // Image arrays for each card - images from the cf folder
     const cardLeftImages = [
         'images/cf/Asset 1.svg',
+        'images/cf/Asset 1txt.svg',
         'images/cf/Asset 2.svg',
+        'images/cf/Asset 2txt.svg',
         'images/cf/Asset 22.svg',
         'images/cf/Asset 3.svg',
-        'images/cf/Asset 4.svg',
+        'images/cf/Asset 3txt.svg',
+        'images/cf/Asset 33.svg',
+        'images/cf/Asset 43.svg',
+        'images/cf/Asset 4txt.svg',
         'images/cf/Asset 5.svg',
         'images/cf/Asset 52.svg',
         'images/cf/Asset 6.svg',
-        'images/cf/Asset 62.svg'
+        'images/cf/Asset 62.svg',
+        'images/cf/Asset 7miciela.svg',
+        'images/cf/Asset 8miciela.svg',
+        'images/cf/Asset 9miciela.svg',
+        'images/cf/Asset 10txt.svg',
+        'images/cf/Asset 11txt.svg',
+        'images/cf/Asset 12txt.svg',
+        'images/cf/shrek.svg'
     ];
 
     const cardRightImages = [
         'images/cf/Asset 1.svg',
+        'images/cf/Asset 1txt.svg',
         'images/cf/Asset 2.svg',
+        'images/cf/Asset 2txt.svg',
         'images/cf/Asset 22.svg',
         'images/cf/Asset 3.svg',
-        'images/cf/Asset 4.svg',
+        'images/cf/Asset 3txt.svg',
+        'images/cf/Asset 33.svg',
+        'images/cf/Asset 43.svg',
+        'images/cf/Asset 4txt.svg',
         'images/cf/Asset 5.svg',
         'images/cf/Asset 52.svg',
         'images/cf/Asset 6.svg',
-        'images/cf/Asset 62.svg'
+        'images/cf/Asset 62.svg',
+        'images/cf/Asset 7miciela.svg',
+        'images/cf/Asset 8miciela.svg',
+        'images/cf/Asset 9miciela.svg',
+        'images/cf/Asset 10txt.svg',
+        'images/cf/Asset 11txt.svg',
+        'images/cf/Asset 12txt.svg',
+        'images/cf/shrek.svg'
     ];
 
     // Get references to DOM elements
@@ -205,9 +243,15 @@
             line.style.display = 'none';
         });
         
-        // Style and animate only paths (the actual text/characters including strikethroughs)
+        // Style and animate ALL paths (the actual text/characters including strikethroughs)
+        // Make sure we get ALL paths, including those in nested groups
         const paths = container.querySelectorAll('path');
         paths.forEach((path, index) => {
+            // Make sure path is visible
+            path.style.display = '';
+            path.style.visibility = 'visible';
+            path.style.opacity = '1';
+            
             // Aggressively force red - override any CSS, classes, or inline styles
             path.removeAttribute('stroke');
             path.removeAttribute('class');
@@ -221,14 +265,28 @@
             path.setAttribute('fill', 'none');
             path.style.fill = 'none';
             
+            // Set stroke width
+            path.setAttribute('stroke-width', '2');
+            path.style.strokeWidth = '2';
+            
+            // Set stroke line properties
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            
             // Calculate path length for animation
             const length = getPathLength(path);
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-            
-            // Animate with stagger delay
-            const animationDelay = delay + (index * 0.15);
-            path.style.animation = `drawPath ${2 + Math.random()}s ease-in-out ${animationDelay}s forwards`;
+            if (length > 0) {
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                
+                // Animate with stagger delay
+                const animationDelay = delay + (index * 0.15);
+                path.style.animation = `drawPath ${2 + Math.random()}s ease-in-out ${animationDelay}s forwards`;
+            } else {
+                // If path has no length, make it visible immediately
+                path.style.strokeDasharray = 'none';
+                path.style.strokeDashoffset = '0';
+            }
         });
     }
 
