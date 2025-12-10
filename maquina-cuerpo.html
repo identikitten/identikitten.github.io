@@ -8,9 +8,13 @@
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 
     <style>
+        .body{
+            background-color: rgba(255, 13, 13, 0.688);
+        }
         .card-box {
             height: 100vh;
             position: relative;
+            background-color: rgb(255, 13, 13);
         }
         .random-button {
             position: fixed;
@@ -20,19 +24,18 @@
             z-index: 1000;
             padding: 20px 40px;
             font-size: 18px;
-            background-color: rgba(255, 255, 255, 0.688);
+            background-color: rgba(255, 13, 13, 0.688);
             color: black;
             box-shadow: inset 0px 0px 10px 3px #f28b8b;
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s ease;
             border: 0px;
-            color: red;
+            color: gold;
         }
         .random-button:hover {
-          background-color: rgba(255, 255, 255, 0.688);
-            box-shadow: inset 0px 0px 10px 3px red;
-            color: black;
+            box-shadow: inset 0px 0px 10px 3px #f28b8b;
+            color: rgb(240, 186, 186);
         }
         
         /* Mobile positioning - center button in viewport */
@@ -107,11 +110,52 @@
             stroke-linejoin: round;
         }
         
+        /* Text styling for bodily functions */
+        .card-left .text-content,
+        .card-right .text-content {
+            font-size: 100px;
+            color: gold;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        
+        /* SVG text animation */
+        .card-left svg text,
+        .card-right svg text {
+            font-size: 100px;
+            fill: none;
+            stroke: gold;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
         /* Animation for path drawing effect */
         @keyframes drawPath {
             to {
                 stroke-dashoffset: 0;
             }
+        }
+        
+        @keyframes drawText {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes revealChar {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .char-reveal {
+            display: inline-block;
+            opacity: 0;
+            animation: revealChar 0.1s ease-in-out forwards;
         }
     </style>
 </head>
@@ -130,7 +174,7 @@
     </div>
 </div>
 
-<button class="random-button" id="randomImageButton">Barajar 𓂉</button>
+<button class="random-button" id="randomImageButton">Una máquina que:</button>
 
 <script>
     // NOTE: If you get CORS errors when opening this file directly (file:// protocol),
@@ -139,53 +183,25 @@
     // - Node: npx http-server (then visit http://localhost:8080/cuerpo-fantasmado.html)
     // - VS Code: Use the "Live Server" extension
     
-    // Image arrays for each card - images from the cf folder
-    const cardLeftImages = [
-        'images/cf/Asset 1.svg',
-        'images/cf/Asset 1txt.svg',
-        'images/cf/Asset 2.svg',
-        'images/cf/Asset 2txt.svg',
-        'images/cf/Asset 22.svg',
-        'images/cf/Asset 3.svg',
-        'images/cf/Asset 3txt.svg',
-        'images/cf/Asset 33.svg',
-        'images/cf/Asset 43.svg',
-        'images/cf/Asset 4txt.svg',
-        'images/cf/Asset 5.svg',
-        'images/cf/Asset 52.svg',
-        'images/cf/Asset 6.svg',
-        'images/cf/Asset 62.svg',
-        'images/cf/Asset 7miciela.svg',
-        'images/cf/Asset 8miciela.svg',
-        'images/cf/Asset 9miciela.svg',
-        'images/cf/Asset 10txt.svg',
-        'images/cf/Asset 11txt.svg',
-        'images/cf/Asset 12txt.svg',
-        'images/cf/shrek.svg'
-    ];
-
-    const cardRightImages = [
-        'images/cf/Asset 1.svg',
-        'images/cf/Asset 1txt.svg',
-        'images/cf/Asset 2.svg',
-        'images/cf/Asset 2txt.svg',
-        'images/cf/Asset 22.svg',
-        'images/cf/Asset 3.svg',
-        'images/cf/Asset 3txt.svg',
-        'images/cf/Asset 33.svg',
-        'images/cf/Asset 43.svg',
-        'images/cf/Asset 4txt.svg',
-        'images/cf/Asset 5.svg',
-        'images/cf/Asset 52.svg',
-        'images/cf/Asset 6.svg',
-        'images/cf/Asset 62.svg',
-        'images/cf/Asset 7miciela.svg',
-        'images/cf/Asset 8miciela.svg',
-        'images/cf/Asset 9miciela.svg',
-        'images/cf/Asset 10txt.svg',
-        'images/cf/Asset 11txt.svg',
-        'images/cf/Asset 12txt.svg',
-        'images/cf/shrek.svg'
+    const bodilyFunctions = [
+        'Sueñe',
+        'Se canse',
+        'Juegue',
+        'Sienta frío',
+        'Muera',
+        'Llore',
+        'Se queje',
+        'Suspire',
+        'Mastique',
+        'Tiemble',
+        'Respire',
+        'Eructe',
+        'Ría',
+        'Huela',
+        'Sienta hambre',
+        'Se peturbe',
+        'Gesticule',
+        'Digiera'
     ];
 
     // Get references to DOM elements
@@ -193,10 +209,10 @@
     const rightCardContainer = document.querySelector('.card-right');
     const randomButton = document.getElementById('randomImageButton');
 
-    // Function to get a random image from an array
-    function getRandomImage(imageArray) {
-        const randomIndex = Math.floor(Math.random() * imageArray.length);
-        return imageArray[randomIndex];
+    // Function to get a random text from the array
+    function getRandomText() {
+        const randomIndex = Math.floor(Math.random() * bodilyFunctions.length);
+        return bodilyFunctions[randomIndex];
     }
 
     // Function to get path length for proper animation
@@ -389,75 +405,97 @@
         });
     }
 
-    // Function to display SVG with animation
-    async function displaySVG(container, svgUrl) {
-        container.innerHTML = '';
+    // Function to create SVG text with animation
+    function createAnimatedText(text) {
+        // Create SVG element
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '150');
+        svg.setAttribute('viewBox', '0 0 1200 150');
+        svg.style.display = 'block';
+        svg.style.margin = '0 auto';
         
-        const svgContent = await loadSVGContent(svgUrl);
-        if (svgContent) {
-            container.innerHTML = svgContent;
-            const svg = container.querySelector('svg');
-            if (svg) {
-                styleSVGPaths(svg);
-            }
-        } else {
-            // Fallback: use img tag if we can't load inline
-            const img = document.createElement('img');
-            img.src = svgUrl;
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
-            container.appendChild(img);
-        }
+        // Create text element
+        const textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        textElement.setAttribute('x', '50%');
+        textElement.setAttribute('y', '50%');
+        textElement.setAttribute('dominant-baseline', 'middle');
+        textElement.setAttribute('text-anchor', 'middle');
+        textElement.setAttribute('font-size', '100');
+        textElement.setAttribute('font-family', 'sans-serif');
+        textElement.setAttribute('fill', 'none');
+        textElement.setAttribute('stroke', 'gold');
+        textElement.setAttribute('stroke-width', '2');
+        textElement.setAttribute('stroke-linecap', 'round');
+        textElement.setAttribute('stroke-linejoin', 'round');
+        textElement.textContent = text;
+        
+        svg.appendChild(textElement);
+        
+        // Animate the text - estimate stroke length based on text length
+        // For 100px font, average character width is approximately 60px
+        // We multiply by a larger factor to account for stroke path complexity and ensure completion
+        // Using a much larger estimate to ensure the animation completes fully
+        const estimatedLength = text.length * 120;
+        textElement.style.strokeDasharray = estimatedLength;
+        textElement.style.strokeDashoffset = estimatedLength;
+        const animationDuration = 2 + Math.random() * 1;
+        textElement.style.animation = `drawText ${animationDuration}s ease-in-out forwards`;
+        
+        return svg;
+    }
+    
+    // Function to display text with animation
+    function displayText(container, text) {
+        container.innerHTML = '';
+        const svg = createAnimatedText(text);
+        container.appendChild(svg);
     }
 
-    // Function to shuffle both images - ensures they're never the same
-    function shuffleBothImages() {
-        // Get random images for both cards, ensuring they're different
-        let randomLeftImage = getRandomImage(cardLeftImages);
-        let randomRightImage = getRandomImage(cardRightImages);
+    // Function to shuffle both texts - ensures they're never the same
+    function shuffleBothTexts() {
+        // Get random texts for both cards, ensuring they're different
+        let randomLeftText = getRandomText();
+        let randomRightText = getRandomText();
         
         // Keep picking until they're different
-        while (randomLeftImage === randomRightImage && cardLeftImages.length > 1) {
-            randomRightImage = getRandomImage(cardRightImages);
+        while (randomLeftText === randomRightText && bodilyFunctions.length > 1) {
+            randomRightText = getRandomText();
         }
         
-        // Update both images with fade transition
+        // Update both texts with fade transition
         leftCardContainer.style.opacity = '0';
         rightCardContainer.style.opacity = '0';
         
         setTimeout(() => {
-            Promise.all([
-                displaySVG(leftCardContainer, randomLeftImage),
-                displaySVG(rightCardContainer, randomRightImage)
-            ]).then(() => {
-                setTimeout(() => {
-                    leftCardContainer.style.transition = 'opacity 0.5s ease';
-                    rightCardContainer.style.transition = 'opacity 0.5s ease';
-                    leftCardContainer.style.opacity = '1';
-                    rightCardContainer.style.opacity = '1';
-                }, 10);
-            });
+            displayText(leftCardContainer, randomLeftText);
+            displayText(rightCardContainer, randomRightText);
+            
+            setTimeout(() => {
+                leftCardContainer.style.transition = 'opacity 0.5s ease';
+                rightCardContainer.style.transition = 'opacity 0.5s ease';
+                leftCardContainer.style.opacity = '1';
+                rightCardContainer.style.opacity = '1';
+            }, 10);
         }, 10);
     }
 
-    // Initialize with first images - ensure they're different
+    // Initialize with first texts - ensure they're different
     window.addEventListener('DOMContentLoaded', () => {
-        const leftImage = cardLeftImages[0];
-        const rightImage = cardRightImages.length > 1 ? cardRightImages[1] : cardRightImages[0];
-        Promise.all([
-            displaySVG(leftCardContainer, leftImage),
-            displaySVG(rightCardContainer, rightImage)
-        ]);
+        const leftText = bodilyFunctions[0];
+        const rightText = bodilyFunctions.length > 1 ? bodilyFunctions[1] : bodilyFunctions[0];
+        displayText(leftCardContainer, leftText);
+        displayText(rightCardContainer, rightText);
     });
 
     // Add event listener to the button
-    randomButton.addEventListener('click', shuffleBothImages);
+    randomButton.addEventListener('click', shuffleBothTexts);
 
     // Optional: Allow keyboard spacebar to trigger shuffle
     document.addEventListener('keydown', function(event) {
         if (event.code === 'Space') {
             event.preventDefault();
-            shuffleBothImages();
+            shuffleBothTexts();
         }
     });
 </script>
