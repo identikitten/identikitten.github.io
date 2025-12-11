@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 
     <style>
+        p{
+            color: red!important;
+            font-size: 16px;
+        }
         .card-box {
             height: 100vh;
             position: relative;
@@ -22,17 +26,13 @@
             font-size: 18px;
             background-color: rgba(255, 255, 255, 0.688);
             color: black;
-            box-shadow: inset 0px 0px 10px 3px #f28b8b;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 2px;
             transition: all 0.3s ease;
             border: 0px;
             color: red;
-        }
-        .random-button:hover {
-          background-color: rgba(255, 255, 255, 0.688);
-            box-shadow: inset 0px 0px 10px 3px red;
-            color: black;
+            box-shadow: inset 0px 0px 10px 3px #f28b8b;
+
         }
         
         /* Mobile positioning - center button in viewport */
@@ -113,6 +113,90 @@
                 stroke-dashoffset: 0;
             }
         }
+        
+        /* Expandable button and panel */
+        .expand-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: red;
+            transition: all 0.3s ease;
+            box-shadow: inset 0px 0px 9px 1px #f28b8b;
+        }
+        
+        .expand-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        
+        .expandable-panel {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 400px;
+            max-width: 500px;
+            max-height: calc(100vh - 100px);
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            overflow: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1999;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            box-shadow: inset 0px 0px 9px 1px #f28b8b;
+        }
+        
+        .expandable-panel.expanded {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .expand-button {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .expandable-panel {
+                top: 60px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                width: calc(100% - 20px);
+                padding: 15px;
+            }
+        }
+        
+        .expandable-panel p {
+            margin: 10px 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .expandable-panel video {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -131,6 +215,17 @@
 </div>
 
 <button class="random-button" id="randomImageButton">Barajar 𓂉</button>
+
+<button class="expand-button" id="expandButton">𓂂</button>
+
+<div class="expandable-panel" id="expandablePanel">
+    
+    <p>Este ensayo está escrito con y a través de un plotter robotizado. En esta página, se simula el trazo que hace la máquina sobre el papel.</p>
+    <video controls style="border-radius: 5px;">
+        <source src="images/cf/aaauuu.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
 
 <script>
     // NOTE: If you get CORS errors when opening this file directly (file:// protocol),
@@ -458,6 +553,22 @@
         if (event.code === 'Space') {
             event.preventDefault();
             shuffleBothImages();
+        }
+    });
+    
+    // Expandable panel functionality
+    const expandButton = document.getElementById('expandButton');
+    const expandablePanel = document.getElementById('expandablePanel');
+    let isExpanded = false;
+    
+    expandButton.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+            expandablePanel.classList.add('expanded');
+            expandButton.textContent = '𓂃';
+        } else {
+            expandablePanel.classList.remove('expanded');
+            expandButton.textContent = '𓂂';
         }
     });
 </script>
