@@ -10,9 +10,15 @@
     src: url(Acid\ TM.otf);
   }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+body {
     background-color: #fff;
     color: #000;
     font-weight: lighter;
@@ -21,6 +27,11 @@ body {
 
 p{
     font-size: 1.2em;
+}
+
+.expo-titulo{
+    box-shadow: inset #858484 0px 0px 7px 1px;
+    padding: 0px 10px;
 }
 
 h1, h2{
@@ -68,6 +79,17 @@ a{
 }
 
 
+.toggle-exhibitions{
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 4px 2px rgba(242, 139, 139, 0.5);
+    float: right;
+    margin-right: 2em;
+}
+
+
 a:hover{
     color: #000;
     /* background: rgba(204, 252, 11, 0.811); */
@@ -78,6 +100,19 @@ a:hover{
 
 a:visited{
     color: #000
+}
+
+.expo-lista a{
+    filter: drop-shadow(0px 0px 4px #90f28b);
+}
+
+.expo-lista a:hover{
+    box-shadow: inset 0px 0px 10px 3px #90f28b91;
+    text-decoration: underline #90f28b wavy;
+}
+
+.expo-lista li{
+    margin-bottom: 0.6em;
 }
 
 .hideandseek {
@@ -111,17 +146,10 @@ a:visited{
 
 .lang {
    list-style: none;
+  
 }
 
-.lang:before{
-    content: "⦚⦚";
-    color: red;
-}
 
-.lang:after{
-    content: "⦚⦚";
-    color: red;
-}
 
 
 p a:hover:before{
@@ -139,6 +167,9 @@ header {
     height: 100vh;
     display: flex;
     justify-content: space-between;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .center{
@@ -149,6 +180,8 @@ header {
 .main-content {
     flex: 3;
     overflow: scroll;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .sidebar {
@@ -231,6 +264,10 @@ button{
   .post {
     transition: top 1s ease-out;
     
+  }
+
+  .expo-lista-movil{
+    max-width: 90%;
   }
 
 
@@ -659,9 +696,11 @@ iframe{
 
 .mobile-header{
     width: 100%;
+    max-width: 100%;
     position: fixed;
     top: 0;
     background: white;
+    overflow-x: hidden;
 }
 
 .mobile-header li{

@@ -47,10 +47,25 @@
                    </marquee>
 
                      
-            <p><a href="index.html">𓂐 digital organism 𓂐</a></p> 
-            
+            <p><a href="index.html">𓂐 digital organism 𓂐</a> <button class="toggle-exhibitions" onclick="toggleExhibitions(this)">▾</button></p> 
+
+            <div class="exhibitions-content" style="display: none;">
+            <p class="expo-titulo"><i>currently showing work at:</i></p>
+            <div class="expo-lista-movil">
+           <p>𓏲 Objetos de Extrañeza @ <a href="https://www.servidorlocal.net/" target="_blank">Servidor Local</a>, CDMX<sub><i> <br> [Dec 11, 2025 - Feb 14, 2026]</i></sub></p>
+           </div>
+
+           <p class="expo-titulo"><i>upcoming:</i></p>
+
+           <div class="expo-lista-movil">
+           <p>𓏱 ANTIFASCISM:
+            NOW @ <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></p>
+
+            <p>𓐎 Panel: Error 406 Not Acceptable - Scores Against Tech-Fascism @ <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i>  <br>[Feb 1, 2026 @ 5pm]</i></sub></p>
+            </div>
+        </div>
            
-          
+         
             <ul class="intro-menu-cel">
                 <li> <a href="about.html">about</a></li>
                 <li><a href="EDEN.html">EDEN 𓃚</a></li>
@@ -69,7 +84,22 @@
 
         <div class="sidebar shadow aside">
             <div class="description">
-                <p><a href="index.html">organismo digital</a></p>
+                <p><a href="index.html">organismo digital</a> <button class="toggle-exhibitions" onclick="toggleExhibitions(this)">▾</button></p>
+
+                <div class="exhibitions-content" style="display: none;">
+                <p class="expo-titulo"><i>currently showing work at:</i></p>
+                <ul class="expo-lista">
+                <li>Objetos de Extrañeza: <a href="https://www.servidorlocal.net/" target="_blank">Servidor Local</a>, CDMX<sub><i> <br> [Dec 11, 2025 - Feb 14, 2026]</i></sub></li>
+            </ul>
+
+                <p class="expo-titulo"><i>upcoming:</i></p>
+                <ul class="expo-lista">
+                <li>ANTIFASCISM:
+                NOW <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></li>
+
+                <li>Panel: Error 406 Not Acceptable - Scores Against Tech-Fascism <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [Feb 1, 2026 @ 5pm]</i></sub></li>
+                </div>
+            </ul>
 
                 <div class="divider"></div>
 
@@ -117,6 +147,23 @@
     <script src="translate.js" defer></script>
     <script src="data.js"></script>
     <script src="script.js" defer></script>
+    <script>
+        function toggleExhibitions(button) {
+            // Find the exhibitions-content container relative to the clicked button
+            const parent = button.parentElement;
+            const exhibitionsContent = parent.nextElementSibling;
+            
+            if (exhibitionsContent && exhibitionsContent.classList.contains('exhibitions-content')) {
+                if (exhibitionsContent.style.display === 'none') {
+                    exhibitionsContent.style.display = 'block';
+                    button.textContent = '𓂐';
+                } else {
+                    exhibitionsContent.style.display = 'none';
+                    button.textContent = '▾';
+                }
+            }
+        }
+    </script>
    
 
 
