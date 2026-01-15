@@ -426,34 +426,59 @@
         displaySVG(leftCardContainer, randomImage);
     });
 
-    // Listen for localStorage changes from controller (socket-like communication)
+    // Track the last shuffle counter we processed
+    let lastShuffleCounter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
+    let lastShuffleTime = 0;
+    
+    console.log('Phantom Body A: Listening for shuffle commands. Last counter:', lastShuffleCounter);
+    
+    // Listen for storage events (fires in other tabs/windows)
     window.addEventListener('storage', function(event) {
-        if (event.key === 'phantomBodyShuffle' && event.newValue) {
+        if (event.key === 'phantomBodyShuffleCounter') {
+            const newCounter = parseInt(event.newValue || '0', 10);
+            if (newCounter > lastShuffleCounter) {
+                console.log('Phantom Body A: Storage event detected, counter:', newCounter);
+                lastShuffleCounter = newCounter;
+                shuffleImage();
+            }
+        } else if (event.key === 'phantomBodyShuffle' && event.newValue) {
             try {
                 const data = JSON.parse(event.newValue);
-                if (data.action === 'shuffle') {
+                if (data.action === 'shuffle' && data.counter > lastShuffleCounter) {
+                    console.log('Phantom Body A: Storage event detected, counter:', data.counter);
+                    lastShuffleCounter = data.counter;
                     shuffleImage();
                 }
             } catch (e) {
-                // If parsing fails, still try to shuffle
+                console.log('Phantom Body A: Storage event detected (parse error), shuffling anyway');
                 shuffleImage();
             }
         }
     });
     
-    // Also listen for custom events (for same-tab communication)
-    window.addEventListener('phantomBodyShuffle', function(event) {
-        shuffleImage();
-    });
-    
-    // Poll localStorage as a fallback (check every 500ms)
-    let lastShuffleTime = 0;
+    // Poll localStorage aggressively (check every 100ms) - this is the main mechanism
+    // This works even if storage events don't fire (same-origin issues, etc.)
     setInterval(function() {
         try {
+            // Check the counter first (more reliable)
+            const currentCounter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
+            if (currentCounter > lastShuffleCounter) {
+                console.log('Phantom Body A: Polling detected counter change:', currentCounter);
+                lastShuffleCounter = currentCounter;
+                shuffleImage();
+                return;
+            }
+            
+            // Also check the shuffle data object
             const shuffleData = localStorage.getItem('phantomBodyShuffle');
             if (shuffleData) {
                 const data = JSON.parse(shuffleData);
-                if (data.timestamp && data.timestamp > lastShuffleTime) {
+                if (data.counter && data.counter > lastShuffleCounter) {
+                    console.log('Phantom Body A: Polling detected counter in data:', data.counter);
+                    lastShuffleCounter = data.counter;
+                    shuffleImage();
+                } else if (data.timestamp && data.timestamp > lastShuffleTime) {
+                    console.log('Phantom Body A: Polling detected timestamp change:', data.timestamp);
                     lastShuffleTime = data.timestamp;
                     shuffleImage();
                 }
@@ -461,7 +486,7 @@
         } catch (e) {
             // Ignore errors
         }
-    }, 500);
+    }, 100); // Check every 100ms for responsiveness
     
     // Expose shuffle function globally for direct calls (fallback)
     window.shuffleImage = shuffleImage;

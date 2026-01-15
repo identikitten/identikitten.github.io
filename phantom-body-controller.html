@@ -65,23 +65,31 @@
     
     // Function to trigger shuffle on both pages using localStorage
     function shuffle() {
-        // Create a unique timestamp to trigger the shuffle
+        // Use a counter that increments each time - this ensures the value always changes
+        let counter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
+        counter += 1;
+        
+        // Store the counter - this will trigger storage events in other tabs
+        localStorage.setItem('phantomBodyShuffleCounter', counter.toString());
+        
+        // Also store a timestamp object for the polling mechanism
         const shuffleTrigger = {
             timestamp: Date.now(),
+            counter: counter,
             action: 'shuffle'
         };
-        
-        // Store in localStorage - this will trigger storage events on open a/b pages
         localStorage.setItem('phantomBodyShuffle', JSON.stringify(shuffleTrigger));
         
-        // Also trigger a custom event that pages can listen to
-        // (This works for pages in the same browser session)
-        window.dispatchEvent(new CustomEvent('phantomBodyShuffle', { detail: shuffleTrigger }));
+        console.log('Shuffle triggered, counter:', counter);
         
-        // Force a storage event by removing and re-adding (for cross-tab communication)
+        // Force a change to ensure polling detects it
         setTimeout(() => {
-            localStorage.removeItem('phantomBodyShuffle');
-        }, 100);
+            localStorage.setItem('phantomBodyShuffle', JSON.stringify({
+                timestamp: Date.now() + 1,
+                counter: counter,
+                action: 'shuffle'
+            }));
+        }, 10);
     }
     
     // Add event listener to the shuffle button
