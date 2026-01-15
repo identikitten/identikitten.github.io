@@ -427,25 +427,33 @@
     });
 
     // Track the last shuffle counter we processed
-    let lastShuffleCounter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
+    // Initialize from localStorage but start fresh to catch new changes
+    let lastShuffleCounter = 0;
     let lastShuffleTime = 0;
     
-    console.log('Phantom Body B: Listening for shuffle commands. Last counter:', lastShuffleCounter);
+    // On page load, read the current counter but don't use it as lastShuffleCounter
+    // This ensures we catch the NEXT increment
+    const initialCounter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
+    console.log('Phantom Body B: Page loaded. Current counter in storage:', initialCounter);
+    console.log('Phantom Body B: Will trigger shuffle when counter >', lastShuffleCounter);
     
     // Listen for storage events (fires in other tabs/windows)
     window.addEventListener('storage', function(event) {
+        console.log('Phantom Body B: Storage event received:', event.key, event.newValue);
         if (event.key === 'phantomBodyShuffleCounter') {
             const newCounter = parseInt(event.newValue || '0', 10);
+            console.log('Phantom Body B: Storage event - new counter:', newCounter, 'last counter:', lastShuffleCounter);
             if (newCounter > lastShuffleCounter) {
-                console.log('Phantom Body B: Storage event detected, counter:', newCounter);
+                console.log('Phantom Body B: Storage event triggered shuffle!');
                 lastShuffleCounter = newCounter;
                 shuffleImage();
             }
         } else if (event.key === 'phantomBodyShuffle' && event.newValue) {
             try {
                 const data = JSON.parse(event.newValue);
+                console.log('Phantom Body B: Storage event - data counter:', data.counter, 'last counter:', lastShuffleCounter);
                 if (data.action === 'shuffle' && data.counter > lastShuffleCounter) {
-                    console.log('Phantom Body B: Storage event detected, counter:', data.counter);
+                    console.log('Phantom Body B: Storage event triggered shuffle!');
                     lastShuffleCounter = data.counter;
                     shuffleImage();
                 }
@@ -456,14 +464,16 @@
         }
     });
     
-    // Poll localStorage aggressively (check every 100ms) - this is the main mechanism
+    // Poll localStorage aggressively (check every 50ms) - this is the main mechanism
     // This works even if storage events don't fire (same-origin issues, etc.)
+    let pollCount = 0;
     setInterval(function() {
+        pollCount++;
         try {
             // Check the counter first (more reliable)
             const currentCounter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
             if (currentCounter > lastShuffleCounter) {
-                console.log('Phantom Body B: Polling detected counter change:', currentCounter);
+                console.log('Phantom Body B: Polling detected counter change! Current:', currentCounter, 'Last:', lastShuffleCounter);
                 lastShuffleCounter = currentCounter;
                 shuffleImage();
                 return;
@@ -474,19 +484,24 @@
             if (shuffleData) {
                 const data = JSON.parse(shuffleData);
                 if (data.counter && data.counter > lastShuffleCounter) {
-                    console.log('Phantom Body B: Polling detected counter in data:', data.counter);
+                    console.log('Phantom Body B: Polling detected counter in data! Counter:', data.counter, 'Last:', lastShuffleCounter);
                     lastShuffleCounter = data.counter;
                     shuffleImage();
                 } else if (data.timestamp && data.timestamp > lastShuffleTime) {
-                    console.log('Phantom Body B: Polling detected timestamp change:', data.timestamp);
+                    console.log('Phantom Body B: Polling detected timestamp change! Timestamp:', data.timestamp, 'Last:', lastShuffleTime);
                     lastShuffleTime = data.timestamp;
                     shuffleImage();
                 }
             }
+            
+            // Debug every 20 polls (1 second)
+            if (pollCount % 20 === 0) {
+                console.log('Phantom Body B: Still polling... Current counter:', currentCounter, 'Last processed:', lastShuffleCounter);
+            }
         } catch (e) {
-            // Ignore errors
+            console.error('Phantom Body B: Polling error:', e);
         }
-    }, 100); // Check every 100ms for responsiveness
+    }, 50); // Check every 50ms for better responsiveness
     
     // Expose shuffle function globally for direct calls (fallback)
     window.shuffleImage = shuffleImage;

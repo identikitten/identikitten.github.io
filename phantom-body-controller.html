@@ -69,8 +69,11 @@
         let counter = parseInt(localStorage.getItem('phantomBodyShuffleCounter') || '0', 10);
         counter += 1;
         
+        console.log('Controller: Shuffle button clicked, setting counter to:', counter);
+        
         // Store the counter - this will trigger storage events in other tabs
         localStorage.setItem('phantomBodyShuffleCounter', counter.toString());
+        console.log('Controller: Counter stored:', localStorage.getItem('phantomBodyShuffleCounter'));
         
         // Also store a timestamp object for the polling mechanism
         const shuffleTrigger = {
@@ -79,10 +82,9 @@
             action: 'shuffle'
         };
         localStorage.setItem('phantomBodyShuffle', JSON.stringify(shuffleTrigger));
+        console.log('Controller: Shuffle data stored:', localStorage.getItem('phantomBodyShuffle'));
         
-        console.log('Shuffle triggered, counter:', counter);
-        
-        // Force a change to ensure polling detects it
+        // Force multiple updates to ensure polling detects it
         setTimeout(() => {
             localStorage.setItem('phantomBodyShuffle', JSON.stringify({
                 timestamp: Date.now() + 1,
@@ -90,6 +92,14 @@
                 action: 'shuffle'
             }));
         }, 10);
+        
+        setTimeout(() => {
+            localStorage.setItem('phantomBodyShuffle', JSON.stringify({
+                timestamp: Date.now() + 2,
+                counter: counter,
+                action: 'shuffle'
+            }));
+        }, 20);
     }
     
     // Add event listener to the shuffle button
