@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Body A</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+    <style>
+        p{
+            color: red!important;
+            font-size: 16px;
+        }
+        .card-box {
+            height: 100vh;
+            position: relative;
+        }
+        /* Center content in card containers */
+        .card-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .card-left img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* SVG styling - make strokes red and thicker */
+        .card-left svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            transform: scale(1.1);
+            transform-origin: center center;
+        }
+        
+        /* Hide polylines (connecting lines) */
+        .card-left svg polyline {
+            display: none !important;
+        }
+        
+        /* Hide bounding boxes and structural elements */
+        .card-left svg rect,
+        .card-left svg circle,
+        .card-left svg ellipse,
+        .card-left svg polygon,
+        .card-left svg line {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        
+        /* Style only paths (the actual text/characters including strikethroughs) */
+        .card-left svg path {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            stroke: red !important;
+            stroke-width: 2;
+            fill: none !important;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Animation for path drawing effect */
+        @keyframes drawPath {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* Expandable button and panel */
+        .expand-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: red;
+            transition: all 0.3s ease;
+            box-shadow: inset 0px 0px 9px 1px #f28b8b;
+        }
+        
+        .expand-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        
+        .expandable-panel {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 400px;
+            max-width: 500px;
+            max-height: calc(100vh - 100px);
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            overflow: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1999;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            box-shadow: inset 0px 0px 9px 1px #f28b8b;
+        }
+        
+        .expandable-panel.expanded {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .expand-button {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .expandable-panel {
+                top: 60px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                width: calc(100% - 20px);
+                padding: 15px;
+            }
+        }
+        
+        .expandable-panel p {
+            margin: 10px 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .expandable-panel video {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="list-element flex flex-wrap tc card-box">
+    <div class="w-100 h-100 shadow">
+        <div class="card-left ph4 pt5">
+            <!-- SVG will be loaded here dynamically -->
+        </div>
+    </div>
+</div>
+
+<button class="expand-button" id="expandButton">𓂂</button>
+
+<div class="expandable-panel" id="expandablePanel">
+    <p>Este ensayo está escrito con y a través de un plotter robotizado. En esta página, se simula el trazo que hace la máquina sobre el papel.</p>
+    <video controls style="border-radius: 5px;">
+        <source src="images/cf/aaauuu.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<script>
+    // Image array for left card
+    const cardLeftImages = [
+        'images/cf/Asset 1.svg',
+        'images/cf/Asset 1txt.svg',
+        'images/cf/Asset 2.svg',
+        'images/cf/Asset 2txt.svg',
+        'images/cf/Asset 22.svg',
+        'images/cf/Asset 3.svg',
+        'images/cf/Asset 3txt.svg',
+        'images/cf/Asset 33.svg',
+        'images/cf/Asset 43.svg',
+        'images/cf/Asset 4txt.svg',
+        'images/cf/Asset 5.svg',
+        'images/cf/Asset 52.svg',
+        'images/cf/Asset 6.svg',
+        'images/cf/Asset 62.svg',
+        'images/cf/Asset 7miciela.svg',
+        'images/cf/Asset 8miciela.svg',
+        'images/cf/Asset 9miciela.svg',
+        'images/cf/Asset 10txt.svg',
+        'images/cf/Asset 11txt.svg',
+        'images/cf/Asset 12txt.svg',
+        'images/cf/shrek.svg'
+    ];
+
+    // Get references to DOM elements
+    const leftCardContainer = document.querySelector('.card-left');
+
+    // Function to get a random image from an array
+    function getRandomImage(imageArray) {
+        const randomIndex = Math.floor(Math.random() * imageArray.length);
+        return imageArray[randomIndex];
+    }
+
+    // Function to get path length for proper animation
+    function getPathLength(path) {
+        if (path.getTotalLength) {
+            return path.getTotalLength();
+        }
+        return 1000; // fallback value
+    }
+
+    // Function to style and animate SVG paths
+    function styleSVGPaths(svgElementOrDoc, delay = 0) {
+        if (!svgElementOrDoc) return;
+        
+        const container = svgElementOrDoc;
+        
+        const groups = container.querySelectorAll('g');
+        groups.forEach(group => {
+            group.removeAttribute('stroke');
+            group.style.stroke = 'none';
+        });
+        
+        const polylines = container.querySelectorAll('polyline');
+        polylines.forEach(polyline => {
+            polyline.style.display = 'none';
+        });
+        
+        const rects = container.querySelectorAll('rect');
+        rects.forEach(rect => {
+            rect.style.display = 'none';
+        });
+        
+        const circles = container.querySelectorAll('circle');
+        circles.forEach(circle => {
+            circle.style.display = 'none';
+        });
+        
+        const ellipses = container.querySelectorAll('ellipse');
+        ellipses.forEach(ellipse => {
+            ellipse.style.display = 'none';
+        });
+        
+        const polygons = container.querySelectorAll('polygon');
+        polygons.forEach(polygon => {
+            polygon.style.display = 'none';
+        });
+        
+        const lines = container.querySelectorAll('line');
+        lines.forEach(line => {
+            line.style.display = 'none';
+        });
+        
+        const paths = container.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            path.style.display = '';
+            path.style.visibility = 'visible';
+            path.style.opacity = '1';
+            
+            path.removeAttribute('stroke');
+            path.removeAttribute('class');
+            path.setAttribute('stroke', 'red');
+            path.style.stroke = 'red';
+            path.style.strokeColor = 'red';
+            path.style.color = 'red';
+            path.style.setProperty('stroke', 'red', 'important');
+            
+            path.setAttribute('fill', 'none');
+            path.style.fill = 'none';
+            
+            path.setAttribute('stroke-width', '2');
+            path.style.strokeWidth = '2';
+            
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            
+            const length = getPathLength(path);
+            if (length > 0) {
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                
+                const animationDelay = delay + (index * 0.15);
+                path.style.animation = `drawPath ${2 + Math.random()}s ease-in-out ${animationDelay}s forwards`;
+            } else {
+                path.style.strokeDasharray = 'none';
+                path.style.strokeDashoffset = '0';
+            }
+        });
+    }
+
+    // SVG content cache
+    const svgCache = {};
+
+    // Function to load SVG content
+    function loadSVGContent(url) {
+        return new Promise((resolve) => {
+            if (svgCache[url]) {
+                resolve(svgCache[url]);
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 || xhr.status === 0) {
+                        svgCache[url] = xhr.responseText;
+                        resolve(xhr.responseText);
+                    } else {
+                        loadSVGViaObject(url).then(resolve);
+                    }
+                }
+            };
+            
+            try {
+                xhr.send();
+            } catch (e) {
+                loadSVGViaObject(url).then(resolve);
+            }
+        });
+    }
+
+    // Alternative: Load SVG via object tag
+    function loadSVGViaObject(url) {
+        return new Promise((resolve) => {
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.style.visibility = 'hidden';
+            document.body.appendChild(tempContainer);
+
+            const object = document.createElement('object');
+            object.type = 'image/svg+xml';
+            object.data = url;
+            object.style.width = '1px';
+            object.style.height = '1px';
+
+            object.onload = function() {
+                try {
+                    const svgDoc = object.contentDocument;
+                    if (svgDoc) {
+                        const svgElement = svgDoc.documentElement;
+                        const svgContent = new XMLSerializer().serializeToString(svgElement);
+                        svgCache[url] = svgContent;
+                        document.body.removeChild(tempContainer);
+                        resolve(svgContent);
+                    } else {
+                        document.body.removeChild(tempContainer);
+                        resolve(null);
+                    }
+                } catch (e) {
+                    document.body.removeChild(tempContainer);
+                    resolve(null);
+                }
+            };
+
+            object.onerror = function() {
+                document.body.removeChild(tempContainer);
+                resolve(null);
+            };
+
+            tempContainer.appendChild(object);
+            
+            setTimeout(() => {
+                if (tempContainer.parentNode) {
+                    document.body.removeChild(tempContainer);
+                    resolve(null);
+                }
+            }, 2000);
+        });
+    }
+
+    // Function to display SVG with animation
+    async function displaySVG(container, svgUrl) {
+        container.innerHTML = '';
+        
+        const svgContent = await loadSVGContent(svgUrl);
+        if (svgContent) {
+            container.innerHTML = svgContent;
+            const svg = container.querySelector('svg');
+            if (svg) {
+                styleSVGPaths(svg);
+            }
+        } else {
+            const img = document.createElement('img');
+            img.src = svgUrl;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            container.appendChild(img);
+        }
+    }
+
+    // Function to shuffle image
+    function shuffleImage() {
+        const randomImage = getRandomImage(cardLeftImages);
+        leftCardContainer.style.opacity = '0';
+        
+        setTimeout(() => {
+            displaySVG(leftCardContainer, randomImage).then(() => {
+                setTimeout(() => {
+                    leftCardContainer.style.transition = 'opacity 0.5s ease';
+                    leftCardContainer.style.opacity = '1';
+                }, 10);
+            });
+        }, 10);
+    }
+
+    // Initialize with random image
+    window.addEventListener('DOMContentLoaded', () => {
+        const randomImage = getRandomImage(cardLeftImages);
+        displaySVG(leftCardContainer, randomImage);
+    });
+
+    // Listen for localStorage changes from controller (socket-like communication)
+    window.addEventListener('storage', function(event) {
+        if (event.key === 'phantomBodyShuffle' && event.newValue) {
+            try {
+                const data = JSON.parse(event.newValue);
+                if (data.action === 'shuffle') {
+                    shuffleImage();
+                }
+            } catch (e) {
+                // If parsing fails, still try to shuffle
+                shuffleImage();
+            }
+        }
+    });
+    
+    // Also listen for custom events (for same-tab communication)
+    window.addEventListener('phantomBodyShuffle', function(event) {
+        shuffleImage();
+    });
+    
+    // Poll localStorage as a fallback (check every 500ms)
+    let lastShuffleTime = 0;
+    setInterval(function() {
+        try {
+            const shuffleData = localStorage.getItem('phantomBodyShuffle');
+            if (shuffleData) {
+                const data = JSON.parse(shuffleData);
+                if (data.timestamp && data.timestamp > lastShuffleTime) {
+                    lastShuffleTime = data.timestamp;
+                    shuffleImage();
+                }
+            }
+        } catch (e) {
+            // Ignore errors
+        }
+    }, 500);
+    
+    // Expose shuffle function globally for direct calls (fallback)
+    window.shuffleImage = shuffleImage;
+
+    // Expandable panel functionality
+    const expandButton = document.getElementById('expandButton');
+    const expandablePanel = document.getElementById('expandablePanel');
+    let isExpanded = false;
+    
+    expandButton.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+            expandablePanel.classList.add('expanded');
+            expandButton.textContent = '𓂃';
+        } else {
+            expandablePanel.classList.remove('expanded');
+            expandButton.textContent = '𓂂';
+        }
+    });
+</script>
+
+</body>
+</html>

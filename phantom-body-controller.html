@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Body Controller</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .controller-container {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shuffle-button {
+            padding: 20px 40px;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.688);
+            color: red;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            border: 0px;
+            box-shadow: inset 0px 0px 10px 3px #f28b8b;
+        }
+
+        .shuffle-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Mobile positioning */
+        @media (max-width: 768px) {
+            .shuffle-button {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="controller-container">
+    <button class="shuffle-button" id="shuffleButton">Barajar 𓂉</button>
+</div>
+
+<script>
+    const shuffleButton = document.getElementById('shuffleButton');
+    
+    // Function to trigger shuffle on both pages using localStorage
+    function shuffle() {
+        // Create a unique timestamp to trigger the shuffle
+        const shuffleTrigger = {
+            timestamp: Date.now(),
+            action: 'shuffle'
+        };
+        
+        // Store in localStorage - this will trigger storage events on open a/b pages
+        localStorage.setItem('phantomBodyShuffle', JSON.stringify(shuffleTrigger));
+        
+        // Also trigger a custom event that pages can listen to
+        // (This works for pages in the same browser session)
+        window.dispatchEvent(new CustomEvent('phantomBodyShuffle', { detail: shuffleTrigger }));
+        
+        // Force a storage event by removing and re-adding (for cross-tab communication)
+        setTimeout(() => {
+            localStorage.removeItem('phantomBodyShuffle');
+        }, 100);
+    }
+    
+    // Add event listener to the shuffle button
+    shuffleButton.addEventListener('click', shuffle);
+    
+    // Optional: Allow keyboard spacebar to trigger shuffle
+    document.addEventListener('keydown', function(event) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            shuffle();
+        }
+    });
+</script>
+
+</body>
+</html>
