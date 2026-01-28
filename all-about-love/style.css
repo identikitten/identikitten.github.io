@@ -1,12 +1,12 @@
 
 @font-face {
     font-family: FT88;
-    src: url("https://cdn.glitch.global/a8fed1cb-f4fc-4d98-91be-313365a91171/FT88-Regular.otf?v=1708718998654");
+    src: url("/FT88-Regular.otf");
   }
 
   @font-face {
     font-family: basiic;
-    src: url("https://cdn.glitch.global/a8fed1cb-f4fc-4d98-91be-313365a91171/basiic.ttf?v=1708718994883");
+    src: url("/basiic.ttf");
   }
 
 
