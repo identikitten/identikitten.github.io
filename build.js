@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
+const { marked } = require('marked');
 
 console.log('Starting build process...');
 console.log('Current directory:', __dirname);
@@ -31,6 +32,18 @@ function buildGalleryData() {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
         
+        // Convert markdown content to HTML
+        const rawDescription = data.description || content;
+        const rawDescriptionEs = data.description_es || '';
+        
+        // Check if content is already HTML (starts with < tag), otherwise convert from markdown
+        const description = rawDescription.trim().startsWith('<') 
+          ? rawDescription 
+          : marked(rawDescription);
+        const description_es = rawDescriptionEs.trim().startsWith('<') 
+          ? rawDescriptionEs 
+          : (rawDescriptionEs ? marked(rawDescriptionEs) : '');
+
         return {
           id: data.id,
           title: data.title,
@@ -41,8 +54,8 @@ function buildGalleryData() {
           thumbnail: data.thumbnail,
           images: data.images || [data.thumbnail],
           decoration: data.decoration || '',
-          description: data.description || content,
-          description_es: data.description_es || '' // Include description_es
+          description: description,
+          description_es: description_es // Include description_es
         };
     });
     

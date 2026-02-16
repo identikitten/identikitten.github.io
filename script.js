@@ -76,7 +76,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial render
     renderGallery();
-    showMainContent(); // Ensure we start on the main content view
+    
+    // Check if URL has a project hash - if so, load that project directly
+    const hash = window.location.hash.substring(1); // remove the #
+    if (hash && window.galleryData && window.galleryData.find(item => item.id === hash)) {
+        loadContent(hash);
+    } else {
+        showMainContent(); // Ensure we start on the main content view
+    }
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function() {
+        const currentHash = window.location.hash.substring(1);
+        if (currentHash && window.galleryData && window.galleryData.find(item => item.id === currentHash)) {
+            loadContent(currentHash);
+        } else {
+            showMainContent();
+        }
+    });
 
   // Falling characters functionality
   const container = document.querySelector(".falling-characters");
@@ -289,6 +306,9 @@ console.log('Projects with Spanish titles:',
   if (sidebarMenu) sidebarMenu.style.opacity = '0';
   if (mobileMenu) mobileMenu.style.opacity = '0';
 
+  // Update the URL hash so this project is linkable
+  history.pushState(null, '', '#' + id);
+
   // Reinitialize the image slider
   initializeImageSlider();
   // Add this near the end of your loadContent function
@@ -301,6 +321,9 @@ function showMainContent() {
   projectContainer.style.display = 'none';
   projectContainer.innerHTML = '';
   backButton.style.display = 'none';
+  
+  // Clear the URL hash
+  history.pushState(null, '', window.location.pathname);
   
   // Show category menus when back on main content
   const sidebarMenu = document.querySelector('.hideandseek');
@@ -325,13 +348,20 @@ function showMainContent() {
     }
 
     function cycleImages() {
+      currentImageIndex++;
       if (currentImageIndex >= images.length) {
         currentImageIndex = 0;
       }
       changeImage(images[currentImageIndex]);
-      currentImageIndex++;
     }
 
+    // Initialize with the first image (no fade, show immediately)
+    if (images.length > 0) {
+      expandImg.src = images[0].src;
+      expandImg.style.opacity = "1";
+    }
+
+    // Start cycling from the second image onwards
     const intervalId = setInterval(cycleImages, 4500);
 
     images.forEach(img => {
@@ -340,11 +370,6 @@ function showMainContent() {
         changeImage(img);
       });
     });
-
-    // Initialize with the first image
-    if (images.length > 0) {
-      changeImage(images[1]);
-    }
   }
 
   backButton.addEventListener('click', showMainContent);

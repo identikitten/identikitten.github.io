@@ -8,29 +8,123 @@
     
     <!-- Include Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <style>
+      /* Style the CMS admin shell to match the site */
+      body {
+        font-weight: lighter;
+      }
+      /* Top bar */
+      [class*="AppHeader"] {
+        background-color: #fff !important;
+        box-shadow: inset 0px 0px 10px 3px rgba(242, 139, 139, 0.3) !important;
+      }
+      /* Sidebar */
+      [class*="Sidebar"] {
+        background-color: #fff !important;
+        box-shadow: inset 0px 0px 14px 3px rgba(144, 242, 139, 0.2) !important;
+      }
+    </style>
   </head>
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
     <script>
-      // Add your custom CSS to the CMS
+      // Add your site's CSS to the preview pane
       CMS.registerPreviewStyle("../style.css");
+      CMS.registerPreviewStyle("https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css");
+
+      // Custom preview styles (injected into preview iframe)
+      CMS.registerPreviewStyle(`
+        body {
+          font-weight: lighter;
+          color: #000;
+          padding: 20px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        p { font-size: 1.2em; }
+        h2 { font-size: 1.4em; }
+        h3 { font-size: 1.4em; font-weight: 100; }
+        h5 {
+          margin: 0px;
+          text-transform: uppercase;
+          font-weight: 100;
+          line-height: 1.6em;
+          font-size: 0.8em;
+        }
+        a { color: #000; }
+        img { border-radius: 4px; }
+        .preview-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          border-bottom: 1px solid #eee;
+          margin-bottom: 1em;
+          padding-bottom: 0.5em;
+        }
+        .preview-category {
+          display: inline-block;
+          padding: 2px 10px;
+          font-size: 0.8em;
+          text-transform: lowercase;
+          border-radius: 20px;
+          margin-bottom: 1em;
+        }
+        .preview-category[data-cat="art"] { box-shadow: inset 0 0 10px #F28B8B; }
+        .preview-category[data-cat="design"] { box-shadow: inset 0 0 10px #717BFF; }
+        .preview-category[data-cat="workshops"] { box-shadow: inset 0 0 10px #71FFEC; }
+        .preview-category[data-cat="texts"] { box-shadow: inset 0 0 10px #dcf952; }
+        .preview-category[data-cat="experiments"] { box-shadow: inset 0 0 10px #FC39D8; }
+        .preview-images {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin: 1em 0;
+        }
+        .preview-images img {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+        }
+        .preview-description {
+          line-height: 1.6;
+        }
+      `, {raw: true});
       
       // Customize the preview component for gallery items
       const GalleryItemPreview = createClass({
         render: function() {
           const entry = this.props.entry;
+          const title = entry.getIn(['data', 'title']) || '';
+          const year = entry.getIn(['data', 'year']) || '';
+          const category = entry.getIn(['data', 'category']) || '';
+          const thumbnail = entry.getIn(['data', 'thumbnail']);
+          const images = entry.getIn(['data', 'images']);
           
-          return h('div', {className: 'preview-container'},
-            h('h2', {}, entry.getIn(['data', 'title'])),
-            h('p', {}, entry.getIn(['data', 'year'])),
-            h('img', {src: entry.getIn(['data', 'thumbnail'])}),
-            h('div', {
-              className: 'description',
-              dangerouslySetInnerHTML: {
-                __html: this.props.widgetFor('description')
+          // Build images list
+          var imageElements = [];
+          if (images && images.toJS) {
+            var imgArray = images.toJS();
+            imgArray.forEach(function(img, i) {
+              var src = typeof img === 'string' ? img : (img.image || '');
+              if (src) {
+                imageElements.push(
+                  h('img', {key: i, src: src, alt: title + ' - ' + (i + 1)})
+                );
               }
-            })
+            });
+          }
+
+          return h('div', {},
+            h('div', {className: 'preview-header'},
+              h('h2', {}, title),
+              h('h3', {}, year)
+            ),
+            category ? h('span', {className: 'preview-category', 'data-cat': category}, category) : null,
+            thumbnail ? h('img', {src: thumbnail, style: {width: '100%', maxHeight: '300px', objectFit: 'cover', marginBottom: '1em'}}) : null,
+            imageElements.length > 0 ? h('div', {className: 'preview-images'}, imageElements) : null,
+            h('div', {className: 'preview-description'}, this.props.widgetFor('body'))
           );
         }
       });

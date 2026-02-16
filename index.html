@@ -53,15 +53,16 @@
             <p class="expo-titulo"><i>currently showing work at:</i></p>
             <div class="expo-lista-movil">
            <p>𓏲 Objetos de Extrañeza @ <a href="https://www.servidorlocal.net/" target="_blank">Servidor Local</a>, CDMX<sub><i> <br> [Dec 11, 2025 - Feb 14, 2026]</i></sub></p>
+           <p>𓏱 ANTIFASCISM:
+            NOW @ <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></p>
+            <p>𓏱 <a href="https://error417.expectation.fail/13scoresagainsttechfascism/" target="_blank">Error 417 Expectation Failed: 13 Scores Against Tech Fascism</a>, Online</p>
            </div>
 
            <p class="expo-titulo"><i>upcoming:</i></p>
 
            <div class="expo-lista-movil">
-           <p>𓏱 ANTIFASCISM:
-            NOW @ <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></p>
-
-            <p>𓐎 Panel: Error 406 Not Acceptable - Scores Against Tech-Fascism @ <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i>  <br>[Feb 1, 2026 @ 5pm]</i></sub></p>
+           
+            <p>Coming soon...</p>
             </div>
         </div>
            
@@ -69,7 +70,7 @@
             <ul class="intro-menu-cel">
                 <li> <a href="about.html">about</a></li>
                 <li><a href="EDEN.html">EDEN 𓃚</a></li>
-                <li class="lang"><a href="#" onclick="switchLanguage('es'); return false;">ver en español</a></li>            
+                <li class="lang"><a href="#" onclick="switchLanguage('es'); return false;">𓆙 ver en español</a></li>            
             </ul>
             </div>
                 <ul class="menu" id="menuContainer">
@@ -90,20 +91,24 @@
                 <p class="expo-titulo"><i>currently showing work at:</i></p>
                 <ul class="expo-lista">
                 <li>Objetos de Extrañeza: <a href="https://www.servidorlocal.net/" target="_blank">Servidor Local</a>, CDMX<sub><i> <br> [Dec 11, 2025 - Feb 14, 2026]</i></sub></li>
+                <li>ANTIFASCISM:
+                    NOW <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></li>
+                    <li><a href="https://error417.expectation.fail/13scoresagainsttechfascism/" target="_blank">Error 417 Expectation Failed: 13 Scores Against Tech Fascism</a>, Online</li>
             </ul>
+
 
                 <p class="expo-titulo"><i>upcoming:</i></p>
                 <ul class="expo-lista">
-                <li>ANTIFASCISM:
-                NOW <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [30 Jan – 31 July, 2026]</i></sub></li>
+                
 
-                <li>Panel: Error 406 Not Acceptable - Scores Against Tech-Fascism <a href="https://www.lothringer13.com/" target="_blank">Lothringer 13 Halle</a>, Munich<sub><i> <br> [Feb 1, 2026 @ 5pm]</i></sub></li>
+                <li>Coming soon...</li>
                 </div>
+                
             </ul>
 
                 <div class="divider"></div>
 
-                <p class="lang"><a href="#" onclick="switchLanguage('es'); return false;">ver en español</a></p>
+                <p class="lang"><a href="#" onclick="switchLanguage('es'); return false;">𓆑 ver en español</a></p>
 
                 <div class="divider"></div>
 
@@ -163,6 +168,24 @@
                 }
             }
         }
+
+        // Mobile: toggle thumbnail on touch (long press)
+        document.addEventListener('DOMContentLoaded', function() {
+            let pressTimer;
+            document.addEventListener('touchstart', function(e) {
+                const post = e.target.closest('.post');
+                if (!post) return;
+                pressTimer = setTimeout(function() {
+                    post.classList.toggle('show-thumbnail');
+                }, 400);
+            });
+            document.addEventListener('touchend', function() {
+                clearTimeout(pressTimer);
+            });
+            document.addEventListener('touchmove', function() {
+                clearTimeout(pressTimer);
+            });
+        });
     </script>
    
 

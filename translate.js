@@ -6,8 +6,8 @@ const translations = {
       // Navigation
       "about": "about",
       "EDEN 𓃚 ": "EDEN 𓅯",
-      "seeInSpanish": "ver en español",
-      "seeInEnglish": "see in english",
+      "seeInSpanish": "𓆑 ver en español",
+      "seeInEnglish": "𓆱 see in english",
       
       // Buttons & UI elements
       "backToMain": "🥀 Back",
@@ -47,8 +47,8 @@ const translations = {
       // Navigation
       "about": "acerca",
       "EDEN 𓃚": "EDEN 𓅯",
-      "seeInSpanish": "ver en español",
-      "seeInEnglish": "see in english",
+      "seeInSpanish": "𓆑ver en español",
+      "seeInEnglish": "𓆱 see in english",
       
       // Buttons & UI elements
       "backToMain": "🥀 Volver",

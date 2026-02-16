@@ -262,7 +262,7 @@ button{
   }
   
   .post {
-    transition: top 1s ease-out;
+    transition: top 1.3s ease-out;
     
   }
 
@@ -310,6 +310,7 @@ button{
     align-items: center;
     text-align: center;
     text-overflow: wrap;
+    position: relative;
 }
 
 .post a:hover{
@@ -318,6 +319,50 @@ button{
 
 .post:hover{
     box-shadow: inset 1px -4px 20px 8px #90f28b!important;
+}
+
+.post img {
+    display: block !important;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.post:hover img {
+    opacity: 1;
+}
+
+.post a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    box-shadow: inset 1px -4px 20px 8px #90f28b;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.post:hover a::after {
+    opacity: 1;
+}
+
+.post .text-content {
+    transition: opacity 0.4s ease;
+}
+
+.post:hover .text-content {
+    opacity: 0;
 }
 
 .text-content {
@@ -329,12 +374,6 @@ button{
 .text-content h2 {
     margin: 0;
     font-weight: 300;
-}
-
-.post img {
-    max-width: 20%; /* Ensure the image takes up an appropriate portion */
-    height: auto; /* Maintain aspect ratio */
-
 }
 
 .post img:hover{
@@ -784,6 +823,22 @@ iframe{
         border-radius: 0;
         width: 100vw;
         margin-left: 0;
+        min-height: 80px;
+    }
+
+    .post.show-thumbnail .text-content {
+        opacity: 0;
+    }
+
+    .post.show-thumbnail img {
+        display: block !important;
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .more-links{
