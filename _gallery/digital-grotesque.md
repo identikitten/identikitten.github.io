@@ -9,22 +9,21 @@ images:
   - /images/diggrotesque2.jpeg
   - /images/screenshot-2026-02-16-at-8.52.21 p.m..png
 decoration: |-
-  <pre>
-         
-         𓇳
-  𓇳    𓇳     𓇳
-         𓇳
-         𓇳
-         𓇳
+  <pre>       
+   _
+  /_/\ /\
+  \_\   /
+  /_/   \
+  \_\/\  \
+     \_\/ 
   </pre>
 description_es: >-
-  ##### **D﻿igital Grotesque I: cianotipia sobre tela de algodón, sensor NFC.\
-
-  Digital Grotesque II: cianotipia sobre bioplástico, sensor NFC.\
-
-  Digital Grotesque III: cianotipia sobre cartón corrugado, sensor NFC.**
+  ##### D﻿igital Grotesque I: cianotipia sobre tela de algodón, sensor NFC.
 
 
+  ##### Digital Grotesque II: cianotipia sobre bioplástico, sensor NFC.\
+
+  Digital Grotesque III: cianotipia sobre cartón corrugado, sensor NFC.
 
 
   Estas exploraciones surgen a partir de capturas de pantalla de tutoriales en línea que explican cómo crear mapas UV y “skins” para avatares en entornos virtuales como Second Life. Las imágenes son transferidas mediante cianotipia sobre textiles, llevando lo que experimento de forma digital a algo que puedo tocar, oler, y sentir.
@@ -34,8 +33,9 @@ description_es: >-
 ---
 ##### Digital Grotesque I: cyanotype on cotton fabric, NFC sensor.
 
-##### Digital Grotesque II: cyanotype on bioplastic, NFC sensor.\
-Digital Grotesque III: cyanotype on corrugated cardboard, NFC sensor.
+##### Digital Grotesque II: cyanotype on bioplastic, NFC sensor.
+
+##### Digital Grotesque III: cyanotype on corrugated cardboard, NFC sensor.
 
 These explorations emerge from screenshots of online tutorials that explain how to create UV maps and “skins” for avatars in virtual environments such as Second Life. The images are transferred through cyanotype onto textiles, carrying what I experience digitally into something I can touch, smell, and feel.
 
