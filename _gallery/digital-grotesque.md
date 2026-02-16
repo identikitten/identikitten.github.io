@@ -21,9 +21,10 @@ description_es: >-
   ##### D﻿igital Grotesque I: cianotipia sobre tela de algodón, sensor NFC.
 
 
-  ##### Digital Grotesque II: cianotipia sobre bioplástico, sensor NFC.\
+  ##### Digital Grotesque II: cianotipia sobre bioplástico, sensor NFC.
 
-  Digital Grotesque III: cianotipia sobre cartón corrugado, sensor NFC.
+
+  ##### Digital Grotesque III: cianotipia sobre cartón corrugado, sensor NFC.
 
 
   Estas exploraciones surgen a partir de capturas de pantalla de tutoriales en línea que explican cómo crear mapas UV y “skins” para avatares en entornos virtuales como Second Life. Las imágenes son transferidas mediante cianotipia sobre textiles, llevando lo que experimento de forma digital a algo que puedo tocar, oler, y sentir.
