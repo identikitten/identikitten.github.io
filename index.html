@@ -169,22 +169,7 @@
             }
         }
 
-        // Mobile: toggle thumbnail on touch (long press)
         document.addEventListener('DOMContentLoaded', function() {
-            let pressTimer;
-            document.addEventListener('touchstart', function(e) {
-                const post = e.target.closest('.post');
-                if (!post) return;
-                pressTimer = setTimeout(function() {
-                    post.classList.toggle('show-thumbnail');
-                }, 400);
-            });
-            document.addEventListener('touchend', function() {
-                clearTimeout(pressTimer);
-            });
-            document.addEventListener('touchmove', function() {
-                clearTimeout(pressTimer);
-            });
         });
     </script>
    
