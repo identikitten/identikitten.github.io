@@ -73,6 +73,10 @@ a{
     color: black;
 }
 
+.hide{
+    display: none;
+}
+
 .intro{
     margin-left: auto;
     margin-right: auto;
@@ -336,6 +340,7 @@ button{
 
 .post:hover img {
     opacity: 1;
+    filter: grayscale(100%);
 }
 
 .post a::after {
@@ -704,7 +709,7 @@ button{
     background: #dcffc6a1;
 }
 
-.quoteme, quotes{
+.quoteme, quote{
     font-family: 'Acid';
     font-size: 2em;
     color: #1e4405;
@@ -786,6 +791,10 @@ iframe{
 
 
 @media only screen and (max-width: 700px) {
+
+    .marquee-wup{
+        display: none;
+    }
 
      #expandedImg{
     width: 100%;

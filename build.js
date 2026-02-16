@@ -44,20 +44,40 @@ function buildGalleryData() {
           ? rawDescriptionEs 
           : (rawDescriptionEs ? marked(rawDescriptionEs) : '');
 
+        // Normalize image paths (handle both plain strings and CMS object format)
+        function normalizeImagePath(img) {
+          let p = typeof img === 'string' ? img : (img.image || img.src || '');
+          // Remove leading slash if present for consistency
+          if (p.startsWith('/')) p = p.substring(1);
+          return p;
+        }
+
+        const thumbnail = normalizeImagePath(data.thumbnail || '');
+        
+        let imagesList = data.images || [data.thumbnail];
+        if (Array.isArray(imagesList)) {
+          imagesList = imagesList.map(normalizeImagePath).filter(Boolean);
+        } else {
+          imagesList = thumbnail ? [thumbnail] : [];
+        }
+
         return {
           id: data.id,
           title: data.title,
-          title_es: data.title_es || data.title, // Include title_es
+          title_es: data.title_es || data.title,
           year: data.year,
           category: data.category,
           symbols: data.symbols || '',
-          thumbnail: data.thumbnail,
-          images: data.images || [data.thumbnail],
+          thumbnail: thumbnail,
+          images: imagesList,
           decoration: data.decoration || '',
           description: description,
-          description_es: description_es // Include description_es
+          description_es: description_es
         };
     });
+    
+    // Sort by year, newest first
+    galleryData.sort((a, b) => (parseInt(b.year) || 0) - (parseInt(a.year) || 0));
     
     return galleryData;
 }

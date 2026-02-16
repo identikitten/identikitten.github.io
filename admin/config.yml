@@ -11,7 +11,7 @@ local_backend: true
 
 # These lines should match the media folder structure of your site
 media_folder: "images" # Your existing images folder
-public_folder: "/images" # The public path to your images
+public_folder: "images" # The public path to your images
 
 # Example Netlify CMS config for gallery collection
 collections:

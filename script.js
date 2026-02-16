@@ -333,7 +333,15 @@ function showMainContent() {
   if (mobileMenu) mobileMenu.style.opacity = '1';
 }
   
+  var sliderIntervalId = null;
+
   function initializeImageSlider() {
+    // Clear any previous slider interval
+    if (sliderIntervalId) {
+      clearInterval(sliderIntervalId);
+      sliderIntervalId = null;
+    }
+
     let currentImageIndex = 0;
     const images = document.querySelectorAll('.column img');
     const expandImg = document.getElementById("expandedImg");
@@ -362,11 +370,12 @@ function showMainContent() {
     }
 
     // Start cycling from the second image onwards
-    const intervalId = setInterval(cycleImages, 4500);
+    sliderIntervalId = setInterval(cycleImages, 4500);
 
     images.forEach(img => {
       img.addEventListener('click', () => {
-        clearInterval(intervalId);
+        clearInterval(sliderIntervalId);
+        sliderIntervalId = null;
         changeImage(img);
       });
     });
