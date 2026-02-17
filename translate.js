@@ -39,6 +39,9 @@ const translations = {
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 i am 𓆙 𓍢 <br> 𓆱 awake 𓆱 𓆙 \n𓆑 𓆙 in 𓍢𓇼<br>\n 𓆸 𓆱 everything  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  i love 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 and desire 𓍢 𓆑 𓇼 𓆙\n𓆸 to the  𓇼<br>\n  𓆱  𓇼 point 𓆸 𓇼\n𓆱 𓇼 of 𓆑 \nterror 𓆱 𓍢 𓆑",
       
+      // EDEN page
+      "edenIntro": '<strong>Welcome to my Evolving Digital Ecologic Network. </strong><br><br>The spirit of this page emulates the <a href="https://web.archive.org/web/20200208000752/http://www.nous.org.uk/intro.html" target="_blank">type of websites</a> created in the early 2000s, where people compiled links, thoughts and texts as a small collection of things.',
+      
       // Blog
       "noBlogPosts": "No blog posts yet.",
       "readMore": "Read more →"
@@ -78,6 +81,9 @@ const translations = {
 
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 estoy 𓆙 𓍢 <br> 𓆱 despierta 𓆱 𓆙 \n𓆑 𓆙 en 𓍢𓇼<br>\n 𓆸 𓆱 todo  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  lo que amo 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 y deseo 𓍢 𓆑 𓇼 𓆙\n𓆸 hasta el  𓇼<br>\n  𓆱  𓇼 punto 𓆸 𓇼\n𓆱 𓇼 del 𓆑 \nterror 𓆱 𓍢 𓆑",
+      
+      // EDEN page
+      "edenIntro": '<strong>Bienvenidx a mi Red Ecológica Digital en Evolución. </strong><br><br>El espíritu de esta página emula el <a href="https://web.archive.org/web/20200208000752/http://www.nous.org.uk/intro.html" target="_blank">tipo de sitios web</a> creados a principios de los 2000, donde la gente compilaba enlaces, pensamientos y textos como una pequeña colección de cosas.',
       
       // Blog
       "noBlogPosts": "No hay entradas de blog todavía.",
@@ -152,27 +158,30 @@ fetch('project-translations.json')
 
   // Add this function to your translations.js file
 function initializeAllLanguageToggles() {
-    // Desktop sidebar toggle
-    const sidebarLangLinks = document.querySelectorAll('.sidebar .lang a');
+    const allEnLinks = document.querySelectorAll('.lang a.lang-en');
+    const allEsLinks = document.querySelectorAll('.lang a.lang-es');
     
-    // Mobile menu toggle
-    const mobileLangLinks = document.querySelectorAll('.mobile-header .lang a');
-    
-    // Update all toggles
-    const allLangLinks = [...sidebarLangLinks, ...mobileLangLinks];
-    
-    allLangLinks.forEach(link => {
+    allEnLinks.forEach(link => {
       if (currentLanguage === 'en') {
-        link.textContent = translations.en.seeInSpanish;
-        link.setAttribute('onclick', 'switchLanguage("es"); return false;');
-        link.href = '#';
+        link.classList.add('active-lang');
       } else {
-        link.textContent = translations.es.seeInEnglish;
-        link.setAttribute('onclick', 'switchLanguage("en"); return false;');
-        link.href = '#';
+        link.classList.remove('active-lang');
+      }
+    });
+    
+    allEsLinks.forEach(link => {
+      if (currentLanguage === 'es') {
+        link.classList.add('active-lang');
+      } else {
+        link.classList.remove('active-lang');
       }
     });
 
+    // Update language symbol
+    const langSymbols = document.querySelectorAll('.lang-symbol');
+    langSymbols.forEach(symbol => {
+      symbol.textContent = currentLanguage === 'es' ? '𓆑' : '𓆱';
+    });
   }
   
  
@@ -229,6 +238,12 @@ function initializeAllLanguageToggles() {
       introPoem.innerHTML = translations[currentLanguage].introPoem;
     }
     
+    // Update EDEN intro if present
+    const edenIntro = document.querySelector('.eden-intro');
+    if (edenIntro) {
+      edenIntro.innerHTML = translations[currentLanguage].edenIntro;
+    }
+
     // Update about page content if present
     updateAboutPageContent();
     

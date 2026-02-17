@@ -150,7 +150,15 @@ a:visited{
 
 .lang {
    list-style: none;
-  
+}
+
+.lang a.active-lang {
+    text-decoration: underline #f28b8b wavy;
+    box-shadow: inset 0px 0px 10px 3px #f28b8b;
+}
+
+.lang a:not(.active-lang) {
+    opacity: 0.5;
 }
 
 
