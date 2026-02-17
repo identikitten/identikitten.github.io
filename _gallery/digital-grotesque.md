@@ -32,6 +32,9 @@ description_es: >-
 
 
   ¿Qué ocurre cuando estos cuerpos virtuales abandonan la pantalla? Fuera del contexto del juego, el avatar se vuelve extraño, incluso monstruoso. El grotesco en lo digital no proviene de una interioridad expuesta, no hay sangre, órganos, huesos o músculos expuestos, esta piel no se puede perforar - no tiene nada adentro. ¿Cuál es, entonces, la vulnerabilidad de un cuerpo que simula el mío? ¿Está en su distorsión?
+
+
+  P﻿resentada como parte de *Objetos de Extrañeza,* curada por Mariela Patiño en Servidor Local, CDMX.
 ---
 ##### Digital Grotesque I: cyanotype on cotton fabric, NFC sensor.
 
@@ -41,4 +44,6 @@ description_es: >-
 
 These explorations emerge from screenshots of online tutorials that explain how to create UV maps and “skins” for avatars in virtual environments such as Second Life. The images are transferred through cyanotype onto textiles, carrying what I experience digitally into something I can touch, smell, and feel.
 
-What happens when these virtual bodies leave the screen? Outside the context of the game, the avatar becomes strange, even monstrous. The grotesque in the digital does not arise from an exposed interiority; there is no blood, organs, bones, or muscles revealed. This skin cannot be pierced, it has nothing inside. Where, then, does the vulnerability of a body that simulates mine reside? Is it in its distortion?
+What happens when these virtual bodies leave the screen? Outside the context of the game, the avatar becomes strange, even monstrous. The grotesque in the digital does not arise from an exposed interiority; there is no blood, organs, bones, or muscles revealed. This skin cannot be pierced, it has nothing inside. Where, then, does the vulnerability of a body that simulates mine reside? Is it in its distortion? 
+
+Presented as part of **Objects of Strangeness**, curated by Mariela Patiño at Servidor Local, Mexico City.
