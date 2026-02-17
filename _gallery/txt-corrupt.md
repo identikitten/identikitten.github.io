@@ -1,17 +1,55 @@
 ---
 id: txt-corrupt
-title: "CORRUPTING TEXT TO FIND YOUR VOICE"
-title_es: "CORROMPER EL TEXTO PARA ENCONTRAR TU VOZ"
+title: CORRUPTING TEXT TO FIND YOUR VOICE
+title_es: CORROMPER EL TEXTO PARA ENCONTRAR TU VOZ
 year: 2022
 category: art
 thumbnail: images/corromper-1.png
-images: ["images/corromper-1.png","images/corromper-2.png"]
-symbols: "\n      <pre>\n⋰⋱\n\n⋰ ⋱ ⋰⋱\n\n⋰ ⋱⋰ ⋱\n\n⋱\n      </pre>\n      "
-decoration: "\n        <pre>\n   ⋰⋱\n⋰ ⋱ ⋰⋱ \n   ⋰ ⋱⋰ ⋱\n           ⋱\n        </pre>\n        "
-description_es: |
+images:
+  - images/corromper-1.png
+  - images/corromper-2.png
+symbols: "
+
+  \      <pre>
+
+  ⋰⋱
+
+
+  ⋰ ⋱ ⋰⋱
+
+
+  ⋰ ⋱⋰ ⋱
+
+
+  ⋱
+
+  \      </pre>
+
+  \      "
+decoration: "
+
+  \        <pre>
+
+  \   ⋰⋱
+
+  ⋰ ⋱ ⋰⋱\ 
+
+  \   ⋰ ⋱⋰ ⋱
+
+  \           ⋱
+
+  \        </pre>
+
+  \        "
+description_es: >-
   <h5>Proyección, p5.js, RASPBERRY PI, vela y objetos de cobre</h5>
+
+
+  <p>Presentado en el Museo Cabañas como parte de 'Escrituras en presente continuo maa mo mí me muu' curada por underbelly (Sandra Sánchez and Mariel Vela), Guadalajara, México.</p>
+
   <p>Esta pieza forma parte de la serie de exploraciones en torno al ectoplasma y los poemas que encontré de mi abuela. A diferencia de Ectoplasma, en esta pieza no colaboró mi madre. Fue mi primer acercamiento a las palabras de mi abuela a través del siguiente proceso: escuchar sus poemas, transcribirlos, y después corromperlos con código.</p>
-  <p>Lo que forma el círculo proyectado es un poema escrito por mi abuela, y es completamente ilegible. La corrupción del poema provenía de una página web cuyo código cambiaba de repente, por lo que lo proyectado cambiaba de forma a pesar de contener el mismo poema.</p> 
+
+  <p>Lo que forma el círculo proyectado es un poema escrito por mi abuela, y es completamente ilegible. La corrupción del poema provenía de una página web cuyo código cambiaba de repente, por lo que lo proyectado cambiaba de forma a pesar de contener el mismo poema.</p>
 ---
        <h5>PROJECTION, P5.JS, RASPBERRY PI, CANDLE AND COPPER OBJECTS</h5>
        <p>Exhibited at Museo Cabañas as part of 'Escrituras en presente continuo maa mo mí me muu,' curated by underbelly (Sandra Sánchez and Mariel Vela).</p>
