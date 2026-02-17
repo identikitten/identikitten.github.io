@@ -8,6 +8,7 @@ thumbnail: /images/dig-grotesque1.jpeg
 images:
   - /images/diggrotesque2.jpeg
   - /images/screenshot-2026-02-16-at-8.52.21 p.m..png
+  - images/dig-grotesque1.jpeg
 decoration: |-
   <pre>       
    _
