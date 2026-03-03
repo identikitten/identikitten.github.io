@@ -809,7 +809,7 @@ iframe{
         margin-left: auto;
         margin-right: auto;
         aspect-ratio: 4 / 4;
-        object-fit: cover;
+        object-fit: contain;
         transition: opacity 0.8s;
   }
 

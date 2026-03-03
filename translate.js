@@ -83,7 +83,7 @@ const translations = {
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 estoy 𓆙 𓍢 <br> 𓆱 despierta 𓆱 𓆙 \n𓆑 𓆙 en 𓍢𓇼<br>\n 𓆸 𓆱 todo  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  lo que amo 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 y deseo 𓍢 𓆑 𓇼 𓆙\n𓆸 hasta el  𓇼<br>\n  𓆱  𓇼 punto 𓆸 𓇼\n𓆱 𓇼 del 𓆑 \nterror 𓆱 𓍢 𓆑",
       
       // EDEN page
-      "edenIntro": '<strong>Bienvenidx a mi Red Ecológica Digital en Evolución. </strong><br><br>El espíritu de esta página emula el <a href="https://web.archive.org/web/20200208000752/http://www.nous.org.uk/intro.html" target="_blank">tipo de sitios web</a> creados a principios de los 2000, donde la gente compilaba enlaces, pensamientos y textos como una pequeña colección de cosas.',
+      "edenIntro": '<strong>Bienvenidx a mi Red Ecológica Digital en Evolución (EVOLVING DIGITAL ECOLOGICAL NETWORK). </strong><br><br>El espíritu de esta página emula el <a href="https://web.archive.org/web/20200208000752/http://www.nous.org.uk/intro.html" target="_blank">tipo de páginas web</a> creadas a principios de los 2000, donde la gente compilaba enlaces, pensamientos y textos como una colección virtual de cosas.',
       
       // Blog
       "noBlogPosts": "No hay entradas de blog todavía.",
