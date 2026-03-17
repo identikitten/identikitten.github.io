@@ -1,7 +1,7 @@
 ---
 id: spring26-sfpc
-title: SCHOOL FOR POETIC COMPUTATION SPRING 2026 SESSION DESIGN
-title_es: DISEÑO DE SESIÓN DE PRIMAVERA 2026 (SCHOOL FOR POETIC COMPUTATION)
+title: SFPC SPRING 2026
+title_es: PRIMAVERA 2026 SFPC
 year: "2026"
 category: design
 thumbnail: images/announcement.png
