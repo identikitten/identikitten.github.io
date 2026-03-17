@@ -20,12 +20,11 @@ decoration: |-
 
   </pre>
 description_es: >-
-  
-
-  ![](images/torbellino-mother.png)
-
-
-  Mientras la tecnología corporativa amplifica sus amenazas, buscamos en el pasado para entender qué queremos que sea el presente. Las skins de Windows Media Player y Winamp nos recuerdan las posibilidades de lo que Internet aún puede ser hoy, si logramos vencer el pesimismo que la tecnología actual genera en nosotros.
+  Mientras la tecnología corporativa amplifica sus amenazas, buscamos en el
+  pasado para entender qué queremos que sea el presente. Las skins de Windows
+  Media Player y Winamp nos recuerdan las posibilidades de lo que Internet aún
+  puede ser hoy, si logramos vencer el pesimismo que la tecnología actual genera
+  en nosotros.
 
 
   No ser vigilados, sino tener espacios donde sea seguro compartir lo que nos gusta. No ser explotados como artistas o tener que elegir la plataforma que menos explota, sino exigir los espacios donde el arte tenga espacio para crecer.
