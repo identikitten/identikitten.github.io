@@ -58,6 +58,7 @@ collections:
           - label: "Blocks (top to bottom = order on the page)"
             name: "blocks"
             widget: "list"
+            hint: "Media files over ~1 MB cannot be uploaded here (GitHub limit). Put the file in images/ with git or Finder, then type its path below."
             types:
               - label: "Heading (h5)"
                 name: "h5"
@@ -73,14 +74,14 @@ collections:
                 name: "image"
                 widget: "object"
                 fields:
-                  - {label: "Image", name: "src", widget: "image"}
+                  - {label: "Image path", name: "src", widget: "string", hint: "e.g. images/photo.jpg — add the file to images/ via git if it is large; do not use the media upload button for big files."}
                   - {label: "Alt text", name: "alt", widget: "string", required: false}
                   - {label: "CSS classes (optional)", name: "class", widget: "string", required: false, hint: "e.g. w-100 tc center"}
               - label: "Video"
                 name: "video"
                 widget: "object"
                 fields:
-                  - {label: "Video file", name: "src", widget: "file"}
+                  - {label: "Video path", name: "src", widget: "string", hint: "e.g. images/myvideo.mp4 — upload the file with git, not through this form."}
                   - {label: "MIME type", name: "mime", widget: "select", options: ["video/mp4", "video/webm", "video/quicktime"], default: "video/mp4"}
                   - {label: "Width", name: "width", widget: "number", default: 320, value_type: "int", required: false}
                   - {label: "Height", name: "height", widget: "number", default: 240, value_type: "int", required: false}
@@ -88,7 +89,7 @@ collections:
                 name: "audio"
                 widget: "object"
                 fields:
-                  - {label: "Audio file", name: "src", widget: "file"}
+                  - {label: "Audio path", name: "src", widget: "string", hint: "e.g. images/track.mp3 — upload the file with git, not through this form."}
                   - {label: "MIME type", name: "mime", widget: "string", default: "audio/mpeg", required: false}
               - label: "Large link (like Ulises.txt)"
                 name: "big_link"
