@@ -5,7 +5,6 @@ window.galleryData = [
     "title_es": "Talleres de Primavera 2026 SFPC",
     "year": "2026",
     "category": "design",
-    "external_url": "",
     "symbols": "",
     "thumbnail": "images/counterveillance-flyer.jpg",
     "images": [
@@ -30,7 +29,6 @@ window.galleryData = [
     "title_es": "Digital Grotesque",
     "year": "2026",
     "category": "art",
-    "external_url": "",
     "symbols": "",
     "thumbnail": "images/dig-grotesque1.jpeg",
     "images": [
@@ -48,7 +46,6 @@ window.galleryData = [
     "title_es": "PRIMAVERA 2026 SFPC",
     "year": "2026",
     "category": "design",
-    "external_url": "",
     "symbols": "",
     "thumbnail": "images/announcement.png",
     "images": [
@@ -71,7 +68,6 @@ window.galleryData = [
     "title_es": "Otoño 2025 SFPC",
     "year": "2025",
     "category": "design",
-    "external_url": "",
     "symbols": "",
     "thumbnail": "images/oops.png",
     "images": [
@@ -94,7 +90,6 @@ window.galleryData = [
     "title_es": "Wiki Game Jam",
     "year": "2025",
     "category": "design",
-    "external_url": "",
     "symbols": "<pre>\n..﹡..ࢪ.*.\n..✴︎..*..✧\n..﹡....*..\n</pre>",
     "thumbnail": "images/wikigamejam.gif",
     "images": [
@@ -111,7 +106,6 @@ window.galleryData = [
     "title_es": "TODO SOBRE EL AMOR (A LAS COMPUTADORAS)",
     "year": 2024,
     "category": "texts",
-    "external_url": "",
     "symbols": "\n      <pre>\n_ _\n_( ) _ ( ) _\n( _ _ _ )\n/ / ( _ ) ( __ )\n/ / / / / /\n/ / / / / /\n/ / / / / /\n      </pre>\n      ",
     "thumbnail": "images/love-essay-2.png",
     "images": [
@@ -129,7 +123,6 @@ window.galleryData = [
     "title_es": "ESTO NO SE CURA CON PALABRAS",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓆱 \n\n\n    𓂅\n      </pre>\n      ",
     "thumbnail": "images/palabras-1.png",
     "images": [
@@ -150,7 +143,6 @@ window.galleryData = [
     "title_es": "ECTOPLASMA",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n    <pre>\n    𓇼\n       \n\n        𓏲\n    </pre>\n    ",
     "thumbnail": "images/ectoplasma-1.jpg",
     "images": [
@@ -169,7 +161,6 @@ window.galleryData = [
     "title_es": "ICONOS CAÍDOS",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓂂 \n\n\n    𓂻\n      </pre>\n      ",
     "thumbnail": "images/iconos-caidos-1.png",
     "images": [
@@ -187,7 +178,6 @@ window.galleryData = [
     "title_es": "ENSAYO SOBRE UN CUERPO FANTASMADO",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n    <pre>\n    𓆱    \n                       \n               𓂉\n    </pre>\n    ",
     "thumbnail": "images/fantasmado-1.jpg",
     "images": [
@@ -211,7 +201,6 @@ window.galleryData = [
     "title_es": "PLEGARIA PARA AQUELLOS QUE ESTÁN A PUNTO DE SER DEVORADOS",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n    <pre>\n  𓆱\n    𓍢\n     𓇼\n    </pre>\n    ",
     "thumbnail": "images/prayer-1.png",
     "images": [
@@ -230,7 +219,6 @@ window.galleryData = [
     "title_es": "¿ALGUNA VEZ HA SUFRIDO USTED LA PRESIÓN DEL DESEO?",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n•\n⋆\n✫ •\n⋆\n∙ ✫\n      </pre>\n      ",
     "thumbnail": "images/des-5.jpg",
     "images": [
@@ -252,7 +240,6 @@ window.galleryData = [
     "title_es": "VERANO 2024 SFPC",
     "year": 2024,
     "category": "design",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓆙\n\n\n    𓆺\n      </pre>\n      ",
     "thumbnail": "images/photo1.png",
     "images": [
@@ -273,7 +260,6 @@ window.galleryData = [
     "title_es": "VIGILIA_INCONCLUSA",
     "year": 2024,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓀒\n  𓀓\n      𓀔\n      </pre>\n      ",
     "thumbnail": "images/descansadores.gif",
     "images": [
@@ -292,7 +278,6 @@ window.galleryData = [
     "title_es": "CIBERSELFIE",
     "year": 2022,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓋪\n𓂉\n𓂥\n𓋪\n      </pre>\n      ",
     "thumbnail": "images/ciberselfie.gif",
     "images": [
@@ -310,7 +295,6 @@ window.galleryData = [
     "title_es": "CORROMPER EL TEXTO PARA ENCONTRAR TU VOZ",
     "year": 2022,
     "category": "art",
-    "external_url": "",
     "symbols": "\n      <pre>\n⋰⋱\n\n⋰ ⋱ ⋰⋱\n\n⋰ ⋱⋰ ⋱\n\n⋱\n      </pre>\n      ",
     "thumbnail": "images/corromper-1.png",
     "images": [
@@ -327,7 +311,6 @@ window.galleryData = [
     "title_es": "TEXT GLITCH",
     "year": 2022,
     "category": "experiments",
-    "external_url": "",
     "symbols": "\n      <pre>\n| Ln 14, col 345 | 100% | Macintosh (CR) | ANSI |\n      </pre>\n      ",
     "thumbnail": "images/glitch-1.gif",
     "images": [
@@ -346,7 +329,6 @@ window.galleryData = [
     "title_es": "INSTALANDO MÁQUINAS LITERARIAS",
     "year": 2021,
     "category": "workshops",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓃉\n 𓃊\n  𓃋\n   𓃌\n   𓃍\n      </pre>\n      ",
     "thumbnail": "images/lit-machines-1.gif",
     "images": [
@@ -364,7 +346,6 @@ window.galleryData = [
     "title_es": "EXPLORACIONES POST-CONCRETAS",
     "year": 2021,
     "category": "experiments",
-    "external_url": "",
     "symbols": "\n<pre>\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n░a▓\n      </pre>\n",
     "thumbnail": "images/postc-1.gif",
     "images": [
@@ -385,7 +366,6 @@ window.galleryData = [
     "title_es": "MARGINALIA REFRACTIVA",
     "year": 2021,
     "category": "workshops",
-    "external_url": "",
     "symbols": "\n      <pre>\n𓐖𓏩𓐖𓏫𓐖𓏲𓐖𓏨𓐖𓏰𓐖𓏪𓐖\n      </pre>\n      ",
     "thumbnail": "images/m-ref-1.png",
     "images": [

@@ -13,6 +13,13 @@ window.edenBlocks = {
       "class": ""
     },
     {
+      "type": "video",
+      "src": "images/aauu.mov",
+      "mime": "video/quicktime",
+      "width": 320,
+      "height": 240
+    },
+    {
       "type": "quote",
       "text": "“Un corazón es tal vez algo sucio. Pertenece a las tablas de anatomía y al mostrador del carnicero. Yo prefiero tu cuerpo.” - Marguerite Yourcenar"
     },

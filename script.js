@@ -5,53 +5,16 @@ function isGalleryPage() {
   return !!document.getElementById('content-container');
 }
 
-function getDisplayTitle(item) {
-  return window.currentLanguage === 'es' && item.title_es ? item.title_es : item.title;
-}
-
-function escapeHtmlAttr(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;');
-}
-
-function renderGalleryPost(item) {
-  const displayTitle = getDisplayTitle(item);
-  const externalUrl = (item.external_url || '').trim();
-  const thumb = item.thumbnail ? `<img src="${escapeHtmlAttr(item.thumbnail)}" alt="" style="display:none;">` : '';
-
-  if (externalUrl) {
-    return `
-    <div class="post post-external" data-category="${escapeHtmlAttr(item.category)}">
-      <a href="${escapeHtmlAttr(externalUrl)}" target="_blank" rel="noopener noreferrer" data-id="${escapeHtmlAttr(item.id)}" data-external="true">
-        <div class="text-content">
-          <h2>${displayTitle}</h2>
-        </div>
-        ${thumb}
-      </a>
-    </div>`;
-  }
-
-  return `
-    <div class="post" data-category="${escapeHtmlAttr(item.category)}">
-      <a href="#" data-id="${escapeHtmlAttr(item.id)}">
-        <div class="text-content">
-          <h2>${displayTitle}</h2>
-        </div>
-        ${thumb}
-      </a>
-    </div>`;
-}
 
 function updateGalleryText() {
   document.querySelectorAll('.post').forEach(post => {
-    const link = post.querySelector('a');
-    if (!link) return;
-    const id = link.getAttribute('data-id');
+    const id = post.querySelector('a').getAttribute('data-id');
     const item = galleryData.find(item => item.id === id);
     if (item) {
-      post.querySelector('h2').textContent = getDisplayTitle(item);
+      const displayTitle = window.currentLanguage === 'es' && item.title_es 
+        ? item.title_es 
+        : item.title;
+      post.querySelector('h2').textContent = displayTitle;
     }
   });
 }
@@ -61,14 +24,24 @@ function updateGalleryText() {
 function renderGallery() {
   if (!contentContainer) return;
   
-  contentContainer.innerHTML = galleryData.map(item => renderGalleryPost(item)).join('');
+  const galleryHTML = galleryData.map(item => `
+    <div class="post" data-category="${item.category}">
+      <a href="#" data-id="${item.id}"> 
+        <div class="text-content">
+          <h2>${window.currentLanguage === 'es' && item.title_es ? item.title_es : item.title}</h2>
+        </div>
+        <img src="${item.thumbnail}" alt="" style="display:none;">
+      </a>
+    </div>
+  `).join('');
+
+  contentContainer.innerHTML = galleryHTML;
   setupGalleryInteractions();
-  positionPostsWithoutOverlap();
+  positionPostsWithoutOverlap(); // Only called on initial load
 }
 
 function setupGalleryInteractions() {
   document.querySelectorAll('.post a').forEach(link => {
-    if (link.getAttribute('data-external') === 'true') return;
     link.addEventListener('click', function(e) {
       e.preventDefault();
       loadContent(this.getAttribute('data-id'));
@@ -82,7 +55,16 @@ document.addEventListener('languageChanged', function(e) {
   // On main gallery page
   if (document.getElementById('content-container')?.style.display !== 'none') {
     // Update existing posts' text only
-    updateGalleryText();
+    document.querySelectorAll('.post').forEach(post => {
+      const id = post.querySelector('a').getAttribute('data-id');
+      const item = galleryData.find(item => item.id === id);
+      if (item) {
+        const titleElement = post.querySelector('h2');
+        titleElement.textContent = window.currentLanguage === 'es' && item.title_es 
+          ? item.title_es 
+          : item.title;
+      }
+    });
   }
   // On project page
   else if (document.getElementById('project-container')?.style.display !== 'none') {
@@ -101,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
       renderGallery();
 
       const hash = window.location.hash.substring(1);
-      if (hash && window.galleryData && window.galleryData.find(item => item.id === hash && !(item.external_url || '').trim())) {
+      if (hash && window.galleryData && window.galleryData.find(item => item.id === hash)) {
         loadContent(hash);
       } else {
         showMainContent();
@@ -109,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       window.addEventListener('popstate', function() {
         const currentHash = window.location.hash.substring(1);
-        if (currentHash && window.galleryData && window.galleryData.find(item => item.id === currentHash && !(item.external_url || '').trim())) {
+        if (currentHash && window.galleryData && window.galleryData.find(item => item.id === currentHash)) {
           loadContent(currentHash);
         } else {
           showMainContent();
@@ -197,8 +179,32 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!contentContainer) return;
     }
   
-    contentContainer.innerHTML = window.galleryData.map(item => renderGalleryPost(item)).join('');
-      setupGalleryInteractions();
+    const galleryHTML = window.galleryData.map((item) => {
+      const displayTitle = window.currentLanguage === 'es' && item.title_es 
+        ? item.title_es 
+        : item.title;
+      
+      return `  
+        <div class="post" data-category="${item.category}">
+          <a href="#" data-id="${item.id}"> 
+            <div class="text-content">
+              <h2>${displayTitle}</h2>
+            </div>
+            <img src="${item.thumbnail}" alt="${displayTitle}" style="display:none;">
+          </a>
+        </div>
+      `;
+    }).join('');
+  
+    contentContainer.innerHTML = galleryHTML;
+      // Add event listeners to the newly created elements
+      document.querySelectorAll('.post a').forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const id = this.getAttribute('data-id');
+              loadContent(id);
+          });
+      });
 
       // Position posts without overlap
       positionPostsWithoutOverlap();
