@@ -2,10 +2,6 @@
   "blocks": [
     {
       "type": "image",
-      "src": "images/screenshot-2025-11-30-at-7.54.48 p.m..png"
-    },
-    {
-      "type": "image",
       "src": "images/Torbellino - Mother.png",
       "alt": "",
       "class": ""
@@ -15,13 +11,6 @@
       "src": "images/sss.png",
       "alt": "",
       "class": ""
-    },
-    {
-      "type": "video",
-      "src": "images/aauu.mov",
-      "mime": "video/quicktime",
-      "width": 320,
-      "height": 240
     },
     {
       "type": "quote",
