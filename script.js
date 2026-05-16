@@ -1,6 +1,10 @@
 const galleryData = window.galleryData || [];
 let contentContainer, projectContainer, backButton; // Declare these globally
 
+function isGalleryPage() {
+  return !!document.getElementById('content-container');
+}
+
 
 function updateGalleryText() {
   document.querySelectorAll('.post').forEach(post => {
@@ -74,26 +78,26 @@ document.addEventListener('DOMContentLoaded', function() {
   projectContainer = document.getElementById('project-container');
   backButton = document.getElementById('back-button');
 
-    // Initial render
-    renderGallery();
-    
-    // Check if URL has a project hash - if so, load that project directly
-    const hash = window.location.hash.substring(1); // remove the #
-    if (hash && window.galleryData && window.galleryData.find(item => item.id === hash)) {
+    // Gallery homepage only (index.html) — skip on about, EDEN, etc.
+    if (isGalleryPage()) {
+      renderGallery();
+
+      const hash = window.location.hash.substring(1);
+      if (hash && window.galleryData && window.galleryData.find(item => item.id === hash)) {
         loadContent(hash);
-    } else {
-        showMainContent(); // Ensure we start on the main content view
-    }
-    
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', function() {
+      } else {
+        showMainContent();
+      }
+
+      window.addEventListener('popstate', function() {
         const currentHash = window.location.hash.substring(1);
         if (currentHash && window.galleryData && window.galleryData.find(item => item.id === currentHash)) {
-            loadContent(currentHash);
+          loadContent(currentHash);
         } else {
-            showMainContent();
+          showMainContent();
         }
-    });
+      });
+    }
 
   // Falling characters functionality
   const container = document.querySelector(".falling-characters");
@@ -211,10 +215,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.renderGallery = renderGallery;
 
-  // In script.js, after loading galleryData
-console.log('Gallery data loaded:', window.galleryData);
-console.log('Projects with Spanish titles:', 
-  window.galleryData.filter(item => item.title_es).map(item => item.id));
+  if (window.galleryData) {
+    console.log('Gallery data loaded:', window.galleryData);
+    console.log('Projects with Spanish titles:',
+      window.galleryData.filter(item => item.title_es).map(item => item.id));
+  }
 
   function initializeFilter() {
       const filterLinks = document.querySelectorAll(".filter");
@@ -243,6 +248,8 @@ console.log('Projects with Spanish titles:',
   }
 
         function loadContent(id) {
+          if (!contentContainer || !projectContainer) return;
+
           const item = galleryData.find(item => item.id === id);
           if (!item) {
             console.error("No item found with ID:", id);
@@ -292,12 +299,13 @@ console.log('Projects with Spanish titles:',
           </div>
         </div>
     `;
-    document.getElementById('intro-container').style.display = 'none';
+    const introContainer = document.getElementById('intro-container');
+    if (introContainer) introContainer.style.display = 'none';
     contentContainer.style.display = 'none';
     projectContainer.innerHTML = contentHTML;
     projectContainer.style.display = 'block';
     projectContainer.dataset.projectId = id;
-    backButton.style.display = 'block';
+    if (backButton) backButton.style.display = 'block';
   
   // Hide category menus when viewing a project
   const sidebarMenu = document.querySelector('.hideandseek');
@@ -316,11 +324,14 @@ console.log('Projects with Spanish titles:',
 }
 
 function showMainContent() {
-  document.getElementById('intro-container').style.display = 'block';
+  if (!contentContainer || !projectContainer) return;
+
+  const introContainer = document.getElementById('intro-container');
+  if (introContainer) introContainer.style.display = 'block';
   contentContainer.style.display = 'block';
   projectContainer.style.display = 'none';
   projectContainer.innerHTML = '';
-  backButton.style.display = 'none';
+  if (backButton) backButton.style.display = 'none';
   
   // Clear the URL hash
   history.pushState(null, '', window.location.pathname);
@@ -381,13 +392,21 @@ function showMainContent() {
     });
   }
 
-  backButton.addEventListener('click', showMainContent);
+  if (backButton && isGalleryPage()) {
+    backButton.addEventListener('click', function(e) {
+      if (backButton.getAttribute('href') === '#' || backButton.getAttribute('href') === '') {
+        e.preventDefault();
+        showMainContent();
+      }
+    });
+  }
 
  // Random positioning with improved collision detection
 function positionPostsWithoutOverlap() {
   const posts = document.querySelectorAll('.post');
   const container = document.getElementById('content-container');
-  
+  if (!container) return;
+
   // Set container dimensions
   container.style.width = '1000px';
   container.style.minHeight = '800px';
