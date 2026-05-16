@@ -5,7 +5,7 @@ const translations = {
     en: {
       // Navigation
       "about": "about",
-      "EDEN 𓃚 ": "EDEN 𓅯",
+      "EDEN 𓃚": "EDEN 𓅯",
       "seeInSpanish": "𓆑 ver en español",
       "seeInEnglish": "𓆱 see in english",
       
@@ -31,17 +31,15 @@ const translations = {
       
       // About page
      "bioP1": 'Mexican artist working with experimental design, poetry, and material explorations of the digital. I’m currently based in Vienna and I do communications and design work for the <a href="https://sfpc.study" target="_blank">School for Poetic Computation</a>.',
-     "bioP2": 'I’m also ½ of the collective <a href="nottoday.diy" target="_blank">Not Today</a>, where we use experimental media tactics that blend fiction, sabotage, and symbolic distortion to experiment with disrupting ideological authority online.',
+     "bioP2": 'I’m also ½ of the collective <a href="https://nottoday.diy" target="_blank">Not Today</a>, where we use experimental media tactics that blend fiction, sabotage, and symbolic distortion to experiment with disrupting ideological authority online.',
      "bioP3": '𓂅 You can find me on <a href="https://www.instagram.com/identikitten" target="_blank">Instagram</a>.',
-     "bioP4": '𓆇 Find my cv <a href="https://docs.google.com/spreadsheets/d/1ZKHbxrdu0seJG5mZnymQSVTfBvBvsZXoWuHaBE9V6wE/edit?usp=sharing" target="_blank">here</a>.'
+     "bioP4": '𓆇 Find my cv <a href="https://docs.google.com/spreadsheets/d/1ZKHbxrdu0seJG5mZnymQSVTfBvBvsZXoWuHaBE9V6wE/edit?usp=sharing" target="_blank">here</a>.',
 
-
-      
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 i am 𓆙 𓍢 <br> 𓆱 awake 𓆱 𓆙 \n𓆑 𓆙 in 𓍢𓇼<br>\n 𓆸 𓆱 everything  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  i love 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 and desire 𓍢 𓆑 𓇼 𓆙\n𓆸 to the  𓇼<br>\n  𓆱  𓇼 point 𓆸 𓇼\n𓆱 𓇼 of 𓆑 \nterror 𓆱 𓍢 𓆑",
       
       // EDEN page
-      "edenIntro": '<strong>Welcome to my Evolving Digital Ecologic Network.',
+      "edenIntro": '<strong>Welcome to my Evolving Digital Ecologic Network.</strong>',
       
       // Blog
       "noBlogPosts": "No blog posts yet.",
@@ -76,10 +74,9 @@ const translations = {
       
       // About page
      "bioP1": 'Artista mexicana que trabaja con diseño experimental, poesía y exploraciones materiales de lo digital. Vivo en Viena y hago trabajo de comunicación y diseño para la <a href="https://sfpc.study" target="_blank">School for Poetic Computation</a>.',
-     "bioP2": 'También soy ½ del colectivo <a href="nottoday.diy" target="_blank">Not Today</a>, en donde usamos tácticas experimentales mediáticas mezclando ficción, sabotaje y distorsión simbólica para cuestionar la autoridad.',
+     "bioP2": 'También soy ½ del colectivo <a href="https://nottoday.diy" target="_blank">Not Today</a>, en donde usamos tácticas experimentales mediáticas mezclando ficción, sabotaje y distorsión simbólica para cuestionar la autoridad.',
      "bioP3": '𓂅 Puedes encontrarme en <a href="https://www.instagram.com/identikitten" target="_blank">Instagram</a>.',
-     "bioP4": '𓆇 Encuentra mi cv <a href="https://docs.google.com/spreadsheets/d/1ZKHbxrdu0seJG5mZnymQSVTfBvBvsZXoWuHaBE9V6wE/edit?usp=sharing" target="_blank">aquí</a>.'
-
+     "bioP4": '𓆇 Encuentra mi cv <a href="https://docs.google.com/spreadsheets/d/1ZKHbxrdu0seJG5mZnymQSVTfBvBvsZXoWuHaBE9V6wE/edit?usp=sharing" target="_blank">aquí</a>.',
 
       // Homepage
       "introPoem": "𓆱    𓆱 𓍢\n𓆱 𓇼 estoy 𓆙 𓍢 <br> 𓆱 despierta 𓆱 𓆙 \n𓆑 𓆙 en 𓍢𓇼<br>\n 𓆸 𓆱 todo  𓍢 𓆙 \n𓍢 𓇼𓆑 𓇼  lo que amo 𓆑<br>\n𓇼𓆱 𓍢 𓆱 𓍢 y deseo 𓍢 𓆑 𓇼 𓆙\n𓆸 hasta el  𓇼<br>\n  𓆱  𓇼 punto 𓆸 𓇼\n𓆱 𓇼 del 𓆑 \nterror 𓆱 𓍢 𓆑",
@@ -259,12 +256,15 @@ function initializeAllLanguageToggles() {
   if (!bioSection) return;
 
   const paragraphs = bioSection.querySelectorAll('p');
-  if (paragraphs.length >= 3) {
-    paragraphs[0].innerHTML = translations[currentLanguage].bioP1;
-    paragraphs[1].innerHTML = translations[currentLanguage].bioP2;
-    paragraphs[2].innerHTML = translations[currentLanguage].bioP3;
-    paragraphs[3].innerHTML = translations[currentLanguage].bioP4;
-  }
+  const bios = [
+    translations[currentLanguage].bioP1,
+    translations[currentLanguage].bioP2,
+    translations[currentLanguage].bioP3,
+    translations[currentLanguage].bioP4
+  ];
+  bios.forEach(function (html, i) {
+    if (html && paragraphs[i]) paragraphs[i].innerHTML = html;
+  });
 }
 
   
@@ -323,11 +323,11 @@ function initializeAllLanguageToggles() {
         currentLanguage = 'es';
       }
     }
-    
+    window.currentLanguage = currentLanguage;
+
     // Initialize the page with the correct language
     updatePageContent();
     updateLanguageLinks();
-    
   });
 
   // Add this to your translate.js at the end of the document.addEventListener('DOMContentLoaded', ...) function
