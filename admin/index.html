@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>⋰⋱⋰⋱ organismo digital - Content Manager ⋰⋱⋰⋱</title>
-    <link rel="stylesheet" href="../style.css">
-    
+    <!-- Do not load ../style.css here: it targets global tags and breaks Decap's text/CodeMirror fields. Preview still uses style.css via registerPreviewStyle below. -->
+
     <!-- Include Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
@@ -27,6 +27,7 @@
     </style>
   </head>
   <body>
+    <script src="https://unpkg.com/marked@4.3.0/marked.min.js"></script>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
     <script>
@@ -101,6 +102,17 @@
           const category = entry.getIn(['data', 'category']) || '';
           const thumbnail = entry.getIn(['data', 'thumbnail']);
           const images = entry.getIn(['data', 'images']);
+          const bodyMd = entry.getIn(['data', 'body']);
+          const bodyEsMd = entry.getIn(['data', 'description_es']);
+
+          function mdToHtml(md) {
+            if (!md) return '';
+            try {
+              return typeof marked !== 'undefined' ? marked.parse(String(md)) : '<pre>' + String(md) + '</pre>';
+            } catch (e) {
+              return '<pre>' + String(md) + '</pre>';
+            }
+          }
           
           // Build images list
           var imageElements = [];
@@ -124,7 +136,9 @@
             category ? h('span', {className: 'preview-category', 'data-cat': category}, category) : null,
             thumbnail ? h('img', {src: thumbnail, style: {width: '100%', maxHeight: '300px', objectFit: 'cover', marginBottom: '1em'}}) : null,
             imageElements.length > 0 ? h('div', {className: 'preview-images'}, imageElements) : null,
-            h('div', {className: 'preview-description'}, this.props.widgetFor('body'))
+            h('div', {className: 'preview-description', dangerouslySetInnerHTML: {__html: mdToHtml(bodyMd)}}),
+            bodyEsMd ? h('h5', {style: {marginTop: '1.5em'}}, 'Spanish description') : null,
+            bodyEsMd ? h('div', {className: 'preview-description', dangerouslySetInnerHTML: {__html: mdToHtml(bodyEsMd)}}) : null
           );
         }
       });

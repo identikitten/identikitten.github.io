@@ -130,6 +130,49 @@ function generateDataJs(galleryData) {
     }
 }
 
+function normalizePublicPath(p) {
+  if (!p || typeof p !== 'string') return p;
+  return p.startsWith('/') ? p.substring(1) : p;
+}
+
+function normalizeEdenBlocks(data) {
+  const blocks = Array.isArray(data.blocks) ? data.blocks : [];
+  const normalized = blocks.map((block) => {
+    const t = block.type;
+    const nested = t && block[t];
+    if (nested && typeof nested === 'object' && nested.src) {
+      nested.src = normalizePublicPath(nested.src);
+    }
+    if (nested && typeof nested === 'object' && nested.url && typeof nested.url === 'string' && !/^https?:\/\//i.test(nested.url)) {
+      nested.url = normalizePublicPath(nested.url);
+    }
+    return block;
+  });
+  return { blocks: normalized };
+}
+
+function buildEdenData() {
+  const edenPath = path.join(__dirname, '_eden', 'eden-blocks.json');
+  if (!fs.existsSync(edenPath)) {
+    console.log('EDEN blocks file not found, using empty blocks');
+    return { blocks: [] };
+  }
+  try {
+    const raw = fs.readFileSync(edenPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    return normalizeEdenBlocks(parsed);
+  } catch (e) {
+    console.error('Failed to read _eden/eden-blocks.json:', e.message);
+    return { blocks: [] };
+  }
+}
+
+function generateEdenDataJs(edenData) {
+  const content = `window.edenBlocks = ${JSON.stringify(edenData, null, 2)};\n`;
+  fs.writeFileSync(path.join(__dirname, 'eden-data.js'), content);
+  console.log('Generated eden-data.js from _eden/eden-blocks.json');
+}
+
 // Generate blog.js file
 function generateBlogJs(blogData) {
     const blogJsContent = `window.blogData = ${JSON.stringify(blogData, null, 2)};`;
@@ -168,6 +211,7 @@ function generateTranslationDictionary(galleryData) {
 // Run the build process
 const galleryData = buildGalleryData();
 const blogData = buildBlogData();
+const edenData = buildEdenData();
 
 // Generate project translations
 const projectTranslations = generateTranslationDictionary(galleryData);
@@ -181,5 +225,6 @@ console.log('Generated project-translations.json');
 
 generateDataJs(galleryData);
 generateBlogJs(blogData);
+generateEdenDataJs(edenData);
 
 console.log('Build completed successfully!');

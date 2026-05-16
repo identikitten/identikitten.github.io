@@ -6,8 +6,9 @@ backend:
 # If you want to use GitHub directly, change git-gateway to github and add 
 # your repo and auth settings
 
-# Enable local development
-local_backend: true
+# Only uncomment when running the CMS locally with: npx netlify-cms-proxy-server
+# If left on while using /admin on Netlify, the editor can misbehave or fail to save.
+# local_backend: true
 
 # These lines should match the media folder structure of your site
 media_folder: "images" # Your existing images folder
@@ -44,3 +45,54 @@ collections:
       - {label: "Language", name: "language", widget: "select", options: ["en", "es", "both"], default: "en", hint: "Select the language(s) this post should appear in"}
       - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
       - {label: "Content", name: "content", widget: "markdown"}
+
+  # EDEN.html collage: ordered blocks (quotes, headings, images, video, audio)
+  - name: "eden"
+    label: "EDEN page"
+    files:
+      - label: "EDEN collage"
+        name: "feed"
+        file: "_eden/eden-blocks.json"
+        format: json
+        fields:
+          - label: "Blocks (top to bottom = order on the page)"
+            name: "blocks"
+            widget: "list"
+            types:
+              - label: "Heading (h5)"
+                name: "h5"
+                widget: "object"
+                fields:
+                  - {label: "Text", name: "text", widget: "string"}
+              - label: "Quote"
+                name: "quote"
+                widget: "object"
+                fields:
+                  - {label: "Quote text", name: "text", widget: "text"}
+              - label: "Image"
+                name: "image"
+                widget: "object"
+                fields:
+                  - {label: "Image", name: "src", widget: "image"}
+                  - {label: "Alt text", name: "alt", widget: "string", required: false}
+                  - {label: "CSS classes (optional)", name: "class", widget: "string", required: false, hint: "e.g. w-100 tc center"}
+              - label: "Video"
+                name: "video"
+                widget: "object"
+                fields:
+                  - {label: "Video file", name: "src", widget: "file"}
+                  - {label: "MIME type", name: "mime", widget: "select", options: ["video/mp4", "video/webm", "video/quicktime"], default: "video/mp4"}
+                  - {label: "Width", name: "width", widget: "number", default: 320, value_type: "int", required: false}
+                  - {label: "Height", name: "height", widget: "number", default: 240, value_type: "int", required: false}
+              - label: "Audio"
+                name: "audio"
+                widget: "object"
+                fields:
+                  - {label: "Audio file", name: "src", widget: "file"}
+                  - {label: "MIME type", name: "mime", widget: "string", default: "audio/mpeg", required: false}
+              - label: "Large link (like Ulises.txt)"
+                name: "big_link"
+                widget: "object"
+                fields:
+                  - {label: "URL (relative or full)", name: "url", widget: "string"}
+                  - {label: "Link label", name: "text", widget: "string"}
