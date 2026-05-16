@@ -2,6 +2,10 @@
   "blocks": [
     {
       "type": "image",
+      "src": "images/screenshot-2025-11-30-at-7.54.48 p.m..png"
+    },
+    {
+      "type": "image",
       "src": "images/Torbellino - Mother.png",
       "alt": "",
       "class": ""
