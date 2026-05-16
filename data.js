@@ -9,8 +9,15 @@ window.galleryData = [
     "thumbnail": "images/counterveillance-flyer.jpg",
     "images": [
       "images/counterveillance-flyer.jpg",
+      "images/sl6.jpg",
       "images/consensual-hacking.jpg",
-      "images/how-to-find-what-you-re-looking-for.jpg"
+      "images/how-to-find-what-you-re-looking-for.jpg",
+      "images/spring-workshops-horizontal.jpg",
+      "images/teacher-slide.jpg",
+      "images/slide-2.jpg",
+      "images/slide-9.jpg",
+      "images/slide-2.jpg",
+      "images/slide-8.jpg"
     ],
     "decoration": "",
     "description": "<p>F﻿lyers for Spring workshops centered around counter surveillance, digital and social consent, and artistic approaches to investigation at the School for Poetic Computation in New York City taught by Melanie Hoff, American Artist, Sam Lavigne &amp; Maura Brewer.</p>\n",

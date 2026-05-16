@@ -2,100 +2,74 @@ window.edenBlocks = {
   "blocks": [
     {
       "type": "image",
-      "image": {
-        "src": "images/Torbellino - Mother.png",
-        "alt": "",
-        "class": ""
-      }
+      "src": "images/Torbellino - Mother.png",
+      "alt": "",
+      "class": ""
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/sss.png",
-        "alt": "",
-        "class": ""
-      }
+      "src": "images/sss.png",
+      "alt": "",
+      "class": ""
     },
     {
       "type": "video",
-      "video": {
-        "src": "images/aauu.mov",
-        "mime": "video/quicktime",
-        "width": 320,
-        "height": 240
-      }
+      "src": "images/aauu.mov",
+      "mime": "video/quicktime",
+      "width": 320,
+      "height": 240
     },
     {
       "type": "quote",
-      "quote": {
-        "text": "“Un corazón es tal vez algo sucio. Pertenece a las tablas de anatomía y al mostrador del carnicero. Yo prefiero tu cuerpo.” - Marguerite Yourcenar"
-      }
+      "text": "“Un corazón es tal vez algo sucio. Pertenece a las tablas de anatomía y al mostrador del carnicero. Yo prefiero tu cuerpo.” - Marguerite Yourcenar"
     },
     {
       "type": "h5",
-      "h5": {
-        "text": "Estoy perdida entre los otros animales del jardín. Amapolas, pensamientos, tulipanes, no me olvides. Todos los mordería, los mordería, como para llenarme el corazón de algo vivo. Algo blanco me sostiene, algo agudo. Quiere sacarme de este barranco mudo."
-      }
+      "text": "Estoy perdida entre los otros animales del jardín. Amapolas, pensamientos, tulipanes, no me olvides. Todos los mordería, los mordería, como para llenarme el corazón de algo vivo. Algo blanco me sostiene, algo agudo. Quiere sacarme de este barranco mudo."
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/wax.jpeg",
-        "alt": "",
-        "class": ""
-      }
+      "src": "images/wax.jpeg",
+      "alt": "",
+      "class": ""
     },
     {
       "type": "quote",
-      "quote": {
-        "text": "“Sappho and her successors in general prefer physiology to concepts. The moment when the soul parts on itself in desire is conceived as a dilemma of body and senses” - Eros the bittersweet, Anne Carson"
-      }
+      "text": "“Sappho and her successors in general prefer physiology to concepts. The moment when the soul parts on itself in desire is conceived as a dilemma of body and senses” - Eros the bittersweet, Anne Carson"
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/bitrot.png",
-        "alt": "",
-        "class": "tc"
-      }
+      "src": "images/bitrot.png",
+      "alt": "",
+      "class": "tc"
     },
     {
       "type": "big_link",
-      "big_link": {
-        "url": "txt/ulises.txt",
-        "text": "Ulises.txt"
-      }
+      "url": "txt/ulises.txt",
+      "text": "Ulises.txt"
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/cyanotype.png",
-        "alt": "",
-        "class": "tc"
-      }
+      "src": "images/cyanotype.png",
+      "alt": "",
+      "class": "tc"
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/combined.gif",
-        "alt": "",
-        "class": "w-100"
-      }
+      "src": "images/combined.gif",
+      "alt": "",
+      "class": "w-100"
     },
     {
       "type": "image",
-      "image": {
-        "src": "images/Scan 2.jpeg",
-        "alt": "",
-        "class": "tc center"
-      }
+      "src": "images/Scan 2.jpeg",
+      "alt": "",
+      "class": "tc center"
     },
     {
       "type": "audio",
-      "audio": {
-        "src": "images/cityofsadness.mp3",
-        "mime": "audio/mpeg"
-      }
+      "src": "images/cityofsadness.mp3",
+      "mime": "audio/mpeg"
     }
   ]
 };

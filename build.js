@@ -135,18 +135,29 @@ function normalizePublicPath(p) {
   return p.startsWith('/') ? p.substring(1) : p;
 }
 
+// Decap list+types stores fields flat on each item ({ type, src, text, ... }), not nested under type name.
+function flattenEdenBlock(block) {
+  if (!block || !block.type) return block;
+  const t = block.type;
+  if (block[t] && typeof block[t] === 'object' && !Array.isArray(block[t])) {
+    return { type: t, ...block[t] };
+  }
+  const flat = { type: t };
+  for (const key of Object.keys(block)) {
+    if (key !== 'type' && key !== t) flat[key] = block[key];
+  }
+  return flat;
+}
+
 function normalizeEdenBlocks(data) {
   const blocks = Array.isArray(data.blocks) ? data.blocks : [];
   const normalized = blocks.map((block) => {
-    const t = block.type;
-    const nested = t && block[t];
-    if (nested && typeof nested === 'object' && nested.src) {
-      nested.src = normalizePublicPath(nested.src);
+    const flat = flattenEdenBlock(block);
+    if (flat.src) flat.src = normalizePublicPath(flat.src);
+    if (flat.url && typeof flat.url === 'string' && !/^https?:\/\//i.test(flat.url)) {
+      flat.url = normalizePublicPath(flat.url);
     }
-    if (nested && typeof nested === 'object' && nested.url && typeof nested.url === 'string' && !/^https?:\/\//i.test(nested.url)) {
-      nested.url = normalizePublicPath(nested.url);
-    }
-    return block;
+    return flat;
   });
   return { blocks: normalized };
 }
