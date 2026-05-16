@@ -67,6 +67,7 @@ function buildGalleryData() {
           title_es: data.title_es || data.title,
           year: data.year,
           category: data.category,
+          external_url: (data.external_url || '').trim(),
           symbols: data.symbols || '',
           thumbnail: thumbnail,
           images: imagesList,
