@@ -1,6 +1,10 @@
 {
   "blocks": [
     {
+      "type": "quote",
+      "text": "Por un mamut y una ballena mi corazón está tan triste que es como una vitrina con instrumentos de cirugía tumbada en la espuma del mar del primer día. - Hector Viel Temperley"
+    },
+    {
       "type": "image",
       "src": "images/Torbellino - Mother.png",
       "alt": "",
