@@ -161,6 +161,9 @@ a:visited{
     opacity: 0.5;
 }
 
+.image-carousel img{
+    width: 60%;
+}
 
 p a:hover:before{
     content: "🥀 ";
@@ -786,7 +789,8 @@ iframe{
 
 
 @media only screen and (min-width: 700px) {
-    
+
+
 
 .mobile-header{
     display: none;
@@ -797,6 +801,11 @@ iframe{
 
 
 @media only screen and (max-width: 700px) {
+
+    .image-carousel img{
+    width: 100%;
+}
+    
 
     .marquee-wup{
         display: none;
