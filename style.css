@@ -162,8 +162,6 @@ a:visited{
 }
 
 
-
-
 p a:hover:before{
     content: "🥀 ";
 }
@@ -910,3 +908,5 @@ iframe, .organismo, .intro{
 .marquee-wrapper{
     display: none;
 }
+
+
