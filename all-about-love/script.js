@@ -10,7 +10,7 @@ document.addEventListener('keydown', function(event) {
         $('#welcome').fadeOut(2000, function() {
             $(this).css('display', 'none');
         });
-        console.log("It’s embarrassing for me to stay fixated on a brief moment, 10 years ago, when I walked by myself at night and didn’t feel terrified. It’s a moment I can’t let go of. It was me, and the silence of the night, the cold air, the distant lights. I had gone for two months to an artistic residency in Barcelona, and walking alone at 2am without fear felt like something inside me was new. I knew that it could only grow if nurtured under these conditions.I wanted to repeat this night until I could see what would grow from it.");
+        console.log("It’s embarrassing for me to stay fixated on a brief moment, 10 years ago, when I walked by myself at night and didn’t feel terrified. It’s a moment I can’t let go of. It was me, and the silence of the night, the cold air, the distant lights. I had gone for two months to an artistic residency in Barcelona, and walking alone at 2am without fear felt like something inside me was new. I knew that it could only grow if nurtured under these conditions. I wanted to repeat this night until I could see what would grow from it.");
         typeAscii(
          ` 
      ÷÷÷÷÷÷÷÷÷   ÷÷÷÷     ÷÷÷÷÷       
